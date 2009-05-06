@@ -24,7 +24,7 @@ in your RAILS_ROOT.
 Acknowledgements
 ----------------
 
-Excellent is based on roodi by Marty Andrews. However, it will get more functionaliy than rodi in the future.
+Excellent is based on roodi by Marty Andrews. However, it will get more functionaliy than roodi in the future.
 
 Author
 ------
