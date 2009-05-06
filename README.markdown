@@ -4,8 +4,6 @@ simplabs-excellent
 Excellent is a source code analysis gem. It detects commonly regarded bad code snippets
 like empty rescue blocks etc.
 
-Excellent is based on roodi by Martin J. Andrews (http://github.com/martinjandrews/roodi).
-
 Installation
 ------------
 
