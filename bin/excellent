@@ -13,8 +13,7 @@ end
 
 puts "\nExcellent found #{excellent.errors.size} errors.\n"
 excellent.errors.each do |error|
-  relative_path = Pathname.new(error.filename).relative_path_from(Pathname.new(File.dirname(__FILE__)))
-  puts "  * File #{relative_path}, line #{error.line_number}: #{error.message}"
+  puts "  * File #{error.filename}, line #{error.line_number}: #{error.message}"
 end
 puts ''
 
