@@ -1,12 +1,15 @@
+require 'sexp_processor'
+
 module Simplabs
 
   module Excellent
 
     module Core
 
-      class CheckingVisitor
+      class CodeProcessor < SexpProcessor
 
         def initialize(*checks)
+          super()
           @checks ||= {}
           checks.first.each do |check|
             nodes = check.interesting_nodes
@@ -18,11 +21,12 @@ module Simplabs
           end
         end
 
-        def visit(node)
-          @last_newline = node if node.node_type == :newline
-          checks = @checks[node.node_type]
-          checks.each { |check| check.evaluate_node(node) } unless checks.nil?
-          nil
+        def process(node)
+          if node.is_a?(Sexp)
+            checks = @checks[node.node_type]
+            checks.each { |check| check.evaluate_node(node) } unless checks.nil?
+          end
+          super
         end
 
       end

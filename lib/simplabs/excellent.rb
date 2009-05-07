@@ -5,8 +5,14 @@ require 'sexp'
 
 module Excellent
 
-  VERSION = '1.0.0'
+  VERSION = '1.0.1'
 
 end
 
-Sexp.send(:include, Simplabs::Excellent::Core::VisitableSexp)
+Sexp.class_eval do
+
+  def children
+    sexp_body.select {|each| each.is_a?(Sexp) }
+  end
+
+end

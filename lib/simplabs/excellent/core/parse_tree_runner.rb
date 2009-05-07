@@ -1,10 +1,8 @@
 require 'pp'
 require 'yaml'
 
-require 'simplabs/excellent/core/checking_visitor'
-require 'simplabs/excellent/core/iterator_visitor'
 require 'simplabs/excellent/core/parser'
-require 'simplabs/excellent/core/visitable_sexp'
+require 'simplabs/excellent/core/code_processor'
 
 module Simplabs
 
@@ -41,8 +39,9 @@ module Simplabs
       
         def check(filename, content)
           @checks ||= load_checks
+          @processor ||= CodeProcessor.new(@checks)
           node = parse(filename, content)
-          node.accept(IteratorVisitor.new(CheckingVisitor.new(@checks))) if node
+          @processor.process(node)
         end
 
         def check_content(content)
