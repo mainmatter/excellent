@@ -8,26 +8,37 @@ module Simplabs
 
       class CodeProcessor < SexpProcessor
 
-        def initialize(*checks)
-          super()
-          @checks ||= {}
-          checks.first.each do |check|
-            nodes = check.interesting_nodes
-            nodes.each do |node|
+        def initialize(checks)
+          @checks = {}
+          checks.each do |check|
+            check.interesting_nodes.each do |node|
               @checks[node] ||= []
               @checks[node] << check
               @checks[node].uniq!
             end
           end
+          setup_processors
+          super()
+          @require_empty = @warn_on_default = false
         end
 
-        def process(node)
-          if node.is_a?(Sexp)
-            checks = @checks[node.node_type]
-            checks.each { |check| check.evaluate_node(node) } unless checks.nil?
+        private
+
+          def apply_checks(exp)
+            if exp.is_a?(Sexp)
+              checks = @checks[exp.node_type]
+              checks.each { |check| check.evaluate_node(exp) } unless checks.nil?
+            end
           end
-          super
-        end
+
+          def setup_processors
+            @checks.each_key do |key|
+              self.class.send(:define_method, "process_#{key.to_s}".to_sym) do |exp|
+                apply_checks(exp)
+                exp.each { |sub| process(sub) if sub.is_a?(Sexp) }
+              end
+            end
+          end
 
       end
 
