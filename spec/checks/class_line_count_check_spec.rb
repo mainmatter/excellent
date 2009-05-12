@@ -3,7 +3,7 @@ require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 describe Simplabs::Excellent::Checks::ClassLineCountCheck do
 
   before do
-    @excellent = Simplabs::Excellent::Core::ParseTreeRunner.new(Simplabs::Excellent::Checks::ClassLineCountCheck.new({ :threshold => 1 }))
+    @excellent = Simplabs::Excellent::Core::Runner.new(Simplabs::Excellent::Checks::ClassLineCountCheck.new({ :threshold => 1 }))
   end
 
   describe '#evaluate' do
@@ -19,7 +19,7 @@ describe Simplabs::Excellent::Checks::ClassLineCountCheck do
 
     it 'should accept classes with the same number of lines as the threshold' do
       content = <<-END
-        Class OneLineClass
+        class OneLineClass
           @foo = 1
         end
       END

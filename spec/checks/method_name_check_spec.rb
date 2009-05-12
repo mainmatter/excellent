@@ -3,7 +3,7 @@ require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 describe Simplabs::Excellent::Checks::MethodNameCheck do
 
   before do
-    @excellent = Simplabs::Excellent::Core::ParseTreeRunner.new(Simplabs::Excellent::Checks::MethodNameCheck.new)
+    @excellent = Simplabs::Excellent::Core::Runner.new(Simplabs::Excellent::Checks::MethodNameCheck.new)
   end
 
   describe '#evaluate' do
@@ -58,7 +58,7 @@ describe Simplabs::Excellent::Checks::MethodNameCheck do
       @excellent.errors.should be_empty
     end
 
-    ['<<', '>>', '==', '=', '<', '<=', '>', '>=', '[]', '[]=', '+', '-', '*', '~', '/', '%', '&', '^' '|'].each do |operator|
+    ['<<', '>>', '==', '<', '<=', '>', '>=', '[]', '[]=', '+', '-', '*', '~', '/', '%', '&', '^', '|'].each do |operator|
 
       it "should accept #{operator} as a method name" do
         content = <<-END

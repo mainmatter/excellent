@@ -3,7 +3,7 @@ require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 describe Simplabs::Excellent::Checks::AbcMetricMethodCheck do
 
   before do
-    @excellent = Simplabs::Excellent::Core::ParseTreeRunner.new(Simplabs::Excellent::Checks::AbcMetricMethodCheck.new({ :threshold => 0 }))
+    @excellent = Simplabs::Excellent::Core::Runner.new(Simplabs::Excellent::Checks::AbcMetricMethodCheck.new({ :threshold => 0 }))
   end
 
   describe '#evaluate' do

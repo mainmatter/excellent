@@ -8,7 +8,7 @@ module Simplabs
 
       class MethodNameCheck < NameCheck
 
-        DEFAULT_PATTERN = /^[_a-z<>=\[|+-\/\*\~\%\&`]+[_a-z0-9_<>=~@\[\]]*[=!\?]?$/
+        DEFAULT_PATTERN = /^[_a-z<>=\[|+-\/\*\~\%\&`\|\^]+[_a-z0-9_<>=~@\[\]]*[=!\?]?$/
 
         def initialize(options = {})
           pattern = options['pattern'] || DEFAULT_PATTERN

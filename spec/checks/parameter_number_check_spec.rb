@@ -3,7 +3,7 @@ require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 describe Simplabs::Excellent::Checks::ParameterNumberCheck do
 
   before(:each) do
-    @excellent = Simplabs::Excellent::Core::ParseTreeRunner.new(Simplabs::Excellent::Checks::ParameterNumberCheck.new({ :threshold => 1 }))
+    @excellent = Simplabs::Excellent::Core::Runner.new(Simplabs::Excellent::Checks::ParameterNumberCheck.new({ :threshold => 1 }))
   end
 
   describe '#evaluate' do

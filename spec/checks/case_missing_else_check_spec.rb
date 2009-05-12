@@ -3,7 +3,7 @@ require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 describe Simplabs::Excellent::Checks::CaseMissingElseCheck do
 
   before do
-    @excellent = Simplabs::Excellent::Core::ParseTreeRunner.new(Simplabs::Excellent::Checks::CaseMissingElseCheck.new)
+    @excellent = Simplabs::Excellent::Core::Runner.new(Simplabs::Excellent::Checks::CaseMissingElseCheck.new)
   end
 
   describe '#evaluate' do

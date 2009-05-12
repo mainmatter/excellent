@@ -1,8 +1,8 @@
 require 'pp'
 require 'yaml'
 
-require 'simplabs/excellent/core/parser'
-require 'simplabs/excellent/core/code_processor'
+require 'simplabs/excellent/core/parsing/parser'
+require 'simplabs/excellent/core/parsing/code_processor'
 
 module Simplabs
 
@@ -10,7 +10,7 @@ module Simplabs
 
     module Core
 
-      class ParseTreeRunner
+      class Runner
 
         DEFAULT_CONFIG = {
           :AssignmentInConditionalCheck    => { },
@@ -34,12 +34,12 @@ module Simplabs
         def initialize(*checks)
           @config = DEFAULT_CONFIG
           @checks = checks unless checks.empty?
-          @parser = Parser.new
+          @parser = Parsing::Parser.new
         end
       
         def check(filename, content)
           @checks ||= load_checks
-          @processor ||= CodeProcessor.new(@checks)
+          @processor ||= Parsing::CodeProcessor.new(@checks)
           node = parse(filename, content)
           @processor.process(node)
         end
@@ -54,19 +54,13 @@ module Simplabs
   
         def errors
           @checks ||= []
-          all_errors = @checks.collect { |check| check.errors }
-          all_errors.flatten
+          @checks.collect { |check| check.errors }.flatten
         end
       
         private
       
           def parse(filename, content)
-            begin
-              @parser.parse(content, filename)
-            rescue Exception => e
-              puts "#{filename} looks like it's not a valid Ruby file. Skipping..." if ENV["ROODI_DEBUG"]
-              nil
-            end
+            @parser.parse(content, filename)
           end
         
           def load_checks
