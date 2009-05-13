@@ -19,7 +19,7 @@ module Simplabs
           [:defn]
         end
 
-        def evaluate(node)
+        def evaluate(node, context = nil)
           score = count_complexity(node)
           add_error('Method {{method}} has cyclomatic complexity of {{score}}.', { :method => node[1], :score => score }) unless score <= @threshold
         end

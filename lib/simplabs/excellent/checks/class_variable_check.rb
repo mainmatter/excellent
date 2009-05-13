@@ -12,7 +12,7 @@ module Simplabs
           [:cvar]
         end
 
-        def evaluate(node)
+        def evaluate(node, context = nil)
           add_error('Class variable {{variable}}.', { :variable => node.value }, -1)
         end
 

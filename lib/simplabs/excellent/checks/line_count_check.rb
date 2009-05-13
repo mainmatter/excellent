@@ -18,7 +18,7 @@ module Simplabs
           @interesting_nodes
         end
 
-        def evaluate(node)
+        def evaluate(node, context = nil)
           line_count = count_lines(node_to_count(node)) - 1
           add_error(*error_args(node, line_count)) unless line_count <= @threshold
         end

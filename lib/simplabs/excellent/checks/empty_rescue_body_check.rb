@@ -14,7 +14,7 @@ module Simplabs
           [:resbody]
         end
 
-        def evaluate(node)
+        def evaluate(node, context = nil)
           add_error('Rescue block is empty.', {}, -1) unless has_statement?(node)
         end
 

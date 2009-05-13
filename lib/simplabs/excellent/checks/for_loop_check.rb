@@ -12,7 +12,7 @@ module Simplabs
           [:for]
         end
 
-        def evaluate(node)
+        def evaluate(node, context = nil)
           add_error('For loop used.')
         end
 

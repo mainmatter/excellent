@@ -16,17 +16,26 @@ module Simplabs
         end
 
         def interesting_nodes
-          [:defn]
+          [:defn, :iter]
         end
 
-        def evaluate(node)
-          method_name = node[1]
-          parameters = node[2][1..-1]
-          parameter_count = parameters.inject(0) { |count, each| count = count + (each.class == Symbol ? 1 : 0) }
+        def evaluate(node, context = nil)
+          method_name = node.node_type == :defn ? node[1] : node[1][2]
+          parameter_count = count_parameters(node)
           unless parameter_count <= @threshold
-            add_error('Method {{method}} has {{parameter_count}} parameters.', { :method => method_name, :parameter_count => parameter_count })
+            add_error('{{method}} has {{parameter_count}} parameters.', { :method => method_name, :parameter_count => parameter_count })
           end
         end
+
+        private
+
+          def count_parameters(node)
+            if node.node_type == :defn
+              node[2][1..-1].inject(0) { |count, each| count = count + (each.class == Symbol ? 1 : 0) }
+            else
+              node[2][1].length - 1
+            end
+          end
 
       end
 

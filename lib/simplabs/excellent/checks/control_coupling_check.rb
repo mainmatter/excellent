@@ -9,17 +9,13 @@ module Simplabs
       class ControlCouplingCheck < Base
 
         def interesting_nodes
-          [:defn, :lvar]
+          [:if, :case]
         end
 
-        def evaluate_defn(node)
-          @method_name = node[1]
-          @arguments   = node[2][1..-1]
-        end
-
-        def evaluate_lvar(node)
-          if @arguments.detect { |argument| argument == node[1] }
-            add_error('Control of {{method}} is coupled to {{argument}}.', { :method => @method_name, :argument => node[1] }, -1)
+        def evaluate(node, context = nil)
+          return unless context
+          if tested_parameter = context.tests_parameter?
+            add_error('Control of {{method}} is coupled to {{argument}}.', { :method => context.parent.full_name, :argument => tested_parameter }, -1)
           end
         end
 

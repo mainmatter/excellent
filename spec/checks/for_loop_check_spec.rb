@@ -3,7 +3,7 @@ require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 describe Simplabs::Excellent::Checks::ForLoopCheck do
 
   before do
-    @excellent = Simplabs::Excellent::Core::Runner.new(Simplabs::Excellent::Checks::ForLoopCheck.new)
+    @excellent = Simplabs::Excellent::Runner.new(Simplabs::Excellent::Checks::ForLoopCheck.new)
   end
 
   describe '#evaluate' do

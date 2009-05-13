@@ -3,7 +3,7 @@ require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 describe Simplabs::Excellent::Checks::MethodNameCheck do
 
   before do
-    @excellent = Simplabs::Excellent::Core::Runner.new(Simplabs::Excellent::Checks::MethodNameCheck.new)
+    @excellent = Simplabs::Excellent::Runner.new(Simplabs::Excellent::Checks::MethodNameCheck.new)
   end
 
   describe '#evaluate' do

@@ -18,7 +18,7 @@ module Simplabs
           [:iter]
         end
 
-        def evaluate(node)
+        def evaluate(node, context = nil)
           complexity = count_complexity(node)
           add_error('Block has cyclomatic complexity of {{score}}.', { :score => complexity }, -(node.line - node[1].line)) unless complexity <= @threshold
         end

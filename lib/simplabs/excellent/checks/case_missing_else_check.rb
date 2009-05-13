@@ -12,7 +12,7 @@ module Simplabs
           [:case]
         end
   
-        def evaluate(node)
+        def evaluate(node, context = nil)
           add_error('Case statement is missing else clause.') unless node.last
         end
 

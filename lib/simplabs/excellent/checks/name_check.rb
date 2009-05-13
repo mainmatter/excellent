@@ -18,7 +18,7 @@ module Simplabs
           @interesting_nodes
         end
 
-        def evaluate(node)
+        def evaluate(node, context = nil)
           name = find_name(node)
           add_error(*error_args(node)) unless name.to_s =~ @pattern
         end

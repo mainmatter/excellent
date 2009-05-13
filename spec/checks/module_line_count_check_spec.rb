@@ -3,7 +3,7 @@ require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 describe Simplabs::Excellent::Checks::ModuleLineCountCheck do
 
   before do
-    @excellent = Simplabs::Excellent::Core::Runner.new(Simplabs::Excellent::Checks::ModuleLineCountCheck.new({ :threshold => 1 }))
+    @excellent = Simplabs::Excellent::Runner.new(Simplabs::Excellent::Checks::ModuleLineCountCheck.new({ :threshold => 1 }))
   end
 
   describe '#evaluate' do

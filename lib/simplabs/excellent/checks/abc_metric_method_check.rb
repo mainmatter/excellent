@@ -23,7 +23,7 @@ module Simplabs
           [:defn]
         end
 
-        def evaluate(node)
+        def evaluate(node, context = nil)
           method_name = node[1]
           a = count_assignments(node)
           b = count_branches(node)

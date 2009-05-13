@@ -3,7 +3,7 @@ require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 describe Simplabs::Excellent::Checks::ParameterNumberCheck do
 
   before(:each) do
-    @excellent = Simplabs::Excellent::Core::Runner.new(Simplabs::Excellent::Checks::ParameterNumberCheck.new({ :threshold => 1 }))
+    @excellent = Simplabs::Excellent::Runner.new(Simplabs::Excellent::Checks::ParameterNumberCheck.new({ :threshold => 1 }))
   end
 
   describe '#evaluate' do
@@ -46,6 +46,24 @@ describe Simplabs::Excellent::Checks::ParameterNumberCheck do
       verify_error_found(content)
     end
 
+    it 'should reject yield calls with more parameters than the threshold' do
+      content = <<-END
+        two_parameter_method do |first_parameter, second_parameter|
+        end
+      END
+
+      verify_error_found(content)
+    end
+
+    it 'should reject yield calls on a receiver with more parameters than the threshold' do
+      content = <<-END
+        receiver.two_parameter_method do |first_parameter, second_parameter|
+        end
+      END
+
+      verify_error_found(content)
+    end
+
   end
 
   def verify_error_found(content)
@@ -55,7 +73,7 @@ describe Simplabs::Excellent::Checks::ParameterNumberCheck do
     errors.should_not be_empty
     errors[0].info.should        == { :method => :two_parameter_method, :parameter_count => 2 }
     errors[0].line_number.should == 1
-    errors[0].message.should     == 'Method two_parameter_method has 2 parameters.'
+    errors[0].message.should     == 'two_parameter_method has 2 parameters.'
   end
 
 end

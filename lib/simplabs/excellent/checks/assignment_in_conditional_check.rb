@@ -16,7 +16,7 @@ module Simplabs
           [:if, :while, :until]
         end
 
-        def evaluate(node)
+        def evaluate(node, context = nil)
           add_error('Assignment in condition.') if has_assignment?(node[1])
         end
 

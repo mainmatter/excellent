@@ -5,7 +5,7 @@ $LOAD_PATH.unshift(File.expand_path(File.dirname(__FILE__) + "/../lib"))
 require 'simplabs/excellent'
 require 'pathname'
 
-excellent = Simplabs::Excellent::Core::Runner.new
+excellent = Simplabs::Excellent::Runner.new
 
 ARGV.each do |arg|
   Dir.glob(arg).each { |file| excellent.check_file(file) }
