@@ -18,14 +18,10 @@ module Simplabs
           super([:class], pattern)
         end
       
-        def find_name(node)
-          node[1].class == Symbol ? node[1] : node[1].last
-        end
-
         protected
 
-          def error_args(node)
-            ['Bad class name {{class}}.', { :class => node[1] }]
+          def error_args(context)
+            ['Bad class name {{class}}.', { :class => context.full_name }]
           end
 
       end

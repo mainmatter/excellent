@@ -17,12 +17,8 @@ module Simplabs
 
         protected
 
-          def node_to_count(node)
-            node[3]
-          end
-
-          def error_args(node, line_count)
-            ['Class {{class}} has {{count}} lines.', { :class => node[1], :count => line_count }]
+          def error_args(context)
+            ['{{class}} has {{count}} lines.', { :class => context.full_name, :count => context.line_count }]
           end
 
       end

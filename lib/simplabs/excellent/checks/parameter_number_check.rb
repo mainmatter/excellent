@@ -19,23 +19,11 @@ module Simplabs
           [:defn, :iter]
         end
 
-        def evaluate(node, context = nil)
-          method_name = node.node_type == :defn ? node[1] : node[1][2]
-          parameter_count = count_parameters(node)
-          unless parameter_count <= @threshold
-            add_error('{{method}} has {{parameter_count}} parameters.', { :method => method_name, :parameter_count => parameter_count })
+        def evaluate(context)
+          unless context.parameters.length <= @threshold
+            add_error('{{method}} has {{parameter_count}} parameters.', { :method => context.full_name, :parameter_count => context.parameters.length })
           end
         end
-
-        private
-
-          def count_parameters(node)
-            if node.node_type == :defn
-              node[2][1..-1].inject(0) { |count, each| count = count + (each.class == Symbol ? 1 : 0) }
-            else
-              node[2][1].length - 1
-            end
-          end
 
       end
 

@@ -16,18 +16,9 @@ module Simplabs
           [:if, :while, :until]
         end
 
-        def evaluate(node, context = nil)
-          add_error('Assignment in condition.') if has_assignment?(node[1])
+        def evaluate(context)
+          add_error('Assignment in condition.') if context.tests_assignment?
         end
-
-        private
-
-          def has_assignment?(node)
-            found_assignment = false
-            found_assignment = found_assignment || node.node_type == :lasgn
-            node.children.each { |child| found_assignment = found_assignment || has_assignment?(child) }
-            found_assignment
-          end
 
       end
 

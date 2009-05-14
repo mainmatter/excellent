@@ -6,14 +6,14 @@ module Simplabs
 
     module Checks
 
-      class ClassVariableCheck < Base
+      class SingletonVariableCheck < Base
 
         def interesting_nodes
           [:cvar]
         end
 
-        def evaluate(node, context = nil)
-          add_error('Class variable {{variable}}.', { :variable => node.value }, -1)
+        def evaluate(context)
+          add_error('Singleton variable {{variable}} used.', { :variable => context.full_name }, -1)
         end
 
       end

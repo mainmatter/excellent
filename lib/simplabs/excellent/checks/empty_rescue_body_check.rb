@@ -8,27 +8,13 @@ module Simplabs
 
       class EmptyRescueBodyCheck < Base
 
-        STATEMENT_NODES = [:fcall, :return, :attrasgn, :vcall, :call, :str, :lit]
-
         def interesting_nodes
           [:resbody]
         end
 
-        def evaluate(node, context = nil)
-          add_error('Rescue block is empty.', {}, -1) unless has_statement?(node)
+        def evaluate(context)
+          add_error('Rescue block is empty.', {}, -1) unless context.has_statements?
         end
-
-        private
-
-          def has_statement?(node)
-            return true if STATEMENT_NODES.include?(node.node_type)
-            return true if assigning_other_than_exception_to_local_variable?(node) 
-            return true if node.children.any? { |child| has_statement?(child) }
-          end
-
-          def assigning_other_than_exception_to_local_variable?(node)
-            node.node_type == :lasgn && node[2].to_a != [:gvar, :$!]
-          end
 
       end
 

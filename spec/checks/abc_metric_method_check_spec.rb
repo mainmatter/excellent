@@ -78,6 +78,23 @@ describe Simplabs::Excellent::Checks::AbcMetricMethodCheck do
 
     end
 
+    it 'should also work on singleton methods' do
+      content = <<-END
+        class Class
+          def self.method_name
+            foo = 1
+          end
+        end
+      END
+      @excellent.check_content(content)
+      errors = @excellent.errors
+
+      errors.should_not be_empty
+      errors[0].info.should        == { :method => 'Class.method_name', :score => 1.0 }
+      errors[0].line_number.should == 2
+      errors[0].message.should     == "Class.method_name has abc score of 1.0."
+    end
+
   end
 
   def verify_content_score(content, a, b, c)
@@ -86,9 +103,9 @@ describe Simplabs::Excellent::Checks::AbcMetricMethodCheck do
     errors = @excellent.errors
 
     errors.should_not be_empty
-    errors[0].info[:method].should == :method_name
-    errors[0].info[:score].should  == score
-    errors[0].message.should       == "Method method_name has abc score of #{score}."
+    errors[0].info.should        == { :method => 'method_name', :score => score }
+    errors[0].line_number.should == 1
+    errors[0].message.should     == "method_name has abc score of #{score}."
   end
 
 end

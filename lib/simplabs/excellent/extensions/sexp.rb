@@ -8,6 +8,8 @@ module Simplabs
 
         def children
           sexp_body.select { |child| child.is_a?(Sexp) }
+        rescue
+          []
         end
 
       end

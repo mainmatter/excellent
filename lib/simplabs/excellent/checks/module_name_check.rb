@@ -15,14 +15,10 @@ module Simplabs
           super([:module], pattern)
         end
 
-        def find_name(node)
-          node[1].class == Symbol ? node[1] : node[1].last
-        end
-
         protected
 
-          def error_args(node)
-            ['Bad module name {{module}}.', { :module => node[1] }]
+          def error_args(context)
+            ['Bad module name {{module}}.', { :module => context.full_name }]
           end
 
       end

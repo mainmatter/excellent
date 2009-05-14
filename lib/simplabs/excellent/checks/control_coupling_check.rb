@@ -12,10 +12,9 @@ module Simplabs
           [:if, :case]
         end
 
-        def evaluate(node, context = nil)
-          return unless context
+        def evaluate(context)
           if tested_parameter = context.tests_parameter?
-            add_error('Control of {{method}} is coupled to {{argument}}.', { :method => context.parent.full_name, :argument => tested_parameter }, -1)
+            add_error('Control of {{method}} is coupled to {{argument}}.', { :method => context.parent.full_name, :argument => tested_parameter.to_s }, -2)
           end
         end
 

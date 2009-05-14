@@ -18,6 +18,16 @@ describe Simplabs::Excellent::Checks::ModuleNameCheck do
       @excellent.errors.should be_empty
     end
 
+    it 'should accept namespaced modules' do
+      content = <<-END
+        module Outer::Inner::GoodModuleName 
+        end
+      END
+      @excellent.check_content(content)
+
+      @excellent.errors.should be_empty
+    end
+
     it 'should reject module names with underscores' do
       content = <<-END
         module Bad_ModuleName 
@@ -27,9 +37,23 @@ describe Simplabs::Excellent::Checks::ModuleNameCheck do
       errors = @excellent.errors
 
       errors.should_not be_empty
-      errors[0].info.should        == { :module => :Bad_ModuleName }
+      errors[0].info.should        == { :module => 'Bad_ModuleName' }
       errors[0].line_number.should == 1
       errors[0].message.should     == 'Bad module name Bad_ModuleName.'
+    end
+
+    it 'should correctly report bad names of namespaced modules' do
+      content = <<-END
+        module Outer::Inner::Bad_ModuleName
+        end
+      END
+      @excellent.check_content(content)
+      errors = @excellent.errors
+
+      errors.should_not be_empty
+      errors[0].info.should        == { :module => 'Outer::Inner::Bad_ModuleName' }
+      errors[0].line_number.should == 1
+      errors[0].message.should     == 'Bad module name Outer::Inner::Bad_ModuleName.'
     end
 
   end

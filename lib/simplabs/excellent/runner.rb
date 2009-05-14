@@ -15,7 +15,7 @@ module Simplabs
         :CaseMissingElseCheck            => { },
         :ClassLineCountCheck             => { :threshold      => 300 },
         :ClassNameCheck                  => { :pattern         => /^[A-Z][a-zA-Z0-9]*$/ },
-        :ClassVariableCheck              => { },
+        :SingletonVariableCheck          => { },
         :CyclomaticComplexityBlockCheck  => { :complexity      => 4 },
         :CyclomaticComplexityMethodCheck => { :complexity      => 8 },
         :EmptyRescueBodyCheck            => { },

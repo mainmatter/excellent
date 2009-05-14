@@ -4,12 +4,12 @@ module Simplabs
 
     module Parsing
 
-      class MethodContext < SexpContext
+      class SingletonMethodContext < MethodContext
 
-        ASSIGNMENTS           = [:lasgn]
-        BRANCHES              = [:vcall, :call]
-        CONDITIONS            = [:==, :<=, :>=, :<, :>]
-        OPERATORS             = [:*, :/, :%, :+, :<<, :>>, :&, :|, :^, :-, :**]
+        ASSIGNMENTS       = [:lasgn]
+        BRANCHES          = [:vcall, :call]
+        CONDITIONS        = [:==, :<=, :>=, :<, :>]
+        OPERATORS         = [:*, :/, :%, :+, :<<, :>>, :&, :|, :^, :-, :**]
         COMPLEXITY_NODE_TYPES = [:if, :while, :until, :for, :rescue, :case, :when, :and, :or]
 
         attr_reader :parameters
@@ -18,24 +18,14 @@ module Simplabs
 
         def initialize(exp, parent)
           super
-          @parameters = []
-          @name       = exp[1].to_s
-          @parent.methods << self if @parent && (@parent.is_a?(ClassContext) || @parent.is_a?(ModuleContext))
+          @name = exp[2].to_s
           @abc_score = count_abc_score
           @cc_score  = count_cyclomytic_complexity + 1
         end
 
-        def has_parameter?(parameter)
-          @parameters.include?(parameter)
-        end
-
-        def line_offset
-          @parent ? @parent.line_offset + 1 : 1
-        end
-
         def full_name
           return @name if @parent.blank?
-          "#{@parent.full_name}##{@name}"
+          "#{@parent.full_name}.#{@name}"
         end
 
         private

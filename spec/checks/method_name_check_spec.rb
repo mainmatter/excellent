@@ -83,9 +83,30 @@ describe Simplabs::Excellent::Checks::MethodNameCheck do
     errors = @excellent.errors
 
     errors.should_not be_empty
-    errors[0].info.should        == { :method => :badMethodName }
+    errors[0].info.should        == { :method => 'badMethodName' }
     errors[0].line_number.should == 1
     errors[0].message.should     == 'Bad method name badMethodName.'
+  end
+
+  it "should correctly return the method's full name" do
+    content = <<-END
+      class Class
+        def badMethodName
+        end
+        def self.badMethodName2
+        end
+      end
+    END
+    @excellent.check_content(content)
+    errors = @excellent.errors
+
+    errors.should_not be_empty
+    errors[0].info.should        == { :method => 'Class#badMethodName' }
+    errors[0].line_number.should == 2
+    errors[0].message.should     == 'Bad method name Class#badMethodName.'
+    errors[1].info.should        == { :method => 'Class.badMethodName2' }
+    errors[1].line_number.should == 4
+    errors[1].message.should     == 'Bad method name Class.badMethodName2.'
   end
 
 end

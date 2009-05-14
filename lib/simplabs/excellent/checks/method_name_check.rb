@@ -12,17 +12,13 @@ module Simplabs
 
         def initialize(options = {})
           pattern = options['pattern'] || DEFAULT_PATTERN
-          super([:defn], pattern)
-        end
-
-        def find_name(node)
-          node[1]
+          super([:defn, :defs], pattern)
         end
 
         protected
 
-          def error_args(node)
-            ['Bad method name {{method}}.', { :method => node[1] }]
+          def error_args(context)
+            ['Bad method name {{method}}.', { :method => context.full_name }]
           end
 
       end

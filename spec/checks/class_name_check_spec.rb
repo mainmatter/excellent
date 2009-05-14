@@ -19,7 +19,7 @@ describe Simplabs::Excellent::Checks::ClassNameCheck do
 
     it 'should be able to parse scoped class names' do
       content = <<-END
-        class MyScope::GoodClassName 
+        class Outer::Inner::GoodClassName 
           def method
           end
         end
@@ -38,7 +38,7 @@ describe Simplabs::Excellent::Checks::ClassNameCheck do
       errors = @excellent.errors
 
       errors.should_not be_empty
-      errors[0].info.should        == { :class => :Bad_ClassName }
+      errors[0].info.should        == { :class => 'Bad_ClassName' }
       errors[0].line_number.should == 1
       errors[0].message.should     == 'Bad class name Bad_ClassName.'
     end

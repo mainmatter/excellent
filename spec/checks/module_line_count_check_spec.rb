@@ -3,14 +3,14 @@ require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 describe Simplabs::Excellent::Checks::ModuleLineCountCheck do
 
   before do
-    @excellent = Simplabs::Excellent::Runner.new(Simplabs::Excellent::Checks::ModuleLineCountCheck.new({ :threshold => 1 }))
+    @excellent = Simplabs::Excellent::Runner.new(Simplabs::Excellent::Checks::ModuleLineCountCheck.new({ :threshold => 2 }))
   end
 
   describe '#evaluate' do
 
     it 'should accept modules with less lines than the threshold' do
       content = <<-END
-        module ZeroLineModule; end
+        module OneLineModule; end
       END
       @excellent.check_content(content)
 
@@ -19,8 +19,7 @@ describe Simplabs::Excellent::Checks::ModuleLineCountCheck do
 
     it 'should accept modules with the same number of lines as the threshold' do
       content = <<-END
-        module OneLineModule
-          @foo = 1
+        module TwoLinesModule
         end
       END
       @excellent.check_content(content)
@@ -30,7 +29,7 @@ describe Simplabs::Excellent::Checks::ModuleLineCountCheck do
 
     it 'should reject modules with more lines than the threshold' do
       content = <<-END
-        module TwoLineModule
+        module FourLinesModule
           @foo = 1
           @bar = 2
         end
@@ -39,9 +38,9 @@ describe Simplabs::Excellent::Checks::ModuleLineCountCheck do
       errors = @excellent.errors
 
       errors.should_not be_empty
-      errors[0].info.should        == { :module => :TwoLineModule, :count => 2 }
+      errors[0].info.should        == { :module => 'FourLinesModule', :count => 4 }
       errors[0].line_number.should == 1
-      errors[0].message.should     == 'Module TwoLineModule has 2 lines.'
+      errors[0].message.should     == 'FourLinesModule has 4 lines.'
     end
 
   end

@@ -95,6 +95,44 @@ describe Simplabs::Excellent::Checks::EmptyRescueBodyCheck do
       @excellent.errors.should be_empty
     end
 
+    it 'should accept an empty array as a statement' do
+      content = <<-END
+        value = call_method rescue []
+      END
+
+      @excellent.check_content(content)
+
+      @excellent.errors.should be_empty
+    end
+
+    it 'should accept an empty hash as a statement' do
+      content = <<-END
+        value = call_method rescue {}
+      END
+
+      @excellent.check_content(content)
+
+      @excellent.errors.should be_empty
+    end
+
+    it 'should accept a boolean as a statement' do
+      content = <<-END
+        value = call_method rescue false
+      END
+      @excellent.check_content(content)
+
+      @excellent.errors.should be_empty
+    end
+
+    it 'should accept nil as a statement' do
+      content = <<-END
+        value = call_method rescue nil
+      END
+      @excellent.check_content(content)
+
+      @excellent.errors.should be_empty
+    end
+
     it 'should reject an empty rescue block with no parameter' do
       content = <<-END
         begin

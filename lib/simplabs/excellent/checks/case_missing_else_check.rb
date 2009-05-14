@@ -12,8 +12,8 @@ module Simplabs
           [:case]
         end
   
-        def evaluate(node, context = nil)
-          add_error('Case statement is missing else clause.') unless node.last
+        def evaluate(context)
+          add_error('Case statement is missing else clause.') unless context.has_else_clause?
         end
 
       end

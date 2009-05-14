@@ -20,6 +20,33 @@ describe Simplabs::Excellent::Checks::ControlCouplingCheck do
       errors.should be_empty
     end
 
+    it 'should accept methods with ternary operators using an instance variable' do
+      content = <<-END
+        def write(quoted)
+          @quoted ? write_quoted('1') : write_quoted('2')
+        end
+      END
+
+      @excellent.check_content(content)
+      errors = @excellent.errors
+
+      errors.should be_empty
+    end
+
+    it 'should accept methods with ternary operators using a local variable' do
+      content = <<-END
+        def write(quoted)
+          test = false
+          test ? write_quoted('1') : write_quoted('2')
+        end
+      END
+
+      @excellent.check_content(content)
+      errors = @excellent.errors
+
+      errors.should be_empty
+    end
+
     %w(if unless).each do |conditional|
 
       it "should reject methods with #{conditional} checks using a parameter" do
@@ -36,7 +63,7 @@ describe Simplabs::Excellent::Checks::ControlCouplingCheck do
 
     end
 
-    it "should reject methods with ternary operators using a parameter" do
+    it 'should reject methods with ternary operators using a parameter' do
       content = <<-END
         def write(quoted)
           quoted ? write_quoted('1') : write_quoted('2')
@@ -68,8 +95,8 @@ describe Simplabs::Excellent::Checks::ControlCouplingCheck do
     errors = @excellent.errors
 
     errors.should_not be_empty
-    errors[0].info.should        == { :method => :write, :argument => :quoted }
-    errors[0].line_number.should == 2
+    errors[0].info.should        == { :method => 'write', :argument => 'quoted' }
+    errors[0].line_number.should == 1
     errors[0].message.should     == 'Control of write is coupled to quoted.'
   end
 

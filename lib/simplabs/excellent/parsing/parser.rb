@@ -14,6 +14,8 @@ module Simplabs
           silence_stream(STDERR) do 
             return silent_parse(content, filename)
           end
+        rescue
+          #continue on errors
         end
 
         private

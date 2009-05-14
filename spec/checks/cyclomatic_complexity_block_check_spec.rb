@@ -10,10 +10,8 @@ describe Simplabs::Excellent::Checks::CyclomaticComplexityBlockCheck do
 
     it 'should find a simple block' do
       content = <<-END
-        def method_name
-          it 'should be a simple block' do
-            call_foo
-          end
+        it 'should be a simple block' do
+          call_foo
         end
       END
 
@@ -22,13 +20,11 @@ describe Simplabs::Excellent::Checks::CyclomaticComplexityBlockCheck do
 
     it 'should find a block with multiple paths' do
       content = <<-END
-        def method_name
-          it 'should be a complex block' do
-            if some_condition
-              call_foo
-            else
-              call_bar
-            end
+        it 'should be a complex block' do
+          if some_condition
+            call_foo
+          else
+            call_bar
           end
         end
       END

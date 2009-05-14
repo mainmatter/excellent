@@ -10,11 +10,28 @@ describe Simplabs::Excellent::Checks::AssignmentInConditionalCheck do
 
     it 'should accept an assignment before an if clause' do
       content = <<-END
-        count = count += 1 if some_condition
+        count = count += 1 if @some_condition
       END
       @excellent.check_content(content)
 
       @excellent.errors.should be_empty
+    end
+
+    it 'should accept block parameters in an if clause' do
+      content = <<-END
+        return true if exp.children.any? { |child| contains_statements?(child) }
+      END
+      @excellent.check_content(content)
+
+      @excellent.errors.should be_empty
+    end
+
+    it 'should reject assignments of results of blocks in an if clause' do
+      content = <<-END
+        return true if value = exp.children.find { |child| contains_statements?(child) }
+      END
+
+      verify_error_found(content)
     end
 
     it 'should reject an assignment inside an if clause' do

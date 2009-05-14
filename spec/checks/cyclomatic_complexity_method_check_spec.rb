@@ -169,6 +169,32 @@ describe Simplabs::Excellent::Checks::CyclomaticComplexityMethodCheck do
       verify_content_complexity(content, 5)
     end
 
+    it 'should also work on singleton methods' do
+      content = <<-END
+        class Class
+          def self.method_name
+            if first_condition then
+              call_foo
+            else
+              if second_condition then
+                call_bar
+              else
+                call_bam if third_condition
+              end
+              call_baz if fourth_condition
+            end
+          end
+        end
+      END
+      @excellent.check_content(content)
+      errors = @excellent.errors
+
+      errors.should_not be_empty
+      errors[0].info.should        == { :method => 'Class.method_name', :score => 5 }
+      errors[0].line_number.should == 2
+      errors[0].message.should     == "Class.method_name has cyclomatic complexity of 5."
+    end
+
   end
 
   def verify_content_complexity(content, score)
@@ -176,9 +202,9 @@ describe Simplabs::Excellent::Checks::CyclomaticComplexityMethodCheck do
     errors = @excellent.errors
 
     errors.should_not be_empty
-    errors[0].info.should        == { :method => :method_name, :score => score }
+    errors[0].info.should        == { :method => 'method_name', :score => score }
     errors[0].line_number.should == 1
-    errors[0].message.should     == "Method method_name has cyclomatic complexity of #{score}."
+    errors[0].message.should     == "method_name has cyclomatic complexity of #{score}."
   end
 
 end

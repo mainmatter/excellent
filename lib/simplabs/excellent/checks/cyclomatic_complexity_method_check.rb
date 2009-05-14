@@ -11,17 +11,15 @@ module Simplabs
         DEFAULT_THRESHOLD = 8
 
         def initialize(options = {})
-          complexity = options[:threshold] || DEFAULT_THRESHOLD
-          super(complexity)
+          super(options[:threshold] || DEFAULT_THRESHOLD)
         end
 
         def interesting_nodes
-          [:defn]
+          [:defn, :defs]
         end
 
-        def evaluate(node, context = nil)
-          score = count_complexity(node)
-          add_error('Method {{method}} has cyclomatic complexity of {{score}}.', { :method => node[1], :score => score }) unless score <= @threshold
+        def evaluate(context)
+          add_error('{{method}} has cyclomatic complexity of {{score}}.', { :method => context.full_name, :score => context.cc_score }) unless context.cc_score <= @threshold
         end
 
       end
