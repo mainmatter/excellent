@@ -15,7 +15,7 @@ Example
 
 To analyse all the models in your Rails application, just do
 
-    excellent "app/models/**/*.rb"
+    excellent app/models
 
 in your RAILS_ROOT.
 
