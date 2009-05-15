@@ -1,4 +1,4 @@
-require 'simplabs/excellent/parsing/sexp_context'
+require 'simplabs/excellent/parsing/cyclomatic_complexity_measure'
 
 module Simplabs
 
@@ -8,7 +8,7 @@ module Simplabs
 
       class BlockContext < SexpContext
 
-        COMPLEXITY_NODE_TYPES = [:if, :while, :until, :for, :rescue, :case, :when, :and, :or]
+        include CyclomaticComplexityMeasure
 
         attr_reader :parameters
         attr_reader :cc_score
@@ -34,15 +34,6 @@ module Simplabs
         def inside_block?
           @parent.is_a?(BlockContext)
         end
-
-        private
-
-          def count_cyclomytic_complexity(exp = @exp)
-            count = 0
-            count = count + 1 if COMPLEXITY_NODE_TYPES.include?(exp.node_type)
-            exp.children.each { |child| count += count_cyclomytic_complexity(child) }
-            count
-          end
 
       end
 
