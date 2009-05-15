@@ -10,9 +10,12 @@ module Simplabs
 
         include Comparable
 
+        attr_reader :receiver
+        attr_reader :method
+
         def initialize(exp, parent)
           super
-          @receiver  = exp[1].is_a?(Sexp) ? exp[1][1].to_s : nil
+          @receiver  = exp[1].is_a?(Sexp) ? (exp[1][1].nil? ? exp[1][2].to_s : exp[1][1].to_s) : nil
           @method    = exp[2].to_s
           @full_name = [@receiver, @method].compact.join('.')
         end

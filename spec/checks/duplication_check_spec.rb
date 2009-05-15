@@ -8,6 +8,18 @@ describe Simplabs::Excellent::Checks::DuplicationCheck do
 
   describe '#evaluate' do
 
+    it 'should accept multiple calls to new' do
+      content = <<-END
+        def double_thing
+          @thing.new + @thing.new
+        end
+      END
+      @excellent.check_content(content)
+      errors = @excellent.errors
+
+      errors.should be_empty
+    end
+
     it 'should reject multiple calls to the same method and receiver' do
       content = <<-END
         def double_thing
@@ -16,6 +28,26 @@ describe Simplabs::Excellent::Checks::DuplicationCheck do
       END
 
       verify_error_found(content, '@other.thing')
+    end
+
+    it 'should reject multiple calls to the same lvar' do
+      content = <<-END
+        def double_thing
+          thing[1] + thing[2]
+        end
+      END
+
+      verify_error_found(content, 'thing.[]')
+    end
+
+    it 'should reject multiple calls to the same singleton method' do
+      content = <<-END
+        def double_thing
+          Class.thing[1] + Class.thing[2]
+        end
+      END
+
+      verify_error_found(content, 'Class.thing')
     end
 
     it 'should reject multiple calls to the same method without a receiver' do

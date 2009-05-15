@@ -21,7 +21,7 @@ module Simplabs
 
         def evaluate(context)
           context.calls.each do |call, number|
-            if number > @threshold
+            if number > @threshold && call.method != 'new'
               add_error(
                 '{{method}} calls {{statement}} {{duplication_number}} times.', {
                   :method             => context.full_name,

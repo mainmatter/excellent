@@ -92,7 +92,9 @@ module Simplabs
         end
 
         def process_call(exp)
-          @contexts.last.record_call_to(CallContext.new(exp, @contexts.last)) if @contexts.last.is_a?(MethodContext) || @contexts.last.is_a?(BlockContext) || @contexts.last.is_a?(SingletonMethodContext)
+          if @contexts.last.is_a?(MethodContext) || @contexts.last.is_a?(BlockContext) || @contexts.last.is_a?(SingletonMethodContext)
+            @contexts.last.record_call_to(CallContext.new(exp, @contexts.last))
+          end
           process_default(exp)
         end
 
