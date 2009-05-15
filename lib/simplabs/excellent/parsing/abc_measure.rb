@@ -6,7 +6,7 @@ module Simplabs
 
       module AbcMeasure
 
-        CONDITIONS        = [:==, :<=, :>=, :<, :>]
+        CONDITIONS = [:==, :<=, :>=, :<, :>]
 
         def process_lasgn(exp)
           @assignments ||= 0

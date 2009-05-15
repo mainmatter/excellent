@@ -28,6 +28,7 @@ module Simplabs
           super()
           @require_empty = @warn_on_default = false
           @contexts = []
+          @default_method = 'process_default'
         end
 
         def process(exp)
@@ -80,10 +81,6 @@ module Simplabs
 
         def process_masgn(exp)
           exp[1][1..-1].each { |parameter| @contexts.last.parameters << parameter[1] if parameter[1].is_a?(Symbol) } if @contexts.last.is_a?(BlockContext)
-          process_default(exp)
-        end
-
-        def process_lasgn(exp)
           process_default(exp)
         end
 

@@ -11,7 +11,6 @@ module Simplabs
         include CyclomaticComplexityMeasure
 
         attr_reader :parameters
-        attr_reader :cc_score
         attr_reader :calls
 
         def initialize(exp, parent)
@@ -19,7 +18,6 @@ module Simplabs
           @parameters = []
           @name       = 'block'
           @line      = exp.line < exp[1].line ? exp.line : exp[1].line
-          @cc_score  = count_cyclomytic_complexity + 1
           @calls     = Hash.new(0)
         end
 

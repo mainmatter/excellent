@@ -8,14 +8,23 @@ module Simplabs
 
         COMPLEXITY_NODE_TYPES = [:if, :while, :until, :for, :rescue, :case, :when, :and, :or]
 
-        private
+        def process_exp(exp)
+          @cc_score ||= 0
+          @cc_score += 1
+        end
+        alias process_if     process_exp
+        alias process_while  process_exp
+        alias process_until  process_exp
+        alias process_for    process_exp
+        alias process_rescue process_exp
+        alias process_case   process_exp
+        alias process_when   process_exp
+        alias process_and    process_exp
+        alias process_or     process_exp
 
-          def count_cyclomytic_complexity(exp = @exp)
-            count = 0
-            count = count + 1 if COMPLEXITY_NODE_TYPES.include?(exp.node_type)
-            exp.children.each { |child| count += count_cyclomytic_complexity(child) }
-            count
-          end
+        def cc_score
+          @cc_score + 1 rescue 1
+        end
 
       end
 
