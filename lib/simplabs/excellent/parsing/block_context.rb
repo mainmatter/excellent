@@ -12,6 +12,7 @@ module Simplabs
 
         attr_reader :parameters
         attr_reader :cc_score
+        attr_reader :calls
 
         def initialize(exp, parent)
           super
@@ -19,6 +20,7 @@ module Simplabs
           @name       = 'block'
           @line      = exp.line < exp[1].line ? exp.line : exp[1].line
           @cc_score  = count_cyclomytic_complexity + 1
+          @calls     = Hash.new(0)
         end
 
         def full_name
@@ -27,6 +29,10 @@ module Simplabs
 
         def line_offset
           @parent ? @parent.line_offset + 1 : 1
+        end
+
+        def record_call_to(exp)
+          @calls[exp] += 1
         end
 
         private

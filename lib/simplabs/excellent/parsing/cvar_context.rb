@@ -10,7 +10,7 @@ module Simplabs
 
         def initialize(exp, parent)
           super
-          @name = exp[1].to_s.gsub(/@/, '')
+          @name = exp[1].to_s.gsub(/^@+/, '')
         end
 
         def full_name

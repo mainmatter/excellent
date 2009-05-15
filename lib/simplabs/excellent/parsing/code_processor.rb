@@ -12,6 +12,7 @@ require 'simplabs/excellent/parsing/while_context'
 require 'simplabs/excellent/parsing/until_context'
 require 'simplabs/excellent/parsing/cvar_context'
 require 'simplabs/excellent/parsing/resbody_context'
+require 'simplabs/excellent/parsing/call_context'
 
 module Simplabs
 
@@ -31,7 +32,8 @@ module Simplabs
 
         def process(exp)
           super
-        rescue Exception => ex
+        rescue
+          raise
           #continue on errors
         end
 
@@ -87,6 +89,11 @@ module Simplabs
 
         def process_iter(exp)
           process_default(exp, BlockContext.new(exp, @contexts.last))
+        end
+
+        def process_call(exp)
+          @contexts.last.record_call_to(CallContext.new(exp, @contexts.last)) if @contexts.last.is_a?(MethodContext) || @contexts.last.is_a?(BlockContext) || @contexts.last.is_a?(SingletonMethodContext)
+          process_default(exp)
         end
 
         def process_resbody(exp)

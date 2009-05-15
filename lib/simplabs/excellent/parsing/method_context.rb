@@ -15,6 +15,7 @@ module Simplabs
         attr_reader :parameters
         attr_reader :abc_score
         attr_reader :cc_score
+        attr_reader :calls
 
         def initialize(exp, parent)
           super
@@ -23,6 +24,7 @@ module Simplabs
           @parent.methods << self if @parent && (@parent.is_a?(ClassContext) || @parent.is_a?(ModuleContext))
           @abc_score = count_abc_score
           @cc_score  = count_cyclomytic_complexity + 1
+          @calls     = Hash.new(0)
         end
 
         def has_parameter?(parameter)
@@ -36,6 +38,10 @@ module Simplabs
         def full_name
           return @name if @parent.blank?
           "#{@parent.full_name}##{@name}"
+        end
+
+        def record_call_to(exp)
+          @calls[exp] += 1
         end
 
         private

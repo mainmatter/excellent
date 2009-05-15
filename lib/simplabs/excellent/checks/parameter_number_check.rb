@@ -16,7 +16,7 @@ module Simplabs
         end
 
         def interesting_nodes
-          [:defn, :iter]
+          [:defn, :iter, :defs]
         end
 
         def evaluate(context)

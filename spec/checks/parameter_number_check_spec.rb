@@ -37,13 +37,31 @@ describe Simplabs::Excellent::Checks::ParameterNumberCheck do
       verify_error_found(content, 'two_parameter_method')
     end
 
-    it 'should cope with default values on parameters' do
+    it 'should work with default values on parameters' do
       content = <<-END
         def two_parameter_method(first_parameter = 1, second_parameter = 2)
         end
       END
 
       verify_error_found(content, 'two_parameter_method')
+    end
+
+    it 'should work with methods defined on objects' do
+      content = <<-END
+        def object.two_parameter_method(first_parameter = 1, second_parameter = 2)
+        end
+      END
+
+      verify_error_found(content, 'object.two_parameter_method')
+    end
+
+    it 'should work with methods defined directly on classes' do
+      content = <<-END
+        def Class.two_parameter_method(first_parameter = 1, second_parameter = 2)
+        end
+      END
+
+      verify_error_found(content, 'Class.two_parameter_method')
     end
 
     it 'should reject yield calls with more parameters than the threshold' do
