@@ -30,6 +30,8 @@ module Simplabs
               base = base[1]
             elsif base[0] == :const
               base = false
+            else
+              break
             end
           end
           @base_class_name = @base_class_name.empty? ? nil : @base_class_name.sub(/::$/, '')

@@ -24,7 +24,9 @@ module Simplabs
         :MethodNameCheck                 => { :pattern         => /^[_a-z<>=\[|+-\/\*`]+[_a-z0-9_<>=~@\[\]]*[=!\?]?$/ },
         :ModuleLineCountCheck            => { :line_count      => 300 },
         :ModuleNameCheck                 => { :pattern         => /^[A-Z][a-zA-Z0-9]*$/ },
-        :ParameterNumberCheck            => { :parameter_count => 3 }
+        :ParameterNumberCheck            => { :parameter_count => 3 },
+        :'Rails::AttrProtectedCheck'     => { },
+        :'Rails::AttrAccessibleCheck'    => { }
       }
       
       attr_writer :config
