@@ -89,7 +89,7 @@ describe Simplabs::Excellent::Checks::ParameterNumberCheck do
     errors = @excellent.errors
 
     errors.should_not be_empty
-    errors[0].info.should        == { :method => name, :parameter_count => 2 }
+    errors[0].info.should        == { :method => name, :parameters => 2 }
     errors[0].line_number.should == 1
     errors[0].message.should     == "#{name} has 2 parameters."
   end

@@ -17,8 +17,8 @@ module Simplabs
           super
           @parameters = []
           @name       = 'block'
-          @line      = exp.line < exp[1].line ? exp.line : exp[1].line
-          @calls     = Hash.new(0)
+          @line       = exp.line < exp[1].line ? exp.line : exp[1].line
+          @calls      = Hash.new(0)
         end
 
         def full_name

@@ -4,8 +4,12 @@ require 'simplabs/excellent/runner'
 require 'rubygems'
 require 'sexp'
 
-module Excellent
+module Simplabs
 
-  VERSION = '1.0.1'
+  module Excellent
+
+    VERSION = '1.1.0'
+
+  end
 
 end

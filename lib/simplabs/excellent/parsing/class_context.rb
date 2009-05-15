@@ -8,6 +8,8 @@ module Simplabs
 
       class ClassContext < SexpContext
 
+        #TODO: cleanup!
+
         attr_reader :methods
         attr_reader :line_count
         attr_reader :base_class_name

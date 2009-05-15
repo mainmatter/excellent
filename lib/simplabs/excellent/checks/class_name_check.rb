@@ -6,9 +6,6 @@ module Simplabs
 
     module Checks
 
-      # Checks a class name to make sure it matches the specified pattern.
-      # 
-      # Keeping to a consistent naming convention makes your code easier to read.
       class ClassNameCheck < NameCheck
 
         DEFAULT_PATTERN = /^[A-Z]{1}[a-zA-Z0-9]*$/

@@ -14,7 +14,7 @@ module Simplabs
 
         def evaluate(context)
           if tested_parameter = context.tests_parameter?
-            add_error('Control of {{method}} is coupled to {{argument}}.', { :method => context.parent.full_name, :argument => tested_parameter.to_s }, -2)
+            add_error('{{method}} is coupled to {{argument}}.', { :method => context.parent.full_name, :argument => tested_parameter.to_s }, -2)
           end
         end
 

@@ -1,4 +1,4 @@
-require 'simplabs/excellent/parsing/sexp_context'
+require 'simplabs/excellent/parsing/conditional_context'
 
 module Simplabs
 
@@ -6,7 +6,7 @@ module Simplabs
 
     module Parsing
 
-      class CaseContext < SexpContext
+      class CaseContext < ConditionalContext
 
         def initialize(exp, parent)
           super
@@ -20,12 +20,6 @@ module Simplabs
 
         def tests_parameter?
           @tests_parameter
-        end
-
-        def contains_parameter?
-          return false unless @parent.is_a?(MethodContext)
-          return @exp[1][1] if @exp[1][0] == :lvar and @parent.has_parameter?(@exp[1][1])
-          false
         end
 
       end

@@ -1,5 +1,3 @@
-require 'simplabs/excellent/parsing/sexp_context'
-
 module Simplabs
 
   module Excellent
@@ -13,6 +11,7 @@ module Simplabs
 
         def initialize(exp, parent)
           super
+          #TODO: clean this up!
           if @exp[1].is_a?(Sexp)
             @name = @exp[1].pop.to_s.strip
             @full_name = "#{extract_prefixes}#{@name}"

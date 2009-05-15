@@ -21,7 +21,7 @@ module Simplabs
 
         def evaluate(context)
           unless context.parameters.length <= @threshold
-            add_error('{{method}} has {{parameter_count}} parameters.', { :method => context.full_name, :parameter_count => context.parameters.length })
+            add_error('{{method}} has {{parameters}} parameters.', { :method => context.full_name, :parameters => context.parameters.length })
           end
         end
 

@@ -21,7 +21,7 @@ module Simplabs
           @parameters = []
           @name       = exp[1].to_s
           @parent.methods << self if @parent && (@parent.is_a?(ClassContext) || @parent.is_a?(ModuleContext))
-          @calls     = Hash.new(0)
+          @calls      = Hash.new(0)
           @line_count = count_lines
         end
 

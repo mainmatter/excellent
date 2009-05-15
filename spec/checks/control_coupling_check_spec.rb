@@ -97,7 +97,7 @@ describe Simplabs::Excellent::Checks::ControlCouplingCheck do
     errors.should_not be_empty
     errors[0].info.should        == { :method => 'write', :argument => 'quoted' }
     errors[0].line_number.should == 1
-    errors[0].message.should     == 'Control of write is coupled to quoted.'
+    errors[0].message.should     == 'write is coupled to quoted.'
   end
 
 end

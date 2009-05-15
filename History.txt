@@ -1,3 +1,12 @@
+= 1.1.0
+
+* completely restructured, made everything running in the flow of the SexpProcessor
+* added most tests from reek (except for UtilityFunction and FeatureEnvy)
+
+= 1.0.1
+
+* fixed some errors
+
 = 1.0.0
 
 * this is basically just a custom version of roodi, converted to ruby_parser to be 1.9 safe

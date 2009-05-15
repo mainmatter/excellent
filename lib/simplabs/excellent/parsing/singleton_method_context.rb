@@ -17,6 +17,7 @@ module Simplabs
 
         def initialize(exp, parent)
           super
+          #TODO: clean this up!
           @name = exp[2].to_s
           if exp[1].is_a?(Sexp)
             if exp[1].node_type == :call

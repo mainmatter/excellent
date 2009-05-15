@@ -1,5 +1,3 @@
-require 'simplabs/excellent/parsing/sexp_context'
-
 module Simplabs
 
   module Excellent
@@ -23,7 +21,7 @@ module Simplabs
         def <=>(other)
           @full_name <=> other.full_name
         end
-        alias eql? <=>
+        alias :eql? :'<=>'
 
         def hash
           @full_name.hash

@@ -8,13 +8,15 @@ module Simplabs
 
       class Base
 
+        attr_reader :errors
+
         def initialize
           @errors = []
         end
   
         def evaluate_node(context)
           @context = context
-          evaluate(context) if self.respond_to? :evaluate
+          evaluate(context)
         end
   
         def add_error(message, info = {}, offset = 0)
@@ -22,10 +24,6 @@ module Simplabs
           @errors << Simplabs::Excellent::Error.new(klass, message, @context.file, @context.line + offset, info)
         end
   
-        def errors
-          @errors
-        end
-
       end
 
     end

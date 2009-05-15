@@ -14,7 +14,7 @@ module Simplabs
         end
 
         def process_call(exp)
-          @branches ||= 0
+          @branches     ||= 0
           @conditionals ||= 0
           if CONDITIONS.include?(exp[2])
             @conditionals += 1
@@ -30,8 +30,8 @@ module Simplabs
         end
 
         def abc_score
-          a = @assignments ||= 0
-          b = @branches ||= 0
+          a = @assignments  ||= 0
+          b = @branches     ||= 0
           c = @conditionals ||= 0
           score = Math.sqrt(a * a + b * b + c * c)
         end

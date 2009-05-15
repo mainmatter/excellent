@@ -20,7 +20,9 @@ module Simplabs
         end
 
         def evaluate(context)
-          add_error('{{method}} has abc score of {{score}}.', { :method => context.full_name, :score => context.abc_score }) unless context.abc_score <= @threshold
+          unless context.abc_score <= @threshold
+            add_error('{{method}} has abc score of {{score}}.', { :method => context.full_name, :score => context.abc_score })
+          end
         end
 
       end

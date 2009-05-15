@@ -1,5 +1,3 @@
-require 'simplabs/excellent/parsing/sexp_context'
-
 module Simplabs
 
   module Excellent
@@ -19,6 +17,7 @@ module Simplabs
           parent = @parent
           parent = parent.parent until parent.is_a?(ClassContext) || parent.is_a?(ModuleContext)
           full_name = "#{parent.full_name}::#{full_name}"
+          #TODO: this is ugly!
           full_name.reverse.sub(/::/, '.').reverse
         end
 
