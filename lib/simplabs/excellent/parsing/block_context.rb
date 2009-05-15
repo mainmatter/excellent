@@ -35,6 +35,10 @@ module Simplabs
           @calls[exp] += 1
         end
 
+        def inside_block?
+          @parent.is_a?(BlockContext)
+        end
+
         private
 
           def count_cyclomytic_complexity(exp = @exp)
