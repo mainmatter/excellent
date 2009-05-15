@@ -27,10 +27,6 @@ module Simplabs
           @name
         end
 
-        def line_offset
-          @parent ? @parent.line_offset + 1 : 1
-        end
-
         def record_call_to(exp)
           @calls[exp] += 1
         end

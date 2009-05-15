@@ -34,8 +34,9 @@ module Simplabs
 
         def full_name
           return @full_name if @full_name
-          return @name if @parent.blank?
-          "#{@parent.full_name}.#{@name}"
+          parent = @parent.is_a?(BlockContext) ? @parent.parent : @parent
+          return @name if parent.blank?
+          "#{parent.full_name}.#{@name}"
         end
 
         def record_call_to(exp)
