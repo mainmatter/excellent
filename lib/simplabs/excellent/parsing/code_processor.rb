@@ -33,6 +33,7 @@ module Simplabs
         def process(exp)
           super
         rescue
+          raise
           #continue on errors
         end
 
@@ -82,6 +83,10 @@ module Simplabs
           process_default(exp)
         end
 
+        def process_lasgn(exp)
+          process_default(exp)
+        end
+
         def process_case(exp)
           process_default(exp, CaseContext.new(exp, @contexts.last))
         end
@@ -103,6 +108,10 @@ module Simplabs
 
         def process_default(exp, context = nil)
           @contexts.push(context) if context
+          @contexts.each do |c|
+            method = "process_#{exp.node_type}".to_sym
+            c.send(method, exp) if c.respond_to?(method)
+          end
           exp.children.each { |sub| process(sub) }
           apply_checks(exp)
           @contexts.pop if context
@@ -134,9 +143,7 @@ module Simplabs
               method = "process_#{key.to_s}".to_sym
               unless self.respond_to?(method)
                 self.class.send(:define_method, method) do |exp| # def process_call(exp)
-                  exp.children.each { |sub| process(sub) }       #   exp.children.each { |sub| process(sub) }
-                  apply_checks(exp)                              #   apply_checks(exp)
-                  exp                                            #   exp
+                  process_default(exp)                           #   process_default(exp)
                 end                                              # end
               end
             end

@@ -13,7 +13,6 @@ module Simplabs
         include AbcMeasure
 
         attr_reader :parameters
-        attr_reader :abc_score
         attr_reader :cc_score
         attr_reader :calls
         attr_reader :line_count
@@ -23,7 +22,6 @@ module Simplabs
           @parameters = []
           @name       = exp[1].to_s
           @parent.methods << self if @parent && (@parent.is_a?(ClassContext) || @parent.is_a?(ModuleContext))
-          @abc_score = count_abc_score
           @cc_score  = count_cyclomytic_complexity + 1
           @calls     = Hash.new(0)
           @line_count = count_lines

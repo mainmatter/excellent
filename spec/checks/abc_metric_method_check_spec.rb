@@ -10,7 +10,17 @@ describe Simplabs::Excellent::Checks::AbcMetricMethodCheck do
 
     describe 'when processing assignments' do
 
-      ['=', '*=', '/=', '%=', '+=', '<<=', '>>=', '&=', '|=', '^=', '-=', '**='].each do |assignment|
+      it "should find =" do
+        content = <<-END
+          def method_name
+            foo = 1
+          end
+        END
+
+        verify_content_score(content, 1, 0, 0)
+      end
+
+      ['*=', '/=', '%=', '+=', '<<=', '>>=', '&=', '|=', '^=', '-=', '**='].each do |assignment|
 
         it "should find #{assignment}" do
           content = <<-END
@@ -19,7 +29,8 @@ describe Simplabs::Excellent::Checks::AbcMetricMethodCheck do
             end
           END
 
-          verify_content_score(content, 1, 0, 0)
+          # these special assignments have score 2 since before the value is assigned, a method is called on the old value
+          verify_content_score(content, 1, 0, 1)
         end
 
       end

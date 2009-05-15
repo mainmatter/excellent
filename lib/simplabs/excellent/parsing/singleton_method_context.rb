@@ -13,7 +13,6 @@ module Simplabs
         include AbcMeasure
 
         attr_reader :parameters
-        attr_reader :abc_score
         attr_reader :cc_score
         attr_reader :calls
 
@@ -27,7 +26,6 @@ module Simplabs
               @full_name = "#{exp[1][1]}.#{@name}"
             end
           end
-          @abc_score = count_abc_score
           @cc_score  = count_cyclomytic_complexity + 1
           @calls     = Hash.new(0)
         end
