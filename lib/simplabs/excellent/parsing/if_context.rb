@@ -10,7 +10,7 @@ module Simplabs
 
         def initialize(exp, parent)
           super
-          @contains_assignment = contains_assignment?
+          @contains_assignment = has_assignment?
           @tests_parameter = contains_parameter?
         end
 
@@ -24,18 +24,15 @@ module Simplabs
 
         private
 
-          def contains_assignment?(exp = @exp[1])
-            return false if exp.node_type == :iter
-            found_assignment = false
-            found_assignment = found_assignment || exp.node_type == :lasgn
-            exp.children.each { |child| found_assignment = found_assignment || contains_assignment?(child) }
-            found_assignment
-          end
-
           def contains_parameter?
             return false unless @parent.is_a?(MethodContext)
             return @exp[1][1] if @exp[1][0] == :lvar and @parent.has_parameter?(@exp[1][1])
             false
+          end
+
+          def has_assignment?(exp = @exp[1])
+            return false if exp.node_type == :iter
+            super
           end
 
       end

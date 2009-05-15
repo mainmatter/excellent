@@ -16,6 +16,7 @@ module Simplabs
         attr_reader :abc_score
         attr_reader :cc_score
         attr_reader :calls
+        attr_reader :line_count
 
         def initialize(exp, parent)
           super
@@ -25,14 +26,11 @@ module Simplabs
           @abc_score = count_abc_score
           @cc_score  = count_cyclomytic_complexity + 1
           @calls     = Hash.new(0)
+          @line_count = count_lines
         end
 
         def has_parameter?(parameter)
           @parameters.include?(parameter)
-        end
-
-        def line_offset
-          @parent ? @parent.line_offset + 1 : 1
         end
 
         def full_name

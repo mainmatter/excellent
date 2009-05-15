@@ -33,7 +33,6 @@ module Simplabs
         def process(exp)
           super
         rescue
-          raise
           #continue on errors
         end
 

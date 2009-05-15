@@ -18,8 +18,7 @@ module Simplabs
           @interesting_nodes
         end
 
-        def evaluate(context = nil)
-          return unless context
+        def evaluate(context)
           add_error(*error_args(context)) unless context.line_count <= @threshold
         end
 

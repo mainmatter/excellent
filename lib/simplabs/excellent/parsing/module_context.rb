@@ -9,6 +9,7 @@ module Simplabs
       class ModuleContext < SexpContext
 
         attr_reader :methods
+        attr_reader :line_count
 
         def initialize(exp, parent)
           super
@@ -19,6 +20,7 @@ module Simplabs
             @name = exp[1].to_s
           end
           @methods = []
+          @line_count = count_lines
         end
 
         private
