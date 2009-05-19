@@ -26,4 +26,6 @@ If you want to contribute, just fork the repo. Also I would appretiate suggestio
 Author
 ------
 
-Copyright (c) 2009 Marco Otte-Witte (http://simplabs.com), released under the MIT license
+Copyright (c) 2009 Marco Otte-Witte (http://simplabs.com), released under the MIT license.
+
+Excellent is based on roodi (http://github.com/martinjandrews/roodi), reek (http://github.com/kevinrutherford/reek) and flog (http://github.com/seattlerb/flog).

@@ -23,6 +23,7 @@ module Simplabs
           context.calls.each do |call, number|
             if number > @threshold && call.method != 'new'
               add_error(
+                context,
                 '{{method}} calls {{statement}} {{duplication_number}} times.', {
                   :method             => context.full_name,
                   :statement          => call.full_name,

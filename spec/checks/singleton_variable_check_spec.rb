@@ -17,7 +17,7 @@ describe Simplabs::Excellent::Checks::SingletonVariableCheck do
 
       errors.should_not be_empty
       errors[0].info.should        == { :variable => 'foo' }
-      errors[0].line_number.should == 1
+      errors[0].line_number.should == 2
       errors[0].message.should     == 'Singleton variable foo used.'
     end
 
@@ -36,7 +36,7 @@ describe Simplabs::Excellent::Checks::SingletonVariableCheck do
 
       errors.should_not be_empty
       errors[0].info.should        == { :variable => 'Outer::Inner::Class.foo' }
-      errors[0].line_number.should == 4
+      errors[0].line_number.should == 5
       errors[0].message.should     == 'Singleton variable Outer::Inner::Class.foo used.'
     end
 
@@ -57,7 +57,7 @@ describe Simplabs::Excellent::Checks::SingletonVariableCheck do
 
       errors.should_not be_empty
       errors[0].info.should        == { :variable => 'Outer::Inner::Class.foo' }
-      errors[0].line_number.should == 5
+      errors[0].line_number.should == 6
       errors[0].message.should     == 'Singleton variable Outer::Inner::Class.foo used.'
     end
 

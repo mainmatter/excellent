@@ -8,7 +8,7 @@ module Simplabs
 
       class FlogBlockCheck < FlogCheck
 
-        DEFAULT_THRESHOLD = 10
+        DEFAULT_THRESHOLD = 15
 
         def initialize(options = {})
           threshold = options[:threshold] || DEFAULT_THRESHOLD
@@ -18,7 +18,7 @@ module Simplabs
         protected
 
           def error_args(context)
-            ['{{block}} has flog score of {{score}}.', { :block => context.full_name, :score => context.flog_score }]
+            [context, '{{block}} has flog score of {{score}}.', { :block => context.full_name, :score => context.flog_score }]
           end
 
       end

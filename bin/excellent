@@ -6,22 +6,25 @@ require 'simplabs/excellent'
 require 'pathname'
 
 excellent = Simplabs::Excellent::Runner.new
-
+start_time = Time.now
 ARGV.each do |arg|
   if File.file?(arg)
     excellent.check_file(arg)
   elsif File.directory?(arg)
-    Dir.glob("#{arg}/**/*.rb").each { |file| puts file; excellent.check_file(file) }
+    Dir.glob("#{arg}/**/*.rb").each { |file| excellent.check_file(file) }
   else
     puts "\n** Excellent cannot find '#{arg}'\n\n"
     exit 1
   end
 end
 
-puts "\nExcellent found #{excellent.errors.size} errors.\n"
-excellent.errors.each do |error|
-  puts "  * File #{error.filename}, line #{error.line_number}: #{error.message}"
+unless excellent.errors.empty?
+  puts "\n  Errors:\n\n"
+  excellent.errors.each do |error|
+    puts "  * File #{error.filename}, line #{error.line_number}: #{error.message}"
+  end
 end
-puts ''
+puts "\n  Found #{excellent.errors.size} errors.\n\n"
+puts "DURATION: #{Time.now - start_time}"
 
 exit 0

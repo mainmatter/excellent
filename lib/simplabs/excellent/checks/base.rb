@@ -15,13 +15,12 @@ module Simplabs
         end
   
         def evaluate_node(context)
-          @context = context
           evaluate(context)
         end
   
-        def add_error(message, info = {}, offset = 0)
+        def add_error(context, message, info = {}, offset = 0)
           klass = self.class
-          @errors << Simplabs::Excellent::Error.new(klass, message, @context.file, @context.line + offset, info)
+          @errors << Simplabs::Excellent::Error.new(klass, message, context.file, context.line + offset, info)
         end
   
       end

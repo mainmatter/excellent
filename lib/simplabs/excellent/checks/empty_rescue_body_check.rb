@@ -13,7 +13,7 @@ module Simplabs
         end
 
         def evaluate(context)
-          add_error('Rescue block is empty.', {}, -1) unless context.has_statements?
+          add_error(context, 'Rescue block is empty.', {}, -1) unless context.has_statements?
         end
 
       end

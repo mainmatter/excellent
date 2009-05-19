@@ -13,7 +13,7 @@ module Simplabs
         end
   
         def evaluate(context)
-          add_error('Case statement is missing else clause.') unless context.has_else_clause?
+          add_error(context, 'Case statement is missing else clause.') unless context.has_else_clause?
         end
 
       end

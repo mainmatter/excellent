@@ -18,7 +18,7 @@ module Simplabs
         protected
 
           def error_args(context)
-            ['{{module}} has {{count}} lines.', { :module => context.full_name, :count => context.line_count }]
+            [context, '{{module}} has {{count}} lines.', { :module => context.full_name, :count => context.line_count }]
           end
 
       end

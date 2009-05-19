@@ -13,7 +13,9 @@ module Simplabs
         end
 
         def evaluate(context)
-          add_error('{{block}} inside of {{parent}}.', { :block => context.full_name, :parent => context.parent.full_name }) if context.inside_block?
+          if context.inside_block?
+            add_error(context, '{{block}} inside of {{parent}}.', { :block => context.full_name, :parent => context.parent.full_name })
+          end
         end
 
       end

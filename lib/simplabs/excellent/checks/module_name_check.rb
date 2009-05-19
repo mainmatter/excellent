@@ -18,7 +18,7 @@ module Simplabs
         protected
 
           def error_args(context)
-            ['Bad module name {{module}}.', { :module => context.full_name }]
+            [context, 'Bad module name {{module}}.', { :module => context.full_name }]
           end
 
       end

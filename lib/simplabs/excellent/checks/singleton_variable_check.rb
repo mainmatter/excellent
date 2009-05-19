@@ -13,7 +13,7 @@ module Simplabs
         end
 
         def evaluate(context)
-          add_error('Singleton variable {{variable}} used.', { :variable => context.full_name }, -1)
+          add_error(context, 'Singleton variable {{variable}} used.', { :variable => context.full_name })
         end
 
       end

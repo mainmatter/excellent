@@ -15,7 +15,7 @@ module Simplabs
           end
 
           def evaluate(context)
-            add_error('{{class}} specifies attr_protected.', { :class => context.full_name }) if context.activerecord_model? && context.specifies_attr_protected?
+            add_error(context, '{{class}} specifies attr_protected.', { :class => context.full_name }) if context.activerecord_model? && context.specifies_attr_protected?
           end
 
         end

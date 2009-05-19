@@ -17,7 +17,7 @@ module Simplabs
         end
 
         def evaluate(context)
-          add_error('Assignment in condition.') if context.tests_assignment?
+          add_error(context, 'Assignment in condition.') if context.tests_assignment?
         end
 
       end

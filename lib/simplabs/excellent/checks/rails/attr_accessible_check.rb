@@ -15,7 +15,7 @@ module Simplabs
           end
 
           def evaluate(context)
-            add_error('{{class}} does not specify attr_accessible.', { :class => context.full_name }) if context.activerecord_model? && !context.specifies_attr_accessible?
+            add_error(context, '{{class}} does not specify attr_accessible.', { :class => context.full_name }) if context.activerecord_model? && !context.specifies_attr_accessible?
           end
 
         end

@@ -18,7 +18,7 @@ module Simplabs
         protected
 
           def error_args(context)
-            ['Bad class name {{class}}.', { :class => context.full_name }]
+            [context, 'Bad class name {{class}}.', { :class => context.full_name }]
           end
 
       end

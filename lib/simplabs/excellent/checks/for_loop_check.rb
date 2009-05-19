@@ -13,7 +13,7 @@ module Simplabs
         end
 
         def evaluate(context)
-          add_error('For loop used.')
+          add_error(context, 'For loop used.')
         end
 
       end

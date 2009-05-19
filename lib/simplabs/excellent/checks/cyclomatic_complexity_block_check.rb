@@ -20,7 +20,7 @@ module Simplabs
 
         def evaluate(context)
           unless context.cc_score <= @threshold
-            add_error('{{block}} has cyclomatic complexity of {{score}}.', { :block => context.full_name, :score => context.cc_score }, context.line)
+            add_error(context, '{{block}} has cyclomatic complexity of {{score}}.', { :block => context.full_name, :score => context.cc_score })
           end
         end
 
