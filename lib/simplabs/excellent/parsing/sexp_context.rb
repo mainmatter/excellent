@@ -17,13 +17,17 @@ module Simplabs
           @file       = exp.file
           @line       = exp.line
           @full_name  = nil
-          @processors = {}
         end
 
         def full_name
           return @full_name if @full_name
           return @name if @parent.blank?
           "#{@parent.full_name}::#{@name}"
+        end
+
+        def method_missing(method, *args)
+          return if method.to_s =~ /^process_[a-zA-Z0-9_]+$/
+          super
         end
 
         private

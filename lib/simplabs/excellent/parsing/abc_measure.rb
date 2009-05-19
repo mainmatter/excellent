@@ -11,22 +11,17 @@ module Simplabs
         def process_lasgn(exp)
           @assignments ||= 0
           @assignments += 1
+          super
         end
 
         def process_call(exp)
-          @branches     ||= 0
-          @conditionals ||= 0
-          if CONDITIONS.include?(exp[2])
-            @conditionals += 1
-          else
-            @branches += 1
-          end
+          handle_call(exp)
+          super
         end
-        alias process_vcall process_call
 
-        def process_conditional(exp)
-          @conditionals ||= 0
-          @conditionals += 1
+        def process_vcall(exp)
+          handle_call(exp)
+          super
         end
 
         def abc_score
@@ -35,6 +30,18 @@ module Simplabs
           c = @conditionals ||= 0
           Math.sqrt(a * a + b * b + c * c)
         end
+
+        private
+
+          def handle_call(exp)
+            @branches     ||= 0
+            @conditionals ||= 0
+            if CONDITIONS.include?(exp[2])
+              @conditionals += 1
+            else
+              @branches += 1
+            end
+          end
 
       end
 

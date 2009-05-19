@@ -55,6 +55,12 @@ module Simplabs
           @attr_protected
         end
 
+        def process_call(exp)
+          @attr_accessible = true if exp[2] == :attr_accessible
+          @attr_protected = true if exp[2] == :attr_protected
+          super
+        end
+
         private
 
           def extract_prefixes(exp = @exp[1], prefix = '')

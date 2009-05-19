@@ -37,62 +37,90 @@ module Simplabs
         BRANCHES = [:and, :case, :else, :if, :or, :rescue, :until, :when, :while]
 
         def process_alias(exp)
-          add_score(2)
+          add_flog_score(2)
+          super
         end
 
         def process_and(exp)
-          add_score(1)
+          add_flog_score(1)
+          super
         end
-        alias :process_or :process_and
+
+        def process_or(exp)
+          add_flog_score(1)
+          super
+        end
 
         def process_attrasgn(exp)
-          add_score(1)
+          add_flog_score(1)
+          super
         end
 
         def process_attrset(exp)
-          add_score(1)
-        end
-
-        def process_block(exp)
+          add_flog_score(1)
+          super
         end
 
         def process_block_pass(exp)
-          add_score(1)
+          add_flog_score(1)
           arg = exp.shift
           case arg.first
             when :lit, :call
-              add_score(5)
+              add_flog_score(5)
             when :iter, :dsym, :dstr, *BRANCHES
-              add_score(10)
+              add_flog_score(10)
           end
+          super
         end
 
         def process_call(exp)
-          add_score(SCORES[exp[2]])
+          add_flog_score(SCORES[exp[2]])
+          super
         end
 
         def process_case(exp)
-          add_score(1)
+          add_flog_score(1)
+          super
         end
 
         def process_dasgn_curr(exp)
-          add_score(1)
+          add_flog_score(1)
+          super
         end
-        alias :process_iasgn :process_dasgn_curr
-        alias :process_lasgn :process_dasgn_curr
+
+        def process_iasgn(exp)
+          add_flog_score(1)
+          super
+        end
+
+        def process_lasgn(exp)
+          add_flog_score(1)
+          super
+        end
 
         def process_else(exp)
-          add_score(1)
+          add_flog_score(1)
+          super
         end
-        alias :process_rescue :process_else
-        alias :process_when   :process_else
+
+        def process_rescue(exp)
+          add_flog_score(1)
+          super
+        end
+
+        def process_when(exp)
+          add_flog_score(1)
+          super
+        end
 
         def process_if(exp)
-          add_score(1)
+          add_flog_score(1)
+          super
         end
 
         def process_iter(exp)
-          add_score 1
+          add_flog_score 1
+          super
         end
 
         def process_lit(exp)
@@ -101,29 +129,39 @@ module Simplabs
             when 0, -1
               # do nothing
             when Integer
-              add_score(0.25)
+              add_flog_score(0.25)
           end
+          super
         end
 
         def process_masgn(exp)
-          add_score(1)
+          add_flog_score(1)
+          super
         end
 
         def process_sclass(exp)
-          add_score(5)
+          add_flog_score(5)
+          super
         end
 
         def process_super(exp)
-          add_score(1)
+          add_flog_score(1)
+          super
         end
 
         def process_while(exp)
-          add_score(1)
+          add_flog_score(1)
+          super
         end
-        alias :process_until :process_while
+
+        def process_until(exp)
+          add_flog_score(1)
+          super
+        end
 
         def process_yield(exp)
-          add_score(1)
+          add_flog_score(1)
+          super
         end
 
         def flog_score
@@ -133,7 +171,7 @@ module Simplabs
 
         private
 
-          def add_score(score)
+          def add_flog_score(score)
             initialize_values
             @score += (score * @multiplier)
           end

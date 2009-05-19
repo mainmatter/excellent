@@ -8,23 +8,61 @@ module Simplabs
 
         COMPLEXITY_NODE_TYPES = [:if, :while, :until, :for, :rescue, :case, :when, :and, :or]
 
-        def process_exp(exp)
-          @cc_score ||= 0
-          @cc_score += 1
+        def process_if(exp)
+          add_complexity_score(1)
+          super
         end
-        alias :process_if     :process_exp
-        alias :process_while  :process_exp
-        alias :process_until  :process_exp
-        alias :process_for    :process_exp
-        alias :process_rescue :process_exp
-        alias :process_case   :process_exp
-        alias :process_when   :process_exp
-        alias :process_and    :process_exp
-        alias :process_or     :process_exp
+
+        def process_while(exp)
+          add_complexity_score(1)
+          super
+        end
+
+        def process_until(exp)
+          add_complexity_score(1)
+          super
+        end
+
+        def process_for(exp)
+          add_complexity_score(1)
+          super
+        end
+
+        def process_rescue(exp)
+          add_complexity_score(1)
+          super
+        end
+
+        def process_case(exp)
+          add_complexity_score(1)
+          super
+        end
+
+        def process_when(exp)
+          add_complexity_score(1)
+          super
+        end
+
+        def process_and(exp)
+          add_complexity_score(1)
+          super
+        end
+
+        def process_or(exp)
+          add_complexity_score(1)
+          super
+        end
 
         def cc_score
           @cc_score + 1 rescue 1
         end
+
+        private
+
+          def add_complexity_score(score)
+            @cc_score ||= 0
+            @cc_score += score
+          end
 
       end
 
