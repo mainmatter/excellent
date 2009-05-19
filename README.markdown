@@ -1,8 +1,7 @@
 simplabs-excellent
 ==================
 
-Excellent is a source code analysis gem. It detects commonly regarded bad code snippets
-like empty rescue blocks etc.
+Excellent is a source code analysis gem. It detects commonly regarded bad code snippets like empty rescue blocks etc. It combines roodi (http://github.com/martinjandrews/roodi), most checks of reek (http://github.com/kevinrutherford/reek), flog (http://github.com/seattlerb/flog) and also adds some Rails specific checks.
 
 Installation
 ------------
@@ -19,10 +18,10 @@ To analyse all the models in your Rails application, just do
 
 in your RAILS_ROOT.
 
-Acknowledgements
-----------------
+Contribute
+----------
 
-Excellent is based on roodi by Marty Andrews. However, it will get more functionaliy than roodi in the future.
+If you want to contribute, just fork the repo. Also I would appretiate suggestions for more checks (especially Rails specific checks) - simply open a new issue: http://github.com/simplabs/excellent/issues.
 
 Author
 ------
