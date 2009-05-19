@@ -8,7 +8,14 @@ require 'pathname'
 excellent = Simplabs::Excellent::Runner.new
 
 ARGV.each do |arg|
-  Dir.glob("#{arg}/**/*.rb").each { |file| excellent.check_file(file) }
+  if File.file?(arg)
+    excellent.check_file(arg)
+  elsif File.directory?(arg)
+    Dir.glob("#{arg}/**/*.rb").each { |file| puts file; excellent.check_file(file) }
+  else
+    puts "\n** Excellent cannot find '#{arg}'\n\n"
+    exit 1
+  end
 end
 
 puts "\nExcellent found #{excellent.errors.size} errors.\n"

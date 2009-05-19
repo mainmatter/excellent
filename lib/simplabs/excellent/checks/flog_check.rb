@@ -8,28 +8,18 @@ module Simplabs
 
       class FlogCheck < Base
 
-        DEFAULT_THRESHOLD = 10
-
-        def initialize(options)
+        def initialize(interesting_nodes, threshold)
           super()
-          @threshold = options[:threshold] || DEFAULT_THRESHOLD
+          @interesting_nodes = interesting_nodes
+          @threshold         = threshold
         end
 
         def interesting_nodes
-          [:defn, :defs, :class, :iter]
+          @interesting_nodes
         end
 
         def evaluate(context)
-          unless context.flog_score <= @threshold
-            target = if context.is_a?(Simplabs::Excellent::Parsing::ClassContext)
-              :class
-            elsif context.is_a?(Simplabs::Excellent::Parsing::BlockContext)
-              :block
-            else
-              :method
-            end
-            add_error("{{#{target.to_s}}} has flog score of {{score}}.", { target => context.full_name, :score => context.flog_score })
-          end
+          add_error(*error_args(context)) unless context.flog_score <= @threshold
         end
 
       end

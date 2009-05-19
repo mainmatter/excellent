@@ -39,9 +39,9 @@ describe Simplabs::Excellent::Checks::CyclomaticComplexityBlockCheck do
     errors = @excellent.errors
 
     errors.should_not be_empty
-    errors[0].info.should        == { :score => score }
+    errors[0].info.should        == { :block => 'block', :score => score }
     errors[0].line_number.should == 2
-    errors[0].message.should     == "Block has cyclomatic complexity of #{score}."
+    errors[0].message.should     == "block has cyclomatic complexity of #{score}."
   end
 
 end
