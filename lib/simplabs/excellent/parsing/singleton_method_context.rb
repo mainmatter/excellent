@@ -17,15 +17,8 @@ module Simplabs
 
         def initialize(exp, parent)
           super
-          #TODO: clean this up!
           @name = exp[2].to_s
-          if exp[1].is_a?(Sexp)
-            if exp[1].node_type == :call
-              @full_name = "#{exp[1][2]}.#{@name}"
-            elsif exp[1].node_type == :const
-              @full_name = "#{exp[1][1]}.#{@name}"
-            end
-          end
+          @full_name = get_full_name
           @calls = Hash.new(0)
         end
 
@@ -39,6 +32,19 @@ module Simplabs
         def record_call_to(exp)
           @calls[exp] += 1
         end
+
+        private
+
+          def get_full_name
+            if @exp[1].is_a?(Sexp)
+              if @exp[1].node_type == :call
+                return "#{@exp[1][2]}.#{@name}"
+              elsif @exp[1].node_type == :const
+                return "#{@exp[1][1]}.#{@name}"
+              end
+            end
+            nil
+          end
 
       end
 

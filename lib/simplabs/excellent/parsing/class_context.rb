@@ -1,4 +1,4 @@
-require 'simplabs/excellent/parsing/sexp_context'
+require 'simplabs/excellent/parsing/scopeable'
 
 module Simplabs
 
@@ -8,9 +8,8 @@ module Simplabs
 
       class ClassContext < SexpContext
 
-        #TODO: cleanup!
-
         include FlogMeasure
+        include Scopeable
 
         attr_reader :methods
         attr_reader :line_count
@@ -18,27 +17,10 @@ module Simplabs
 
         def initialize(exp, parent)
           super
-          if @exp[1].is_a?(Sexp)
-            @name = @exp[1].pop.to_s.strip
-            @full_name = "#{extract_prefixes}#{@name}"
-          else
-            @name = exp[1].to_s
-          end
+          @name, @full_name = get_names
+          @base_class_name = get_base_class_name
           @methods = []
           @line_count = count_lines
-          @base_class_name = ''
-          base = exp[2]
-          while base.is_a?(Sexp)
-            @base_class_name = "#{base.last}::#{@base_class_name}"
-            if base[0] == :colon2
-              base = base[1]
-            elsif base[0] == :const
-              base = false
-            else
-              break
-            end
-          end
-          @base_class_name = @base_class_name.empty? ? nil : @base_class_name.sub(/::$/, '')
           @attr_accessible = false
           @attr_protected = false
         end
@@ -63,12 +45,18 @@ module Simplabs
 
         private
 
-          def extract_prefixes(exp = @exp[1], prefix = '')
-            prefix = "#{exp.pop}::#{prefix}" if exp.last.is_a?(Symbol)
-            if exp.last.is_a?(Sexp)
-              prefix = extract_prefixes(exp.last, prefix)
+          def get_base_class_name
+            base = @exp[2]
+            base_class_name = ''
+            while base.is_a?(Sexp)
+              base_class_name = "#{base.last}::#{base_class_name}"
+              if base[0] == :colon2
+                base = base[1]
+              else
+                break
+              end
             end
-            prefix
+            base_class_name = base_class_name.empty? ? nil : base_class_name.sub(/::$/, '')
           end
 
       end

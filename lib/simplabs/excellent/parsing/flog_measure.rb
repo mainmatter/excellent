@@ -63,12 +63,14 @@ module Simplabs
 
         def process_block_pass(exp)
           add_flog_score(1)
-          arg = exp.shift
-          case arg.first
-            when :lit, :call
-              add_flog_score(5)
-            when :iter, :dsym, :dstr, *BRANCHES
-              add_flog_score(10)
+          arg = exp.last
+          if arg.is_a?(Sexp)
+            case arg.first
+              when :lit, :call
+                add_flog_score(5)
+              when :iter, :dsym, :dstr, *BRANCHES
+                add_flog_score(10)
+            end
           end
           super
         end

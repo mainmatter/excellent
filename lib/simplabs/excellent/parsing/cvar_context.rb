@@ -8,7 +8,7 @@ module Simplabs
 
         def initialize(exp, parent)
           super
-          @name = exp[1].to_s.gsub(/^@+/, '')
+          @name = exp[1].to_s.sub(/^@+/, '')
         end
 
         def full_name
@@ -16,9 +16,7 @@ module Simplabs
           full_name = @name
           parent = @parent
           parent = parent.parent until parent.is_a?(ClassContext) || parent.is_a?(ModuleContext)
-          full_name = "#{parent.full_name}::#{full_name}"
-          #TODO: this is ugly!
-          full_name.reverse.sub(/::/, '.').reverse
+          full_name = "#{parent.full_name}.#{full_name}"
         end
 
       end

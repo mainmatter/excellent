@@ -6,7 +6,7 @@ require 'simplabs/excellent'
 require 'pathname'
 
 excellent = Simplabs::Excellent::Runner.new
-start_time = Time.now
+
 ARGV.each do |arg|
   if File.file?(arg)
     excellent.check_file(arg)
@@ -25,6 +25,5 @@ unless excellent.errors.empty?
   end
 end
 puts "\n  Found #{excellent.errors.size} errors.\n\n"
-puts "DURATION: #{Time.now - start_time}"
 
 exit 0
