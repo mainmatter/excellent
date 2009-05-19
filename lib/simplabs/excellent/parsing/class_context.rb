@@ -10,6 +10,8 @@ module Simplabs
 
         #TODO: cleanup!
 
+        include FlogMeasure
+
         attr_reader :methods
         attr_reader :line_count
         attr_reader :base_class_name
@@ -43,11 +45,6 @@ module Simplabs
 
         def activerecord_model?
           @base_class_name == 'ActiveRecord::Base'
-        end
-
-        def process_call(exp)
-          @attr_accessible = true if exp[2] == :attr_accessible
-          @attr_protected = true if exp[2] == :attr_protected
         end
 
         def specifies_attr_accessible?

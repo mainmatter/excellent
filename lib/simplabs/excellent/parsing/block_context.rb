@@ -9,6 +9,7 @@ module Simplabs
       class BlockContext < SexpContext
 
         include CyclomaticComplexityMeasure
+        include FlogMeasure
 
         attr_reader :parameters
         attr_reader :calls

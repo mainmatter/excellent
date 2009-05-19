@@ -33,7 +33,7 @@ module Simplabs
           a = @assignments  ||= 0
           b = @branches     ||= 0
           c = @conditionals ||= 0
-          score = Math.sqrt(a * a + b * b + c * c)
+          Math.sqrt(a * a + b * b + c * c)
         end
 
       end

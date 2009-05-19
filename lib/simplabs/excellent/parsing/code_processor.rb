@@ -33,7 +33,8 @@ module Simplabs
 
         def process(exp)
           super
-        rescue
+        rescue => e
+          puts e.message + e.backtrace.join("\n")
           #continue on errors
         end
 

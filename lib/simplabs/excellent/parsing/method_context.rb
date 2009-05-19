@@ -1,5 +1,6 @@
 require 'simplabs/excellent/parsing/cyclomatic_complexity_measure'
 require 'simplabs/excellent/parsing/abc_measure'
+require 'simplabs/excellent/parsing/flog_measure'
 
 module Simplabs
 
@@ -11,6 +12,7 @@ module Simplabs
 
         include CyclomaticComplexityMeasure
         include AbcMeasure
+        include FlogMeasure
 
         attr_reader :parameters
         attr_reader :calls

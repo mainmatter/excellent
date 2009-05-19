@@ -25,6 +25,7 @@ module Simplabs
         :ModuleLineCountCheck            => { :line_count      => 300 },
         :ModuleNameCheck                 => { :pattern         => /^[A-Z][a-zA-Z0-9]*$/ },
         :ParameterNumberCheck            => { :parameter_count => 3 },
+        :FlogCheck                       => { },
         :'Rails::AttrProtectedCheck'     => { },
         :'Rails::AttrAccessibleCheck'    => { }
       }

@@ -17,6 +17,7 @@ module Simplabs
           @file       = exp.file
           @line       = exp.line
           @full_name  = nil
+          @processors = {}
         end
 
         def full_name
