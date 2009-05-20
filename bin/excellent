@@ -7,6 +7,12 @@ require 'pathname'
 
 excellent = Simplabs::Excellent::Runner.new
 
+if ARGV.empty?
+  puts "\n  You must specify one or more directories to analyse, e.g.:\n"
+  puts "\n    excellent app/\n\n"
+  exit 1
+end
+
 ARGV.each do |arg|
   if File.file?(arg)
     excellent.check_file(arg)
