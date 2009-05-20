@@ -4,7 +4,7 @@ module Simplabs
 
     module Parsing
 
-      class CvarContext < SexpContext
+      class CvarContext < SexpContext #:nodoc:
 
         def initialize(exp, parent)
           super

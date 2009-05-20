@@ -1,3 +1,14 @@
+module Simplabs
+
+  module Excellent
+
+    module Checks #:nodoc:
+    end
+
+  end
+
+end
+
 require 'simplabs/excellent/checks/abc_metric_method_check'
 require 'simplabs/excellent/checks/assignment_in_conditional_check'
 require 'simplabs/excellent/checks/case_missing_else_check'

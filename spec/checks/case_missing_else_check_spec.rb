@@ -16,9 +16,9 @@ describe Simplabs::Excellent::Checks::CaseMissingElseCheck do
           end
       END
       @excellent.check_content(content)
-      errors = @excellent.errors
+      warnings = @excellent.warnings
 
-      errors.should be_empty
+      warnings.should be_empty
     end
 
     it 'should reject case statements that do not have an else clause' do
@@ -29,12 +29,12 @@ describe Simplabs::Excellent::Checks::CaseMissingElseCheck do
           end
       END
       @excellent.check_content(content)
-      errors = @excellent.errors
+      warnings = @excellent.warnings
 
-      errors.should_not be_empty
-      errors[0].info.should        == {}
-      errors[0].line_number.should == 2
-      errors[0].message.should     == 'Case statement is missing else clause.'
+      warnings.should_not be_empty
+      warnings[0].info.should        == {}
+      warnings[0].line_number.should == 2
+      warnings[0].message.should     == 'Case statement is missing else clause.'
     end
 
   end

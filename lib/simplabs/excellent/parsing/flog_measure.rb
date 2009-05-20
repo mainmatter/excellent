@@ -4,7 +4,7 @@ module Simplabs
 
     module Parsing
 
-      module FlogMeasure
+      module FlogMeasure #:nodoc:
 
         SCORES = Hash.new(1)
         SCORES.merge!(

@@ -35,12 +35,12 @@ describe Simplabs::Excellent::Checks::FlogMethodCheck do
 
   def verify_content_score(content, score)
     @excellent.check_content(content)
-    errors = @excellent.errors
+    warnings = @excellent.warnings
 
-    errors.should_not be_empty
-    errors[0].info.should        == { :method => 'method_name', :score => score }
-    errors[0].line_number.should == 1
-    errors[0].message.should     == "method_name has flog score of #{score}."
+    warnings.should_not be_empty
+    warnings[0].info.should        == { :method => 'method_name', :score => score }
+    warnings[0].line_number.should == 1
+    warnings[0].message.should     == "method_name has flog score of #{score}."
   end
 
 end

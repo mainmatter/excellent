@@ -4,7 +4,7 @@ module Simplabs
 
     module Parsing
 
-      module AbcMeasure
+      module AbcMeasure #:nodoc:
 
         CONDITIONS = [:==, :<=, :>=, :<, :>]
 

@@ -15,7 +15,7 @@ describe Simplabs::Excellent::Checks::MethodNameCheck do
       END
       @excellent.check_content(content)
 
-      @excellent.errors.should be_empty
+      @excellent.warnings.should be_empty
     end
 
     it 'should accept method names with numbers' do
@@ -25,7 +25,7 @@ describe Simplabs::Excellent::Checks::MethodNameCheck do
       END
       @excellent.check_content(content)
 
-      @excellent.errors.should be_empty
+      @excellent.warnings.should be_empty
     end
 
     it 'should accept method names ending with a question mark' do
@@ -35,7 +35,7 @@ describe Simplabs::Excellent::Checks::MethodNameCheck do
       END
       @excellent.check_content(content)
 
-      @excellent.errors.should be_empty
+      @excellent.warnings.should be_empty
     end
 
     it 'should accept method names ending with an exclamation mark' do
@@ -45,7 +45,7 @@ describe Simplabs::Excellent::Checks::MethodNameCheck do
       END
       @excellent.check_content(content)
 
-      @excellent.errors.should be_empty
+      @excellent.warnings.should be_empty
     end
 
     it 'should accept method names ending an equals sign' do
@@ -55,7 +55,7 @@ describe Simplabs::Excellent::Checks::MethodNameCheck do
       END
       @excellent.check_content(content)
 
-      @excellent.errors.should be_empty
+      @excellent.warnings.should be_empty
     end
 
     ['<<', '>>', '==', '<', '<=', '>', '>=', '[]', '[]=', '+', '-', '*', '~', '/', '%', '&', '^', '|'].each do |operator|
@@ -67,7 +67,7 @@ describe Simplabs::Excellent::Checks::MethodNameCheck do
         END
         @excellent.check_content(content)
 
-        @excellent.errors.should be_empty
+        @excellent.warnings.should be_empty
       end
 
     end
@@ -80,12 +80,12 @@ describe Simplabs::Excellent::Checks::MethodNameCheck do
       end
     END
     @excellent.check_content(content)
-    errors = @excellent.errors
+    warnings = @excellent.warnings
 
-    errors.should_not be_empty
-    errors[0].info.should        == { :method => 'badMethodName' }
-    errors[0].line_number.should == 1
-    errors[0].message.should     == 'Bad method name badMethodName.'
+    warnings.should_not be_empty
+    warnings[0].info.should        == { :method => 'badMethodName' }
+    warnings[0].line_number.should == 1
+    warnings[0].message.should     == 'Bad method name badMethodName.'
   end
 
   it "should correctly return the method's full name" do
@@ -98,15 +98,15 @@ describe Simplabs::Excellent::Checks::MethodNameCheck do
       end
     END
     @excellent.check_content(content)
-    errors = @excellent.errors
+    warnings = @excellent.warnings
 
-    errors.should_not be_empty
-    errors[0].info.should        == { :method => 'Class#badMethodName' }
-    errors[0].line_number.should == 2
-    errors[0].message.should     == 'Bad method name Class#badMethodName.'
-    errors[1].info.should        == { :method => 'Class.badMethodName2' }
-    errors[1].line_number.should == 4
-    errors[1].message.should     == 'Bad method name Class.badMethodName2.'
+    warnings.should_not be_empty
+    warnings[0].info.should        == { :method => 'Class#badMethodName' }
+    warnings[0].line_number.should == 2
+    warnings[0].message.should     == 'Bad method name Class#badMethodName.'
+    warnings[1].info.should        == { :method => 'Class.badMethodName2' }
+    warnings[1].line_number.should == 4
+    warnings[1].message.should     == 'Bad method name Class.badMethodName2.'
   end
 
 end

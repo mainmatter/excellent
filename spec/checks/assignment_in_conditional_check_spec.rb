@@ -14,7 +14,7 @@ describe Simplabs::Excellent::Checks::AssignmentInConditionalCheck do
       END
       @excellent.check_content(content)
 
-      @excellent.errors.should be_empty
+      @excellent.warnings.should be_empty
     end
 
     it 'should accept block parameters in an if clause' do
@@ -23,7 +23,7 @@ describe Simplabs::Excellent::Checks::AssignmentInConditionalCheck do
       END
       @excellent.check_content(content)
 
-      @excellent.errors.should be_empty
+      @excellent.warnings.should be_empty
     end
 
     it 'should reject assignments of results of blocks in an if clause' do
@@ -31,7 +31,7 @@ describe Simplabs::Excellent::Checks::AssignmentInConditionalCheck do
         return true if value = exp.children.find { |child| contains_statements?(child) }
       END
 
-      verify_error_found(content)
+      verify_warning_found(content)
     end
 
     it 'should reject an assignment inside an if clause' do
@@ -39,7 +39,7 @@ describe Simplabs::Excellent::Checks::AssignmentInConditionalCheck do
         call_foo if bar = bam
       END
 
-      verify_error_found(content)
+      verify_warning_found(content)
     end
 
     it 'should reject an assignment inside an unless clause' do
@@ -47,7 +47,7 @@ describe Simplabs::Excellent::Checks::AssignmentInConditionalCheck do
         call_foo unless bar = bam
       END
 
-      verify_error_found(content)
+      verify_warning_found(content)
     end
 
     it 'should reject an assignment inside a while clause' do
@@ -55,7 +55,7 @@ describe Simplabs::Excellent::Checks::AssignmentInConditionalCheck do
         call_foo while bar = bam
       END
 
-      verify_error_found(content)
+      verify_warning_found(content)
     end
 
     it 'should reject an assignment inside an until clause' do
@@ -63,7 +63,7 @@ describe Simplabs::Excellent::Checks::AssignmentInConditionalCheck do
         call_foo until bar = bam
       END
 
-      verify_error_found(content)
+      verify_warning_found(content)
     end
 
     it 'should reject an assignment inside a ternary operator check clause' do
@@ -72,19 +72,19 @@ describe Simplabs::Excellent::Checks::AssignmentInConditionalCheck do
       END
 
       #RubyParser sets line number 2 here
-      verify_error_found(content, 2)
+      verify_warning_found(content, 2)
     end
 
   end
 
-  def verify_error_found(content, line_number = nil)
+  def verify_warning_found(content, line_number = nil)
     @excellent.check_content(content)
-    errors = @excellent.errors
+    warnings = @excellent.warnings
 
-    errors.should_not be_empty
-    errors[0].info.should        == {}
-    errors[0].line_number.should == (line_number || 1)
-    errors[0].message.should     == 'Assignment in condition.'
+    warnings.should_not be_empty
+    warnings[0].info.should        == {}
+    warnings[0].line_number.should == (line_number || 1)
+    warnings[0].message.should     == 'Assignment in condition.'
   end
 
 end

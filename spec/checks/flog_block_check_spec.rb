@@ -15,12 +15,12 @@ describe Simplabs::Excellent::Checks::FlogBlockCheck do
         end
       END
       @excellent.check_content(content)
-      errors = @excellent.errors
+      warnings = @excellent.warnings
 
-      errors.should_not be_empty
-      errors[0].info.should        == { :block => 'block', :score => 3 }
-      errors[0].line_number.should == 1
-      errors[0].message.should     == "block has flog score of 3."
+      warnings.should_not be_empty
+      warnings[0].info.should        == { :block => 'block', :score => 3 }
+      warnings[0].line_number.should == 1
+      warnings[0].message.should     == "block has flog score of 3."
     end
 
   end

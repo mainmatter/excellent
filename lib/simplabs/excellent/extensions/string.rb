@@ -2,7 +2,7 @@ module Simplabs
 
   module Excellent
 
-    module Extensions
+    module Extensions #:nodoc:
 
       ::String.class_eval do
 

@@ -15,9 +15,9 @@ describe Simplabs::Excellent::Checks::ControlCouplingCheck do
         end
       END
       @excellent.check_content(content)
-      errors = @excellent.errors
+      warnings = @excellent.warnings
 
-      errors.should be_empty
+      warnings.should be_empty
     end
 
     it 'should accept methods with ternary operators using an instance variable' do
@@ -28,9 +28,9 @@ describe Simplabs::Excellent::Checks::ControlCouplingCheck do
       END
 
       @excellent.check_content(content)
-      errors = @excellent.errors
+      warnings = @excellent.warnings
 
-      errors.should be_empty
+      warnings.should be_empty
     end
 
     it 'should accept methods with ternary operators using a local variable' do
@@ -42,9 +42,9 @@ describe Simplabs::Excellent::Checks::ControlCouplingCheck do
       END
 
       @excellent.check_content(content)
-      errors = @excellent.errors
+      warnings = @excellent.warnings
 
-      errors.should be_empty
+      warnings.should be_empty
     end
 
     %w(if unless).each do |conditional|
@@ -58,7 +58,7 @@ describe Simplabs::Excellent::Checks::ControlCouplingCheck do
           end
         END
 
-        verify_error_found(content)
+        verify_warning_found(content)
       end
 
     end
@@ -70,7 +70,7 @@ describe Simplabs::Excellent::Checks::ControlCouplingCheck do
         end
       END
 
-      verify_error_found(content)
+      verify_warning_found(content)
     end
 
     it "should reject methods with case statements using a parameter" do
@@ -85,19 +85,19 @@ describe Simplabs::Excellent::Checks::ControlCouplingCheck do
         end
       END
 
-      verify_error_found(content)
+      verify_warning_found(content)
     end
 
   end
 
-  def verify_error_found(content)
+  def verify_warning_found(content)
     @excellent.check_content(content)
-    errors = @excellent.errors
+    warnings = @excellent.warnings
 
-    errors.should_not be_empty
-    errors[0].info.should        == { :method => 'write', :argument => 'quoted' }
-    errors[0].line_number.should == 1
-    errors[0].message.should     == 'write is coupled to quoted.'
+    warnings.should_not be_empty
+    warnings[0].info.should        == { :method => 'write', :argument => 'quoted' }
+    warnings[0].line_number.should == 1
+    warnings[0].message.should     == 'write is coupled to quoted.'
   end
 
 end

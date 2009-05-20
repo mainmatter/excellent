@@ -20,7 +20,7 @@ module Simplabs
 
     module Parsing
 
-      class CodeProcessor < SexpProcessor
+      class CodeProcessor < SexpProcessor #:nodoc:
 
         def initialize(checks)
           setup_checks(checks)

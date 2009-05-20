@@ -6,14 +6,20 @@ module Simplabs
 
     module Checks
 
+      # This check reports empty rescue blocks. Empty rescue blocks suppress all errors which is usually not a good technique.
+      #
+      # ==== Applies to
+      #
+      # * +rescue+ blocks
       class EmptyRescueBodyCheck < Base
 
-        def interesting_nodes
-          [:resbody]
+        def initialize #:nodoc:
+          super
+          @interesting_nodes = [:resbody]
         end
 
-        def evaluate(context)
-          add_error(context, 'Rescue block is empty.', {}, -1) unless context.has_statements?
+        def evaluate(context) #:nodoc:
+          add_warning(context, 'Rescue block is empty.', {}, -1) unless context.has_statements?
         end
 
       end

@@ -6,7 +6,7 @@ module Simplabs
 
     module Parsing
 
-      class ClassContext < SexpContext
+      class ClassContext < SexpContext #:nodoc:
 
         include FlogMeasure
         include Scopeable

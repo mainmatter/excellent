@@ -8,7 +8,7 @@ module Simplabs
 
     module Parsing
 
-      class MethodContext < SexpContext
+      class MethodContext < SexpContext #:nodoc:
 
         include CyclomaticComplexityMeasure
         include AbcMeasure

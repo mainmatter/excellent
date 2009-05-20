@@ -1,14 +1,13 @@
 require 'simplabs/excellent/checks'
-require 'simplabs/excellent/error'
-require 'simplabs/excellent/runner'
+require 'simplabs/excellent/parsing'
 require 'rubygems'
 require 'sexp'
 
-module Simplabs
+module Simplabs #:nodoc:
 
-  module Excellent
+  module Excellent #:nodoc:
 
-    VERSION = '1.1.0'
+    VERSION = '1.2.0'
 
   end
 

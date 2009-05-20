@@ -14,9 +14,9 @@ describe Simplabs::Excellent::Checks::Rails::AttrProtectedCheck do
         end
       END
       @excellent.check_content(content)
-      errors = @excellent.errors
+      warnings = @excellent.warnings
 
-      errors.should be_empty
+      warnings.should be_empty
     end
 
     it 'should reject an active record model that does specify attr_protected' do
@@ -26,12 +26,12 @@ describe Simplabs::Excellent::Checks::Rails::AttrProtectedCheck do
         end
       END
       @excellent.check_content(content)
-      errors = @excellent.errors
+      warnings = @excellent.warnings
 
-      errors.should_not be_empty
-      errors[0].info.should        == { :class => 'User' }
-      errors[0].line_number.should == 1
-      errors[0].message.should     == 'User specifies attr_protected.'
+      warnings.should_not be_empty
+      warnings[0].info.should        == { :class => 'User' }
+      warnings[0].line_number.should == 1
+      warnings[0].message.should     == 'User specifies attr_protected.'
     end
 
     it 'should accept an active record model that does specify attr_accessible' do
@@ -41,9 +41,9 @@ describe Simplabs::Excellent::Checks::Rails::AttrProtectedCheck do
         end
       END
       @excellent.check_content(content)
-      errors = @excellent.errors
+      warnings = @excellent.warnings
 
-      errors.should be_empty
+      warnings.should be_empty
     end
 
     it 'should accept an active record model that specifies neither attr_accessible not attr_protected' do
@@ -52,9 +52,9 @@ describe Simplabs::Excellent::Checks::Rails::AttrProtectedCheck do
         end
       END
       @excellent.check_content(content)
-      errors = @excellent.errors
+      warnings = @excellent.warnings
 
-      errors.should be_empty
+      warnings.should be_empty
     end
 
     it 'should also work with namespaced models' do
@@ -64,12 +64,12 @@ describe Simplabs::Excellent::Checks::Rails::AttrProtectedCheck do
         end
       END
       @excellent.check_content(content)
-      errors = @excellent.errors
+      warnings = @excellent.warnings
 
-      errors.should_not be_empty
-      errors[0].info.should        == { :class => 'Backend::User' }
-      errors[0].line_number.should == 1
-      errors[0].message.should     == 'Backend::User specifies attr_protected.'
+      warnings.should_not be_empty
+      warnings[0].info.should        == { :class => 'Backend::User' }
+      warnings[0].line_number.should == 1
+      warnings[0].message.should     == 'Backend::User specifies attr_protected.'
     end
 
   end

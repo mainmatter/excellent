@@ -187,24 +187,24 @@ describe Simplabs::Excellent::Checks::CyclomaticComplexityMethodCheck do
         end
       END
       @excellent.check_content(content)
-      errors = @excellent.errors
+      warnings = @excellent.warnings
 
-      errors.should_not be_empty
-      errors[0].info.should        == { :method => 'Class.method_name', :score => 5 }
-      errors[0].line_number.should == 2
-      errors[0].message.should     == "Class.method_name has cyclomatic complexity of 5."
+      warnings.should_not be_empty
+      warnings[0].info.should        == { :method => 'Class.method_name', :score => 5 }
+      warnings[0].line_number.should == 2
+      warnings[0].message.should     == "Class.method_name has cyclomatic complexity of 5."
     end
 
   end
 
   def verify_content_complexity(content, score)
     @excellent.check_content(content)
-    errors = @excellent.errors
+    warnings = @excellent.warnings
 
-    errors.should_not be_empty
-    errors[0].info.should        == { :method => 'method_name', :score => score }
-    errors[0].line_number.should == 1
-    errors[0].message.should     == "method_name has cyclomatic complexity of #{score}."
+    warnings.should_not be_empty
+    warnings[0].info.should        == { :method => 'method_name', :score => score }
+    warnings[0].line_number.should == 1
+    warnings[0].message.should     == "method_name has cyclomatic complexity of #{score}."
   end
 
 end

@@ -6,15 +6,21 @@ module Simplabs
 
     module Checks
 
+      # This check reports nested iterators. Nested iterators lead to introduce performance issues.
+      #
+      # ==== Applies to
+      #
+      # * blocks
       class NestedIteratorsCheck < Base
 
-        def interesting_nodes
-          [:iter]
+        def initialize #:nodoc:
+          super
+          @interesting_nodes = [:iter]
         end
 
-        def evaluate(context)
+        def evaluate(context) #:nodoc:
           if context.inside_block?
-            add_error(context, '{{block}} inside of {{parent}}.', { :block => context.full_name, :parent => context.parent.full_name })
+            add_warning(context, '{{block}} inside of {{parent}}.', { :block => context.full_name, :parent => context.parent.full_name })
           end
         end
 

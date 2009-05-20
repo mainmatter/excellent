@@ -4,7 +4,7 @@ module Simplabs
 
     module Parsing
 
-      module CyclomaticComplexityMeasure
+      module CyclomaticComplexityMeasure #:nodoc:
 
         COMPLEXITY_NODE_TYPES = [:if, :while, :until, :for, :rescue, :case, :when, :and, :or]
 

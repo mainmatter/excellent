@@ -8,7 +8,7 @@ module Simplabs
 
     module Parsing
 
-      class Parser
+      class Parser #:nodoc:
 
         def parse(content, filename)
           silence_stream(STDERR) do 

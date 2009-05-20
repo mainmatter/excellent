@@ -98,12 +98,12 @@ describe Simplabs::Excellent::Checks::AbcMetricMethodCheck do
         end
       END
       @excellent.check_content(content)
-      errors = @excellent.errors
+      warnings = @excellent.warnings
 
-      errors.should_not be_empty
-      errors[0].info.should        == { :method => 'Class.method_name', :score => 1.0 }
-      errors[0].line_number.should == 2
-      errors[0].message.should     == "Class.method_name has abc score of 1.0."
+      warnings.should_not be_empty
+      warnings[0].info.should        == { :method => 'Class.method_name', :score => 1.0 }
+      warnings[0].line_number.should == 2
+      warnings[0].message.should     == "Class.method_name has abc score of 1.0."
     end
 
   end
@@ -111,12 +111,12 @@ describe Simplabs::Excellent::Checks::AbcMetricMethodCheck do
   def verify_content_score(content, a, b, c)
     score = Math.sqrt(a*a + b*b + c*c)
     @excellent.check_content(content)
-    errors = @excellent.errors
+    warnings = @excellent.warnings
 
-    errors.should_not be_empty
-    errors[0].info.should        == { :method => 'method_name', :score => score }
-    errors[0].line_number.should == 1
-    errors[0].message.should     == "method_name has abc score of #{score}."
+    warnings.should_not be_empty
+    warnings[0].info.should        == { :method => 'method_name', :score => score }
+    warnings[0].line_number.should == 1
+    warnings[0].message.should     == "method_name has abc score of #{score}."
   end
 
 end

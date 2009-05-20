@@ -6,7 +6,7 @@ module Simplabs
 
     module Checks
 
-      class NameCheck < Base
+      class NameCheck < Base #:nodoc:
 
         def initialize(interesting_nodes, pattern)
           super()
@@ -14,12 +14,8 @@ module Simplabs
           @pattern           = pattern
         end
 
-        def interesting_nodes
-          @interesting_nodes
-        end
-
         def evaluate(context)
-          add_error(*error_args(context)) unless context.name.to_s =~ @pattern
+          add_warning(*warning_args(context)) unless context.name.to_s =~ @pattern
         end
 
       end

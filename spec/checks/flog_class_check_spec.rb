@@ -15,12 +15,12 @@ describe Simplabs::Excellent::Checks::FlogClassCheck do
         end
       END
       @excellent.check_content(content)
-      errors = @excellent.errors
+      warnings = @excellent.warnings
 
-      errors.should_not be_empty
-      errors[0].info.should        == { :class => 'User', :score => 1 }
-      errors[0].line_number.should == 1
-      errors[0].message.should     == "User has flog score of 1."
+      warnings.should_not be_empty
+      warnings[0].info.should        == { :class => 'User', :score => 1 }
+      warnings[0].line_number.should == 1
+      warnings[0].message.should     == "User has flog score of 1."
     end
 
   end

@@ -4,7 +4,7 @@ module Simplabs
 
     module Parsing
 
-      class UntilContext < SexpContext
+      class UntilContext < SexpContext #:nodoc:
 
         def initialize(exp, parent)
           super

@@ -4,7 +4,7 @@ module Simplabs
 
     module Parsing
 
-      class CallContext < SexpContext
+      class CallContext < SexpContext #:nodoc:
 
         include Comparable
 

@@ -14,7 +14,7 @@ describe Simplabs::Excellent::Checks::ClassLineCountCheck do
       END
       @excellent.check_content(content)
 
-      @excellent.errors.should be_empty
+      @excellent.warnings.should be_empty
     end
 
     it 'should accept classes with the same number of lines as the threshold' do
@@ -25,7 +25,7 @@ describe Simplabs::Excellent::Checks::ClassLineCountCheck do
       END
       @excellent.check_content(content)
 
-      @excellent.errors.should be_empty
+      @excellent.warnings.should be_empty
     end
 
     it 'should not count blank lines' do
@@ -38,7 +38,7 @@ describe Simplabs::Excellent::Checks::ClassLineCountCheck do
       END
       @excellent.check_content(content)
 
-      @excellent.errors.should be_empty
+      @excellent.warnings.should be_empty
     end
 
     it 'should reject classes with more lines than the threshold' do
@@ -49,12 +49,12 @@ describe Simplabs::Excellent::Checks::ClassLineCountCheck do
         end
       END
       @excellent.check_content(content)
-      errors = @excellent.errors
+      warnings = @excellent.warnings
 
-      errors.should_not be_empty
-      errors[0].info.should        == { :class => 'FourLineClass', :count => 4 }
-      errors[0].line_number.should == 1
-      errors[0].message.should     == 'FourLineClass has 4 lines.'
+      warnings.should_not be_empty
+      warnings[0].info.should        == { :class => 'FourLineClass', :count => 4 }
+      warnings[0].line_number.should == 1
+      warnings[0].message.should     == 'FourLineClass has 4 lines.'
     end
 
   end

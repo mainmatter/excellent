@@ -6,7 +6,7 @@ module Simplabs
 
     module Parsing
 
-      class IfContext < ConditionalContext
+      class IfContext < ConditionalContext #:nodoc:
 
         def initialize(exp, parent)
           super

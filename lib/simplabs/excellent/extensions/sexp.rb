@@ -2,7 +2,7 @@ module Simplabs
 
   module Excellent
 
-    module Extensions
+    module Extensions #:nodoc:
 
       ::Sexp.class_eval do
 

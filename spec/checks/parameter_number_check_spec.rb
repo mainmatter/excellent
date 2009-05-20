@@ -15,7 +15,7 @@ describe Simplabs::Excellent::Checks::ParameterNumberCheck do
       END
       @excellent.check_content(content)
 
-      @excellent.errors.should be_empty
+      @excellent.warnings.should be_empty
     end
 
     it 'should accept methods with the same number of parameters as the threshold' do
@@ -25,7 +25,7 @@ describe Simplabs::Excellent::Checks::ParameterNumberCheck do
       END
       @excellent.check_content(content)
 
-      @excellent.errors.should be_empty
+      @excellent.warnings.should be_empty
     end
 
     it 'should reject methods with more parameters than the threshold' do
@@ -34,7 +34,7 @@ describe Simplabs::Excellent::Checks::ParameterNumberCheck do
         end
       END
 
-      verify_error_found(content, 'two_parameter_method')
+      verify_warning_found(content, 'two_parameter_method')
     end
 
     it 'should work with default values on parameters' do
@@ -43,7 +43,7 @@ describe Simplabs::Excellent::Checks::ParameterNumberCheck do
         end
       END
 
-      verify_error_found(content, 'two_parameter_method')
+      verify_warning_found(content, 'two_parameter_method')
     end
 
     it 'should work with methods defined on objects' do
@@ -52,7 +52,7 @@ describe Simplabs::Excellent::Checks::ParameterNumberCheck do
         end
       END
 
-      verify_error_found(content, 'object.two_parameter_method')
+      verify_warning_found(content, 'object.two_parameter_method')
     end
 
     it 'should work with methods defined directly on classes' do
@@ -61,7 +61,7 @@ describe Simplabs::Excellent::Checks::ParameterNumberCheck do
         end
       END
 
-      verify_error_found(content, 'Class.two_parameter_method')
+      verify_warning_found(content, 'Class.two_parameter_method')
     end
 
     it 'should reject yield calls with more parameters than the threshold' do
@@ -70,7 +70,7 @@ describe Simplabs::Excellent::Checks::ParameterNumberCheck do
         end
       END
 
-      verify_error_found(content, 'block')
+      verify_warning_found(content, 'block')
     end
 
     it 'should reject yield calls on a receiver with more parameters than the threshold' do
@@ -79,19 +79,19 @@ describe Simplabs::Excellent::Checks::ParameterNumberCheck do
         end
       END
 
-      verify_error_found(content, 'block')
+      verify_warning_found(content, 'block')
     end
 
   end
 
-  def verify_error_found(content, name)
+  def verify_warning_found(content, name)
     @excellent.check_content(content)
-    errors = @excellent.errors
+    warnings = @excellent.warnings
 
-    errors.should_not be_empty
-    errors[0].info.should        == { :method => name, :parameters => 2 }
-    errors[0].line_number.should == 1
-    errors[0].message.should     == "#{name} has 2 parameters."
+    warnings.should_not be_empty
+    warnings[0].info.should        == { :method => name, :parameters => 2 }
+    warnings[0].line_number.should == 1
+    warnings[0].message.should     == "#{name} has 2 parameters."
   end
 
 end

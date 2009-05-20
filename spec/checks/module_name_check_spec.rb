@@ -15,7 +15,7 @@ describe Simplabs::Excellent::Checks::ModuleNameCheck do
       END
       @excellent.check_content(content)
 
-      @excellent.errors.should be_empty
+      @excellent.warnings.should be_empty
     end
 
     it 'should accept namespaced modules' do
@@ -25,7 +25,7 @@ describe Simplabs::Excellent::Checks::ModuleNameCheck do
       END
       @excellent.check_content(content)
 
-      @excellent.errors.should be_empty
+      @excellent.warnings.should be_empty
     end
 
     it 'should reject module names with underscores' do
@@ -34,12 +34,12 @@ describe Simplabs::Excellent::Checks::ModuleNameCheck do
         end
       END
       @excellent.check_content(content)
-      errors = @excellent.errors
+      warnings = @excellent.warnings
 
-      errors.should_not be_empty
-      errors[0].info.should        == { :module => 'Bad_ModuleName' }
-      errors[0].line_number.should == 1
-      errors[0].message.should     == 'Bad module name Bad_ModuleName.'
+      warnings.should_not be_empty
+      warnings[0].info.should        == { :module => 'Bad_ModuleName' }
+      warnings[0].line_number.should == 1
+      warnings[0].message.should     == 'Bad module name Bad_ModuleName.'
     end
 
     it 'should correctly report bad names of namespaced modules' do
@@ -48,12 +48,12 @@ describe Simplabs::Excellent::Checks::ModuleNameCheck do
         end
       END
       @excellent.check_content(content)
-      errors = @excellent.errors
+      warnings = @excellent.warnings
 
-      errors.should_not be_empty
-      errors[0].info.should        == { :module => 'Outer::Inner::Bad_ModuleName' }
-      errors[0].line_number.should == 1
-      errors[0].message.should     == 'Bad module name Outer::Inner::Bad_ModuleName.'
+      warnings.should_not be_empty
+      warnings[0].info.should        == { :module => 'Outer::Inner::Bad_ModuleName' }
+      warnings[0].line_number.should == 1
+      warnings[0].message.should     == 'Bad module name Outer::Inner::Bad_ModuleName.'
     end
 
   end

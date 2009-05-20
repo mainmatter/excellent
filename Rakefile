@@ -27,6 +27,15 @@ Spec::Rake::SpecTask.new('spec') do |t|
   t.spec_files = FileList['spec/**/*_spec.rb']
 end
 
+desc 'Generate documentation for the Excellent gem.'
+Rake::RDocTask.new(:rdoc) do |rdoc|
+  rdoc.rdoc_dir = 'doc'
+  rdoc.title    = 'Excellent'
+  rdoc.options << '--line-numbers' << '--inline-source'
+  rdoc.rdoc_files.include('README.rdoc')
+  rdoc.rdoc_files.include('lib/**/*.rb')
+end
+
 desc 'Run Excellent against all source files'
 task :excellent do
   puts `bin/excellent "lib/**/*.rb"`

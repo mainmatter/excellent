@@ -15,9 +15,9 @@ describe Simplabs::Excellent::Checks::DuplicationCheck do
         end
       END
       @excellent.check_content(content)
-      errors = @excellent.errors
+      warnings = @excellent.warnings
 
-      errors.should be_empty
+      warnings.should be_empty
     end
 
     it 'should reject multiple calls to the same method and receiver' do
@@ -27,7 +27,7 @@ describe Simplabs::Excellent::Checks::DuplicationCheck do
         end
       END
 
-      verify_error_found(content, '@other.thing')
+      verify_warning_found(content, '@other.thing')
     end
 
     it 'should reject multiple calls to the same lvar' do
@@ -37,7 +37,7 @@ describe Simplabs::Excellent::Checks::DuplicationCheck do
         end
       END
 
-      verify_error_found(content, 'thing.[]')
+      verify_warning_found(content, 'thing.[]')
     end
 
     it 'should reject multiple calls to the same singleton method' do
@@ -47,7 +47,7 @@ describe Simplabs::Excellent::Checks::DuplicationCheck do
         end
       END
 
-      verify_error_found(content, 'Class.thing')
+      verify_warning_found(content, 'Class.thing')
     end
 
     it 'should reject multiple calls to the same method without a receiver' do
@@ -57,7 +57,7 @@ describe Simplabs::Excellent::Checks::DuplicationCheck do
         end
       END
 
-      verify_error_found(content, 'thing')
+      verify_warning_found(content, 'thing')
     end
 
     it 'should reject multiple calls to the same method with the same parameters' do
@@ -67,7 +67,7 @@ describe Simplabs::Excellent::Checks::DuplicationCheck do
         end
       END
 
-      verify_error_found(content, 'thing')
+      verify_warning_found(content, 'thing')
     end
 
     it 'should reject multiple calls to the same method with different parameters' do
@@ -77,7 +77,7 @@ describe Simplabs::Excellent::Checks::DuplicationCheck do
         end
       END
 
-      verify_error_found(content, 'thing')
+      verify_warning_found(content, 'thing')
     end
 
     it 'should work with singleton methods on objects' do
@@ -87,7 +87,7 @@ describe Simplabs::Excellent::Checks::DuplicationCheck do
         end
       END
 
-      verify_error_found(content, 'thing', 'object.double_thing')
+      verify_warning_found(content, 'thing', 'object.double_thing')
     end
 
     it 'should work with singleton methods on classes' do
@@ -97,7 +97,7 @@ describe Simplabs::Excellent::Checks::DuplicationCheck do
         end
       END
 
-      verify_error_found(content, 'thing', 'Class.double_thing')
+      verify_warning_found(content, 'thing', 'Class.double_thing')
     end
 
     it 'should work with singleton methods on classes' do
@@ -109,7 +109,7 @@ describe Simplabs::Excellent::Checks::DuplicationCheck do
         end
       END
 
-      verify_error_found(content, 'thing', 'Class.double_thing', 2)
+      verify_warning_found(content, 'thing', 'Class.double_thing', 2)
     end
 
     it 'should also work with blocks' do
@@ -121,19 +121,19 @@ describe Simplabs::Excellent::Checks::DuplicationCheck do
         end
       END
 
-      verify_error_found(content, 'thing', 'block', 2)
+      verify_warning_found(content, 'thing', 'block', 2)
     end
 
   end
 
-  def verify_error_found(content, statement, method = 'double_thing', line = 1)
+  def verify_warning_found(content, statement, method = 'double_thing', line = 1)
     @excellent.check_content(content)
-    errors = @excellent.errors
+    warnings = @excellent.warnings
 
-    errors.should_not be_empty
-    errors[0].info.should        == { :method => method, :statement => statement, :duplication_number => 2 }
-    errors[0].line_number.should == line
-    errors[0].message.should     == "#{method} calls #{statement} 2 times."
+    warnings.should_not be_empty
+    warnings[0].info.should        == { :method => method, :statement => statement, :duplication_number => 2 }
+    warnings[0].line_number.should == line
+    warnings[0].message.should     == "#{method} calls #{statement} 2 times."
   end
 
 end

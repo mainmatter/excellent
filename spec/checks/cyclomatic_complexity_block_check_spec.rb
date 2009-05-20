@@ -36,12 +36,12 @@ describe Simplabs::Excellent::Checks::CyclomaticComplexityBlockCheck do
 
   def verify_content_complexity(content, score)
     @excellent.check_content(content)
-    errors = @excellent.errors
+    warnings = @excellent.warnings
 
-    errors.should_not be_empty
-    errors[0].info.should        == { :block => 'block', :score => score }
-    errors[0].line_number.should == 1
-    errors[0].message.should     == "block has cyclomatic complexity of #{score}."
+    warnings.should_not be_empty
+    warnings[0].info.should        == { :block => 'block', :score => score }
+    warnings[0].line_number.should == 1
+    warnings[0].message.should     == "block has cyclomatic complexity of #{score}."
   end
 
 end

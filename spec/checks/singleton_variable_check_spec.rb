@@ -13,12 +13,12 @@ describe Simplabs::Excellent::Checks::SingletonVariableCheck do
         @@foo
       END
       @excellent.check_content(content)
-      errors = @excellent.errors
+      warnings = @excellent.warnings
 
-      errors.should_not be_empty
-      errors[0].info.should        == { :variable => 'foo' }
-      errors[0].line_number.should == 2
-      errors[0].message.should     == 'Singleton variable foo used.'
+      warnings.should_not be_empty
+      warnings[0].info.should        == { :variable => 'foo' }
+      warnings[0].line_number.should == 2
+      warnings[0].message.should     == 'Singleton variable foo used.'
     end
 
     it 'should also work for namespaced classes' do
@@ -32,12 +32,12 @@ describe Simplabs::Excellent::Checks::SingletonVariableCheck do
         end
       END
       @excellent.check_content(content)
-      errors = @excellent.errors
+      warnings = @excellent.warnings
 
-      errors.should_not be_empty
-      errors[0].info.should        == { :variable => 'Outer::Inner::Class.foo' }
-      errors[0].line_number.should == 5
-      errors[0].message.should     == 'Singleton variable Outer::Inner::Class.foo used.'
+      warnings.should_not be_empty
+      warnings[0].info.should        == { :variable => 'Outer::Inner::Class.foo' }
+      warnings[0].line_number.should == 5
+      warnings[0].message.should     == 'Singleton variable Outer::Inner::Class.foo used.'
     end
 
     it 'should also work for singleton variables that occur within methods' do
@@ -53,12 +53,12 @@ describe Simplabs::Excellent::Checks::SingletonVariableCheck do
         end
       END
       @excellent.check_content(content)
-      errors = @excellent.errors
+      warnings = @excellent.warnings
 
-      errors.should_not be_empty
-      errors[0].info.should        == { :variable => 'Outer::Inner::Class.foo' }
-      errors[0].line_number.should == 6
-      errors[0].message.should     == 'Singleton variable Outer::Inner::Class.foo used.'
+      warnings.should_not be_empty
+      warnings[0].info.should        == { :variable => 'Outer::Inner::Class.foo' }
+      warnings[0].line_number.should == 6
+      warnings[0].message.should     == 'Singleton variable Outer::Inner::Class.foo used.'
     end
 
   end

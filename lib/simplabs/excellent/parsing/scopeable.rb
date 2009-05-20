@@ -4,7 +4,7 @@ module Simplabs
 
     module Parsing
 
-      module Scopeable
+      module Scopeable #:nodoc:
 
         private
 

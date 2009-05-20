@@ -4,7 +4,7 @@ module Simplabs
 
     module Parsing
 
-      class ForLoopContext < SexpContext
+      class ForLoopContext < SexpContext #:nodoc:
 
       end
 

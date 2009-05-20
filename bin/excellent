@@ -18,12 +18,12 @@ ARGV.each do |arg|
   end
 end
 
-unless excellent.errors.empty?
-  puts "\n  Errors:\n\n"
-  excellent.errors.each do |error|
-    puts "  * File #{error.filename}, line #{error.line_number}: #{error.message}"
+unless excellent.warnings.empty?
+  puts "\n  Warnings:\n\n"
+  excellent.warnings.each do |warning|
+    puts "  * File #{warning.filename}, line #{warning.line_number}: #{warning.message}"
   end
 end
-puts "\n  Found #{excellent.errors.size} errors.\n\n"
+puts "\n  Found #{excellent.warnings.size} warnings.\n\n"
 
 exit 0

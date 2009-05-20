@@ -16,12 +16,12 @@ describe Simplabs::Excellent::Checks::NestedIteratorsCheck do
         end
       END
       @excellent.check_content(content)
-      errors = @excellent.errors
+      warnings = @excellent.warnings
 
-      errors.should_not be_empty
-      errors[0].info.should        == { :block => 'block', :parent => 'block' }
-      errors[0].line_number.should == 2
-      errors[0].message.should     == 'block inside of block.'
+      warnings.should_not be_empty
+      warnings[0].info.should        == { :block => 'block', :parent => 'block' }
+      warnings[0].line_number.should == 2
+      warnings[0].message.should     == 'block inside of block.'
     end
 
     it 'should accept 2 blocks inside a method that are not nested' do
@@ -34,9 +34,9 @@ describe Simplabs::Excellent::Checks::NestedIteratorsCheck do
         end
       END
       @excellent.check_content(content)
-      errors = @excellent.errors
+      warnings = @excellent.warnings
 
-      errors.should be_empty
+      warnings.should be_empty
     end
 
   end

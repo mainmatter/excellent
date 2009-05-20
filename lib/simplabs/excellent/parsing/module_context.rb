@@ -6,7 +6,7 @@ module Simplabs
 
     module Parsing
 
-      class ModuleContext < SexpContext
+      class ModuleContext < SexpContext #:nodoc:
 
         include Scopeable
 

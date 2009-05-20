@@ -6,7 +6,7 @@ module Simplabs
 
     module Checks
 
-      class LineCountCheck < Base
+      class LineCountCheck < Base #:nodoc:
 
         def initialize(interesting_nodes, threshold)
           super()
@@ -14,12 +14,8 @@ module Simplabs
           @threshold         = threshold
         end
 
-        def interesting_nodes
-          @interesting_nodes
-        end
-
         def evaluate(context)
-          add_error(*error_args(context)) unless context.line_count <= @threshold
+          add_warning(*warning_args(context)) unless context.line_count <= @threshold
         end
 
       end

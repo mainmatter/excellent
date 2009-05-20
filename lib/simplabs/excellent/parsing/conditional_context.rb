@@ -6,7 +6,7 @@ module Simplabs
 
     module Parsing
 
-      class ConditionalContext < SexpContext
+      class ConditionalContext < SexpContext #:nodoc:
 
         protected
 

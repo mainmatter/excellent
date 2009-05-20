@@ -6,7 +6,7 @@ module Simplabs
 
     module Parsing
 
-      class BlockContext < SexpContext
+      class BlockContext < SexpContext #:nodoc:
 
         include CyclomaticComplexityMeasure
         include FlogMeasure

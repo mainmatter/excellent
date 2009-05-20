@@ -6,14 +6,21 @@ module Simplabs
 
     module Checks
 
+      # This check reports class variables. Class variables in Ruby have a very complicated inheritance policy that often leads to errors. Usually class
+      # variables can be replaced with another construct which will also lead to better design.
+      #
+      # ==== Applies to
+      #
+      # * class variables
       class SingletonVariableCheck < Base
 
-        def interesting_nodes
-          [:cvar]
+        def initialize #:nodoc:
+          super
+          @interesting_nodes = [:cvar]
         end
 
-        def evaluate(context)
-          add_error(context, 'Singleton variable {{variable}} used.', { :variable => context.full_name })
+        def evaluate(context) #:nodoc:
+          add_warning(context, 'Singleton variable {{variable}} used.', { :variable => context.full_name })
         end
 
       end

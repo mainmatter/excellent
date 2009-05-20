@@ -14,9 +14,9 @@ describe Simplabs::Excellent::Checks::Rails::AttrAccessibleCheck do
         end
       END
       @excellent.check_content(content)
-      errors = @excellent.errors
+      warnings = @excellent.warnings
 
-      errors.should be_empty
+      warnings.should be_empty
     end
 
     it 'should reject an active record model that does not specify attr_accessible' do
@@ -25,12 +25,12 @@ describe Simplabs::Excellent::Checks::Rails::AttrAccessibleCheck do
         end
       END
       @excellent.check_content(content)
-      errors = @excellent.errors
+      warnings = @excellent.warnings
 
-      errors.should_not be_empty
-      errors[0].info.should        == { :class => 'User' }
-      errors[0].line_number.should == 1
-      errors[0].message.should     == 'User does not specify attr_accessible.'
+      warnings.should_not be_empty
+      warnings[0].info.should        == { :class => 'User' }
+      warnings[0].line_number.should == 1
+      warnings[0].message.should     == 'User does not specify attr_accessible.'
     end
 
     it 'should reject an active record model that does specify attr_protected' do
@@ -40,12 +40,12 @@ describe Simplabs::Excellent::Checks::Rails::AttrAccessibleCheck do
         end
       END
       @excellent.check_content(content)
-      errors = @excellent.errors
+      warnings = @excellent.warnings
 
-      errors.should_not be_empty
-      errors[0].info.should        == { :class => 'User' }
-      errors[0].line_number.should == 1
-      errors[0].message.should     == 'User does not specify attr_accessible.'
+      warnings.should_not be_empty
+      warnings[0].info.should        == { :class => 'User' }
+      warnings[0].line_number.should == 1
+      warnings[0].message.should     == 'User does not specify attr_accessible.'
     end
 
     it 'should accept an active record model that does specify attr_accessible' do
@@ -55,9 +55,9 @@ describe Simplabs::Excellent::Checks::Rails::AttrAccessibleCheck do
         end
       END
       @excellent.check_content(content)
-      errors = @excellent.errors
+      warnings = @excellent.warnings
 
-      errors.should be_empty
+      warnings.should be_empty
     end
 
     it 'should also work with namespaced models' do
@@ -66,12 +66,12 @@ describe Simplabs::Excellent::Checks::Rails::AttrAccessibleCheck do
         end
       END
       @excellent.check_content(content)
-      errors = @excellent.errors
+      warnings = @excellent.warnings
 
-      errors.should_not be_empty
-      errors[0].info.should        == { :class => 'Backend::User' }
-      errors[0].line_number.should == 1
-      errors[0].message.should     == 'Backend::User does not specify attr_accessible.'
+      warnings.should_not be_empty
+      warnings[0].info.should        == { :class => 'Backend::User' }
+      warnings[0].line_number.should == 1
+      warnings[0].message.should     == 'Backend::User does not specify attr_accessible.'
     end
 
   end

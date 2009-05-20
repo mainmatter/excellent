@@ -14,7 +14,7 @@ describe Simplabs::Excellent::Checks::ClassNameCheck do
       END
       @excellent.check_content(content)
 
-      @excellent.errors.should be_empty
+      @excellent.warnings.should be_empty
     end
 
     it 'should be able to parse scoped class names' do
@@ -26,7 +26,7 @@ describe Simplabs::Excellent::Checks::ClassNameCheck do
       END
       @excellent.check_content(content)
 
-      @excellent.errors.should be_empty
+      @excellent.warnings.should be_empty
     end
 
     it 'should reject class names with underscores' do
@@ -35,12 +35,12 @@ describe Simplabs::Excellent::Checks::ClassNameCheck do
         end
       END
       @excellent.check_content(content)
-      errors = @excellent.errors
+      warnings = @excellent.warnings
 
-      errors.should_not be_empty
-      errors[0].info.should        == { :class => 'Bad_ClassName' }
-      errors[0].line_number.should == 1
-      errors[0].message.should     == 'Bad class name Bad_ClassName.'
+      warnings.should_not be_empty
+      warnings[0].info.should        == { :class => 'Bad_ClassName' }
+      warnings[0].line_number.should == 1
+      warnings[0].message.should     == 'Bad class name Bad_ClassName.'
     end
 
   end

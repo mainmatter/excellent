@@ -18,7 +18,7 @@ describe Simplabs::Excellent::Checks::EmptyRescueBodyCheck do
       END
       @excellent.check_content(content)
 
-      @excellent.errors.should be_empty
+      @excellent.warnings.should be_empty
     end
 
     it 'should accept a rescue body with a return' do
@@ -31,7 +31,7 @@ describe Simplabs::Excellent::Checks::EmptyRescueBodyCheck do
       END
       @excellent.check_content(content)
 
-      @excellent.errors.should be_empty
+      @excellent.warnings.should be_empty
     end
 
     it "should accept a virtual method call" do
@@ -44,7 +44,7 @@ describe Simplabs::Excellent::Checks::EmptyRescueBodyCheck do
       END
       @excellent.check_content(content)
 
-      @excellent.errors.should be_empty
+      @excellent.warnings.should be_empty
     end
 
     it 'should accept a rescue body with content and a parameter' do
@@ -57,7 +57,7 @@ describe Simplabs::Excellent::Checks::EmptyRescueBodyCheck do
       END
       @excellent.check_content(content)
 
-      @excellent.errors.should be_empty
+      @excellent.warnings.should be_empty
     end
 
     it 'should accept a rescue body with an assignment' do
@@ -70,7 +70,7 @@ describe Simplabs::Excellent::Checks::EmptyRescueBodyCheck do
       END
       @excellent.check_content(content)
 
-      @excellent.errors.should be_empty
+      @excellent.warnings.should be_empty
     end
 
     it 'should accept a rescue body with an attribute assignment' do
@@ -83,7 +83,7 @@ describe Simplabs::Excellent::Checks::EmptyRescueBodyCheck do
       END
       @excellent.check_content(content)
 
-      @excellent.errors.should be_empty
+      @excellent.warnings.should be_empty
     end
 
     it 'should accept an inline rescue statement' do
@@ -92,7 +92,7 @@ describe Simplabs::Excellent::Checks::EmptyRescueBodyCheck do
       END
       @excellent.check_content(content)
 
-      @excellent.errors.should be_empty
+      @excellent.warnings.should be_empty
     end
 
     it 'should accept an empty array as a statement' do
@@ -102,7 +102,7 @@ describe Simplabs::Excellent::Checks::EmptyRescueBodyCheck do
 
       @excellent.check_content(content)
 
-      @excellent.errors.should be_empty
+      @excellent.warnings.should be_empty
     end
 
     it 'should accept an empty hash as a statement' do
@@ -112,7 +112,7 @@ describe Simplabs::Excellent::Checks::EmptyRescueBodyCheck do
 
       @excellent.check_content(content)
 
-      @excellent.errors.should be_empty
+      @excellent.warnings.should be_empty
     end
 
     it 'should accept a boolean as a statement' do
@@ -121,7 +121,7 @@ describe Simplabs::Excellent::Checks::EmptyRescueBodyCheck do
       END
       @excellent.check_content(content)
 
-      @excellent.errors.should be_empty
+      @excellent.warnings.should be_empty
     end
 
     it 'should accept nil as a statement' do
@@ -130,7 +130,7 @@ describe Simplabs::Excellent::Checks::EmptyRescueBodyCheck do
       END
       @excellent.check_content(content)
 
-      @excellent.errors.should be_empty
+      @excellent.warnings.should be_empty
     end
 
     it 'should reject an empty rescue block with no parameter' do
@@ -141,7 +141,7 @@ describe Simplabs::Excellent::Checks::EmptyRescueBodyCheck do
         end
       END
 
-      verify_error_found(content)
+      verify_warning_found(content)
     end
 
     it 'should reject an empty rescue block with a parameter' do
@@ -152,19 +152,19 @@ describe Simplabs::Excellent::Checks::EmptyRescueBodyCheck do
         end
       END
 
-      verify_error_found(content)
+      verify_warning_found(content)
     end
 
   end
 
-  def verify_error_found(content)
+  def verify_warning_found(content)
     @excellent.check_content(content)
-    errors = @excellent.errors
+    warnings = @excellent.warnings
 
-    errors.should_not be_empty
-    errors[0].info.should        == {}
-    errors[0].line_number.should == 3
-    errors[0].message.should     == 'Rescue block is empty.'
+    warnings.should_not be_empty
+    warnings[0].info.should        == {}
+    warnings[0].line_number.should == 3
+    warnings[0].message.should     == 'Rescue block is empty.'
   end
 
 end

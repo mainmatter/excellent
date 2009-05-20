@@ -4,7 +4,7 @@ module Simplabs
 
     module Parsing
 
-      class ResbodyContext < SexpContext
+      class ResbodyContext < SexpContext #:nodoc:
 
         STATEMENT_NODES = [:fcall, :return, :attrasgn, :vcall, :call, :str, :lit, :hash, :false, :true, :nil]
 
