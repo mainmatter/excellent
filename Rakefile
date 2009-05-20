@@ -9,7 +9,7 @@ require 'jeweler'
 require 'pathname'
 
 Jeweler::Tasks.new do |s|
-  s.name     = 'simplabs-excellent'
+  s.name     = 'excellent'
   s.summary  = 'Source code analysis gem'
   s.version  = '1.0.0'
   s.email    = 'marco.otte-witte@simplabs.com'
