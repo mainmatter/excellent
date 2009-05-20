@@ -2,6 +2,8 @@
 
 Excellent detects commonly regarded bad code snippets like empty +rescue+ blocks etc. It combines roodi (http://github.com/martinjandrews/roodi), most checks of reek (http://github.com/kevinrutherford/reek), flog (http://github.com/seattlerb/flog) and also adds some Rails specific checks.
 
+See the API documentation at http://docs.github.com/simplabs/excellent and the WIKI at http://wiki.github.com/simplabs/excellent.
+
 == Installation
 
 Simply install with Ruby Gems:
