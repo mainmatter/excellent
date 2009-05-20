@@ -6,7 +6,7 @@ module Simplabs
 
     module Checks
 
-      # This check reports code with a Flog metric score that is higher than the threshold. The Flog metric is very similar to the cyclomatic complexity
+      # This check reports methods with a Flog metric score that is higher than the threshold. The Flog metric is very similar to the cyclomatic complexity
       # measure but also takes Ruby specific statements into account. For example, calls to metaprogramming methods such as +define_method+ or
       # +class_eval+ are weighted higher than regular method calls.
       #

@@ -9,9 +9,10 @@ module Simplabs
       module Rails
 
         # This check reports +ActiveRecord+ models that specify +attr_protected+. Like +attr_accessible+, +attr_protected+ is a helper to secure
-        # +ActiveRecord+ models against mass assignment attacks, but instead of specifying a white list of properties that are writeable by mass
-        # assignments as +attr_accessible+ does, +attr_protected+ specifies a black list. Such a black list approach is usually less secure since
-        # the list has to be updated for every new property that is introduced, which is easy to forget.
+        # +ActiveRecord+ models against mass assignment attacks (see http://guides.rubyonrails.org/security.html#mass-assignment), but instead of
+        # specifying a white list of properties that are writeable by mass assignments as +attr_accessible+ does, +attr_protected+ specifies a black
+        # list. Such a black list approach is usually less secure since the list has to be updated for every new property that is introduced, which
+        # is easy to forget.
         #
         # ==== Applies to
         #

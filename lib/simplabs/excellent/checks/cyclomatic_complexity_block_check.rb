@@ -6,12 +6,12 @@ module Simplabs
 
     module Checks
 
-      # This check reports code with a cyclomatic complexity metric score that is higher than the threshold. The cyclomatic complexity metric counts
+      # This check reports blocks with a cyclomatic complexity metric score that is higher than the threshold. The cyclomatic complexity metric counts
       # the number of linearly independent paths through the code. This is basically the number of the following statements + 1:
       #
       # * +if+
       # * +else+
-      # * unless
+      # * +unless+
       # * +while+
       # * +until+
       # * +for+

@@ -6,7 +6,7 @@ module Simplabs
 
     module Checks
 
-      # This check reports empty rescue blocks. Empty rescue blocks suppress all errors which is usually not a good technique.
+      # This check reports empty +rescue+ blocks. Empty +rescue+ blocks suppress all errors which is usually not a good technique.
       #
       # ==== Applies to
       #
