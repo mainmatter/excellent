@@ -1,3 +1,7 @@
+= 1.2.2
+
+* fixed specs
+
 = 1.2.1
 
 * renamed Error to Warning
