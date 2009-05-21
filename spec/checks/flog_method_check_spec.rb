@@ -9,17 +9,17 @@ describe Simplabs::Excellent::Checks::FlogMethodCheck do
   describe '#evaluate' do
 
     it 'should calculate the score correctly' do
-      content = <<-END
+      code = <<-END
         def method_name
           puts 'test'
         end
       END
 
-      verify_content_score(content, 1)
+      verify_code_score(code, 1)
     end
 
     it 'should calculate the score that uses special metaprogramming methods correctly' do
-      content = <<-END
+      code = <<-END
         def method_name
           @instance.instance_eval do
             def some_method
@@ -28,13 +28,13 @@ describe Simplabs::Excellent::Checks::FlogMethodCheck do
         end
       END
 
-      verify_content_score(content, 6)
+      verify_code_score(code, 6)
     end
 
   end
 
-  def verify_content_score(content, score)
-    @excellent.check_content(content)
+  def verify_code_score(code, score)
+    @excellent.check_code(code)
     warnings = @excellent.warnings
 
     warnings.should_not be_empty

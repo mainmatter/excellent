@@ -9,32 +9,32 @@ describe Simplabs::Excellent::Checks::ClassNameCheck do
   describe '#evaluate' do
 
     it 'should accept camel case class names starting in capitals' do
-      content = <<-END
+      code = <<-END
         class GoodClassName; end
       END
-      @excellent.check_content(content)
+      @excellent.check_code(code)
 
       @excellent.warnings.should be_empty
     end
 
     it 'should be able to parse scoped class names' do
-      content = <<-END
+      code = <<-END
         class Outer::Inner::GoodClassName 
           def method
           end
         end
       END
-      @excellent.check_content(content)
-
+      @excellent.check_code(code)
+s
       @excellent.warnings.should be_empty
     end
 
     it 'should reject class names with underscores' do
-      content = <<-END
+      code = <<-END
         class Bad_ClassName
         end
       END
-      @excellent.check_content(content)
+      @excellent.check_code(code)
       warnings = @excellent.warnings
 
       warnings.should_not be_empty

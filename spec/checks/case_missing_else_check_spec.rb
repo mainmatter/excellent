@@ -9,26 +9,26 @@ describe Simplabs::Excellent::Checks::CaseMissingElseCheck do
   describe '#evaluate' do
 
     it 'should accept case statements that do have an else clause' do
-      content = <<-END
+      code = <<-END
         case foo
           when "bar": "ok"
           else "good"
           end
       END
-      @excellent.check_content(content)
+      @excellent.check_code(code)
       warnings = @excellent.warnings
 
       warnings.should be_empty
     end
 
     it 'should reject case statements that do not have an else clause' do
-      content = <<-END
+      code = <<-END
         case foo
           when "bar": "ok"
           when "bar": "bad"
           end
       END
-      @excellent.check_content(content)
+      @excellent.check_code(code)
       warnings = @excellent.warnings
 
       warnings.should_not be_empty

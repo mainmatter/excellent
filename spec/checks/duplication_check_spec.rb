@@ -9,99 +9,99 @@ describe Simplabs::Excellent::Checks::DuplicationCheck do
   describe '#evaluate' do
 
     it 'should accept multiple calls to new' do
-      content = <<-END
+      code = <<-END
         def double_thing
           @thing.new + @thing.new
         end
       END
-      @excellent.check_content(content)
+      @excellent.check_code(code)
       warnings = @excellent.warnings
 
       warnings.should be_empty
     end
 
     it 'should reject multiple calls to the same method and receiver' do
-      content = <<-END
+      code = <<-END
         def double_thing
           @other.thing + @other.thing
         end
       END
 
-      verify_warning_found(content, '@other.thing')
+      verify_warning_found(code, '@other.thing')
     end
 
     it 'should reject multiple calls to the same lvar' do
-      content = <<-END
+      code = <<-END
         def double_thing
           thing[1] + thing[2]
         end
       END
 
-      verify_warning_found(content, 'thing.[]')
+      verify_warning_found(code, 'thing.[]')
     end
 
     it 'should reject multiple calls to the same singleton method' do
-      content = <<-END
+      code = <<-END
         def double_thing
           Class.thing[1] + Class.thing[2]
         end
       END
 
-      verify_warning_found(content, 'Class.thing')
+      verify_warning_found(code, 'Class.thing')
     end
 
     it 'should reject multiple calls to the same method without a receiver' do
-      content = <<-END
+      code = <<-END
         def double_thing
           thing + thing
         end
       END
 
-      verify_warning_found(content, 'thing')
+      verify_warning_found(code, 'thing')
     end
 
     it 'should reject multiple calls to the same method with the same parameters' do
-      content = <<-END
+      code = <<-END
         def double_thing
           thing(1) + thing(1)
         end
       END
 
-      verify_warning_found(content, 'thing')
+      verify_warning_found(code, 'thing')
     end
 
     it 'should reject multiple calls to the same method with different parameters' do
-      content = <<-END
+      code = <<-END
         def double_thing
           thing(1) + thing(2)
         end
       END
 
-      verify_warning_found(content, 'thing')
+      verify_warning_found(code, 'thing')
     end
 
     it 'should work with singleton methods on objects' do
-      content = <<-END
+      code = <<-END
         def object.double_thing
           thing(1) + thing(2)
         end
       END
 
-      verify_warning_found(content, 'thing', 'object.double_thing')
+      verify_warning_found(code, 'thing', 'object.double_thing')
     end
 
     it 'should work with singleton methods on classes' do
-      content = <<-END
+      code = <<-END
         def Class.double_thing
           thing(1) + thing(2)
         end
       END
 
-      verify_warning_found(content, 'thing', 'Class.double_thing')
+      verify_warning_found(code, 'thing', 'Class.double_thing')
     end
 
     it 'should work with singleton methods on classes' do
-      content = <<-END
+      code = <<-END
         class Class
           def self.double_thing
             thing(1) + thing(2)
@@ -109,11 +109,11 @@ describe Simplabs::Excellent::Checks::DuplicationCheck do
         end
       END
 
-      verify_warning_found(content, 'thing', 'Class.double_thing', 2)
+      verify_warning_found(code, 'thing', 'Class.double_thing', 2)
     end
 
     it 'should also work with blocks' do
-      content = <<-END
+      code = <<-END
         def method
           double_thing do
             thing(1) + thing(2)
@@ -121,13 +121,13 @@ describe Simplabs::Excellent::Checks::DuplicationCheck do
         end
       END
 
-      verify_warning_found(content, 'thing', 'block', 2)
+      verify_warning_found(code, 'thing', 'block', 2)
     end
 
   end
 
-  def verify_warning_found(content, statement, method = 'double_thing', line = 1)
-    @excellent.check_content(content)
+  def verify_warning_found(code, statement, method = 'double_thing', line = 1)
+    @excellent.check_code(code)
     warnings = @excellent.warnings
 
     warnings.should_not be_empty

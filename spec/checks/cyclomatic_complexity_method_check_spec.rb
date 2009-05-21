@@ -9,27 +9,27 @@ describe Simplabs::Excellent::Checks::CyclomaticComplexityMethodCheck do
   describe '#evaluate' do
 
     it 'should find an if block' do
-      content = <<-END
+      code = <<-END
         def method_name
           call_foo if some_condition
         end
       END
 
-      verify_content_complexity(content, 2)
+      verify_code_complexity(code, 2)
     end
 
     it 'should find an unless block' do
-      content = <<-END
+      code = <<-END
         def method_name
           call_foo unless some_condition
         end
       END
 
-      verify_content_complexity(content, 2)
+      verify_code_complexity(code, 2)
     end
 
     it 'should find an elsif block' do
-      content = <<-END
+      code = <<-END
         def method_name
           if first_condition then
             call_foo
@@ -41,21 +41,21 @@ describe Simplabs::Excellent::Checks::CyclomaticComplexityMethodCheck do
         end
       END
 
-      verify_content_complexity(content, 3)
+      verify_code_complexity(code, 3)
     end
 
     it 'should find a ternary operator' do
-      content = <<-END
+      code = <<-END
         def method_name
           value = some_condition ? 1 : 2
         end
       END
 
-      verify_content_complexity(content, 2)
+      verify_code_complexity(code, 2)
     end
 
     it 'should find a while loop' do
-      content = <<-END
+      code = <<-END
         def method_name
           while some_condition do
             call_foo
@@ -63,11 +63,11 @@ describe Simplabs::Excellent::Checks::CyclomaticComplexityMethodCheck do
         end
       END
 
-      verify_content_complexity(content, 2)
+      verify_code_complexity(code, 2)
     end
 
     it 'should find an until loop' do
-      content = <<-END
+      code = <<-END
         def method_name
           until some_condition do
             call_foo
@@ -75,11 +75,11 @@ describe Simplabs::Excellent::Checks::CyclomaticComplexityMethodCheck do
         end
       END
 
-      verify_content_complexity(content, 2)
+      verify_code_complexity(code, 2)
     end
 
     it 'should find a for loop' do
-      content = <<-END
+      code = <<-END
         def method_name
           for i in 1..2 do
             call_method
@@ -87,11 +87,11 @@ describe Simplabs::Excellent::Checks::CyclomaticComplexityMethodCheck do
         end
       END
 
-      verify_content_complexity(content, 2)
+      verify_code_complexity(code, 2)
     end
 
     it 'should find a rescue block' do
-      content = <<-END
+      code = <<-END
         def method_name
           begin
             call_foo
@@ -101,11 +101,11 @@ describe Simplabs::Excellent::Checks::CyclomaticComplexityMethodCheck do
         end
       END
 
-      verify_content_complexity(content, 2)
+      verify_code_complexity(code, 2)
     end
 
     it 'should find a case and when block' do
-      content = <<-END
+      code = <<-END
         def method_name
           case value
             when 1
@@ -116,7 +116,7 @@ describe Simplabs::Excellent::Checks::CyclomaticComplexityMethodCheck do
         end
       END
 
-      verify_content_complexity(content, 4)
+      verify_code_complexity(code, 4)
     end
 
     describe 'when processing operators' do
@@ -124,13 +124,13 @@ describe Simplabs::Excellent::Checks::CyclomaticComplexityMethodCheck do
       ['&&', 'and', '||', 'or'].each do |operator|
 
         it "should find #{operator}" do
-          content = <<-END
+          code = <<-END
             def method_name
               call_foo #{operator} call_bar
             end
           END
 
-          verify_content_complexity(content, 2)
+          verify_code_complexity(code, 2)
         end
 
       end
@@ -138,7 +138,7 @@ describe Simplabs::Excellent::Checks::CyclomaticComplexityMethodCheck do
     end
 
     it 'should deal with nested if blocks containing && and ||' do
-      content = <<-END
+      code = <<-END
         def method_name
           if first_condition then
             call_foo if second_condition && third_condition
@@ -147,11 +147,11 @@ describe Simplabs::Excellent::Checks::CyclomaticComplexityMethodCheck do
         end
       END
 
-      verify_content_complexity(content, 6)
+      verify_code_complexity(code, 6)
     end
 
     it 'should count stupid nested if and else blocks' do
-      content = <<-END
+      code = <<-END
         def method_name
           if first_condition then
             call_foo
@@ -166,11 +166,11 @@ describe Simplabs::Excellent::Checks::CyclomaticComplexityMethodCheck do
         end
       END
 
-      verify_content_complexity(content, 5)
+      verify_code_complexity(code, 5)
     end
 
     it 'should also work on singleton methods' do
-      content = <<-END
+      code = <<-END
         class Class
           def self.method_name
             if first_condition then
@@ -186,7 +186,7 @@ describe Simplabs::Excellent::Checks::CyclomaticComplexityMethodCheck do
           end
         end
       END
-      @excellent.check_content(content)
+      @excellent.check_code(code)
       warnings = @excellent.warnings
 
       warnings.should_not be_empty
@@ -197,8 +197,8 @@ describe Simplabs::Excellent::Checks::CyclomaticComplexityMethodCheck do
 
   end
 
-  def verify_content_complexity(content, score)
-    @excellent.check_content(content)
+  def verify_code_complexity(code, score)
+    @excellent.check_code(code)
     warnings = @excellent.warnings
 
     warnings.should_not be_empty

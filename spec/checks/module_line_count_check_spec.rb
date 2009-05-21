@@ -9,32 +9,32 @@ describe Simplabs::Excellent::Checks::ModuleLineCountCheck do
   describe '#evaluate' do
 
     it 'should accept modules with less lines than the threshold' do
-      content = <<-END
+      code = <<-END
         module OneLineModule; end
       END
-      @excellent.check_content(content)
+      @excellent.check_code(code)
 
       @excellent.warnings.should be_empty
     end
 
     it 'should accept modules with the same number of lines as the threshold' do
-      content = <<-END
+      code = <<-END
         module TwoLinesModule
         end
       END
-      @excellent.check_content(content)
+      @excellent.check_code(code)
 
       @excellent.warnings.should be_empty
     end
 
     it 'should reject modules with more lines than the threshold' do
-      content = <<-END
+      code = <<-END
         module FourLinesModule
           @foo = 1
           @bar = 2
         end
       END
-      @excellent.check_content(content)
+      @excellent.check_code(code)
       warnings = @excellent.warnings
 
       warnings.should_not be_empty

@@ -9,13 +9,13 @@ describe Simplabs::Excellent::Checks::NestedIteratorsCheck do
   describe '#evaluate' do
 
     it 'should reject a block inside a block' do
-      content = <<-END
+      code = <<-END
         method1 do
           method2 do
           end
         end
       END
-      @excellent.check_content(content)
+      @excellent.check_code(code)
       warnings = @excellent.warnings
 
       warnings.should_not be_empty
@@ -25,7 +25,7 @@ describe Simplabs::Excellent::Checks::NestedIteratorsCheck do
     end
 
     it 'should accept 2 blocks inside a method that are not nested' do
-      content = <<-END
+      code = <<-END
         def method
           method1 do
           end
@@ -33,7 +33,7 @@ describe Simplabs::Excellent::Checks::NestedIteratorsCheck do
           end
         end
       END
-      @excellent.check_content(content)
+      @excellent.check_code(code)
       warnings = @excellent.warnings
 
       warnings.should be_empty

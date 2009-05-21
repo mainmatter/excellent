@@ -9,12 +9,12 @@ describe Simplabs::Excellent::Checks::FlogClassCheck do
   describe '#evaluate' do
 
     it 'should calculate the score correctly' do
-      content = <<-END
+      code = <<-END
         class User < ActiveRecord::Base
           has_many :projects
         end
       END
-      @excellent.check_content(content)
+      @excellent.check_code(code)
       warnings = @excellent.warnings
 
       warnings.should_not be_empty

@@ -9,10 +9,10 @@ describe Simplabs::Excellent::Checks::SingletonVariableCheck do
   describe '#evaluate' do
 
     it 'should reject singleton variables' do
-      content = <<-END
+      code = <<-END
         @@foo
       END
-      @excellent.check_content(content)
+      @excellent.check_code(code)
       warnings = @excellent.warnings
 
       warnings.should_not be_empty
@@ -22,7 +22,7 @@ describe Simplabs::Excellent::Checks::SingletonVariableCheck do
     end
 
     it 'should also work for namespaced classes' do
-      content = <<-END
+      code = <<-END
         module Outer
           module Inner
             class Class
@@ -31,7 +31,7 @@ describe Simplabs::Excellent::Checks::SingletonVariableCheck do
           end
         end
       END
-      @excellent.check_content(content)
+      @excellent.check_code(code)
       warnings = @excellent.warnings
 
       warnings.should_not be_empty
@@ -41,7 +41,7 @@ describe Simplabs::Excellent::Checks::SingletonVariableCheck do
     end
 
     it 'should also work for singleton variables that occur within methods' do
-      content = <<-END
+      code = <<-END
         module Outer
           module Inner
             class Class
@@ -52,7 +52,7 @@ describe Simplabs::Excellent::Checks::SingletonVariableCheck do
           end
         end
       END
-      @excellent.check_content(content)
+      @excellent.check_code(code)
       warnings = @excellent.warnings
 
       warnings.should_not be_empty

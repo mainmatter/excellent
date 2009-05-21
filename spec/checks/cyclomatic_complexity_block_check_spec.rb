@@ -9,17 +9,17 @@ describe Simplabs::Excellent::Checks::CyclomaticComplexityBlockCheck do
   describe '#evaluate' do
 
     it 'should find a simple block' do
-      content = <<-END
+      code = <<-END
         it 'should be a simple block' do
           call_foo
         end
       END
 
-      verify_content_complexity(content, 1)
+      verify_code_complexity(code, 1)
     end
 
     it 'should find a block with multiple paths' do
-      content = <<-END
+      code = <<-END
         it 'should be a complex block' do
           if some_condition
             call_foo
@@ -29,13 +29,13 @@ describe Simplabs::Excellent::Checks::CyclomaticComplexityBlockCheck do
         end
       END
 
-      verify_content_complexity(content, 2)
+      verify_code_complexity(code, 2)
     end
 
   end
 
-  def verify_content_complexity(content, score)
-    @excellent.check_content(content)
+  def verify_code_complexity(code, score)
+    @excellent.check_code(code)
     warnings = @excellent.warnings
 
     warnings.should_not be_empty

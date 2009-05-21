@@ -9,83 +9,83 @@ describe Simplabs::Excellent::Checks::ParameterNumberCheck do
   describe '#evaluate' do
 
     it 'should accept methods with less parameters than the threshold' do
-      content = <<-END
+      code = <<-END
         def zero_parameter_method
         end
       END
-      @excellent.check_content(content)
+      @excellent.check_code(code)
 
       @excellent.warnings.should be_empty
     end
 
     it 'should accept methods with the same number of parameters as the threshold' do
-      content = <<-END
+      code = <<-END
         def one_parameter_method(first_parameter)
         end
       END
-      @excellent.check_content(content)
+      @excellent.check_code(code)
 
       @excellent.warnings.should be_empty
     end
 
     it 'should reject methods with more parameters than the threshold' do
-      content = <<-END
+      code = <<-END
         def two_parameter_method(first_parameter, second_parameter)
         end
       END
 
-      verify_warning_found(content, 'two_parameter_method')
+      verify_warning_found(code, 'two_parameter_method')
     end
 
     it 'should work with default values on parameters' do
-      content = <<-END
+      code = <<-END
         def two_parameter_method(first_parameter = 1, second_parameter = 2)
         end
       END
 
-      verify_warning_found(content, 'two_parameter_method')
+      verify_warning_found(code, 'two_parameter_method')
     end
 
     it 'should work with methods defined on objects' do
-      content = <<-END
+      code = <<-END
         def object.two_parameter_method(first_parameter = 1, second_parameter = 2)
         end
       END
 
-      verify_warning_found(content, 'object.two_parameter_method')
+      verify_warning_found(code, 'object.two_parameter_method')
     end
 
     it 'should work with methods defined directly on classes' do
-      content = <<-END
+      code = <<-END
         def Class.two_parameter_method(first_parameter = 1, second_parameter = 2)
         end
       END
 
-      verify_warning_found(content, 'Class.two_parameter_method')
+      verify_warning_found(code, 'Class.two_parameter_method')
     end
 
     it 'should reject yield calls with more parameters than the threshold' do
-      content = <<-END
+      code = <<-END
         two_parameter_method do |first_parameter, second_parameter|
         end
       END
 
-      verify_warning_found(content, 'block')
+      verify_warning_found(code, 'block')
     end
 
     it 'should reject yield calls on a receiver with more parameters than the threshold' do
-      content = <<-END
+      code = <<-END
         receiver.two_parameter_method do |first_parameter, second_parameter|
         end
       END
 
-      verify_warning_found(content, 'block')
+      verify_warning_found(code, 'block')
     end
 
   end
 
-  def verify_warning_found(content, name)
-    @excellent.check_content(content)
+  def verify_warning_found(code, name)
+    @excellent.check_code(code)
     warnings = @excellent.warnings
 
     warnings.should_not be_empty

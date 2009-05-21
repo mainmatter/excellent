@@ -9,31 +9,31 @@ describe Simplabs::Excellent::Checks::ModuleNameCheck do
   describe '#evaluate' do
 
     it 'should accept camel case module names starting in capitals' do
-      content = <<-END
+      code = <<-END
         module GoodModuleName 
         end
       END
-      @excellent.check_content(content)
+      @excellent.check_code(code)
 
       @excellent.warnings.should be_empty
     end
 
     it 'should accept namespaced modules' do
-      content = <<-END
+      code = <<-END
         module Outer::Inner::GoodModuleName 
         end
       END
-      @excellent.check_content(content)
+      @excellent.check_code(code)
 
       @excellent.warnings.should be_empty
     end
 
     it 'should reject module names with underscores' do
-      content = <<-END
+      code = <<-END
         module Bad_ModuleName 
         end
       END
-      @excellent.check_content(content)
+      @excellent.check_code(code)
       warnings = @excellent.warnings
 
       warnings.should_not be_empty
@@ -43,11 +43,11 @@ describe Simplabs::Excellent::Checks::ModuleNameCheck do
     end
 
     it 'should correctly report bad names of namespaced modules' do
-      content = <<-END
+      code = <<-END
         module Outer::Inner::Bad_ModuleName
         end
       END
-      @excellent.check_content(content)
+      @excellent.check_code(code)
       warnings = @excellent.warnings
 
       warnings.should_not be_empty

@@ -9,39 +9,39 @@ describe Simplabs::Excellent::Checks::ControlCouplingCheck do
   describe '#evaluate' do
 
     it 'should accept methods that just print out the parameter' do
-      content = <<-END
+      code = <<-END
         def write(quoted)
           pp quoted
         end
       END
-      @excellent.check_content(content)
+      @excellent.check_code(code)
       warnings = @excellent.warnings
 
       warnings.should be_empty
     end
 
     it 'should accept methods with ternary operators using an instance variable' do
-      content = <<-END
+      code = <<-END
         def write(quoted)
           @quoted ? write_quoted('1') : write_quoted('2')
         end
       END
 
-      @excellent.check_content(content)
+      @excellent.check_code(code)
       warnings = @excellent.warnings
 
       warnings.should be_empty
     end
 
     it 'should accept methods with ternary operators using a local variable' do
-      content = <<-END
+      code = <<-END
         def write(quoted)
           test = false
           test ? write_quoted('1') : write_quoted('2')
         end
       END
 
-      @excellent.check_content(content)
+      @excellent.check_code(code)
       warnings = @excellent.warnings
 
       warnings.should be_empty
@@ -50,7 +50,7 @@ describe Simplabs::Excellent::Checks::ControlCouplingCheck do
     %w(if unless).each do |conditional|
 
       it "should reject methods with #{conditional} checks using a parameter" do
-        content = <<-END
+        code = <<-END
           def write(quoted)
             #{conditional} quoted
               write_quoted('test')
@@ -58,23 +58,23 @@ describe Simplabs::Excellent::Checks::ControlCouplingCheck do
           end
         END
 
-        verify_warning_found(content)
+        verify_warning_found(code)
       end
 
     end
 
     it 'should reject methods with ternary operators using a parameter' do
-      content = <<-END
+      code = <<-END
         def write(quoted)
           quoted ? write_quoted('1') : write_quoted('2')
         end
       END
 
-      verify_warning_found(content)
+      verify_warning_found(code)
     end
 
     it "should reject methods with case statements using a parameter" do
-      content = <<-END
+      code = <<-END
         def write(quoted)
           case quoted
             when 1
@@ -85,13 +85,13 @@ describe Simplabs::Excellent::Checks::ControlCouplingCheck do
         end
       END
 
-      verify_warning_found(content)
+      verify_warning_found(code)
     end
 
   end
 
-  def verify_warning_found(content)
-    @excellent.check_content(content)
+  def verify_warning_found(code)
+    @excellent.check_code(code)
     warnings = @excellent.warnings
 
     warnings.should_not be_empty

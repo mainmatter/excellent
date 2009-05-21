@@ -9,12 +9,12 @@ describe Simplabs::Excellent::Checks::FlogBlockCheck do
   describe '#evaluate' do
 
     it 'should calculate the score correctly' do
-      content = <<-END
+      code = <<-END
         method_name do
           puts 'test'
         end
       END
-      @excellent.check_content(content)
+      @excellent.check_code(code)
       warnings = @excellent.warnings
 
       warnings.should_not be_empty
