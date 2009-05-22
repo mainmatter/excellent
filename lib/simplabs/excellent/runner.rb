@@ -129,8 +129,11 @@ module Simplabs
 
         def format_file_and_warnings(formatter, filename)
           warnings = @checks.map { |check| check.warnings_for(filename) }.flatten
-          formatter.file(filename) if warnings.length > 0
-          warnings.sort { |x, y| x.line_number <=> y.line_number }.each { |warning| formatter.warning(warning) }
+          if warnings.length > 0
+            formatter.file(filename) do |formatter|
+              warnings.sort { |x, y| x.line_number <=> y.line_number }.each { |warning| formatter.warning(warning) }
+            end
+          end
         end
 
     end

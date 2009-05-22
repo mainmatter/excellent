@@ -20,7 +20,13 @@ module Simplabs
         def start
         end
 
-        # Called whenever the Simplabs::Excellent::Runner processes a file.
+        # Called whenever the Simplabs::Excellent::Runner processes a file. Yields the formatter
+        #
+        # You have to <tt>yield self</tt> in custom formatters. +file+ is called like that by the runner:
+        #
+        #  formatter.file(filename) do |formatter|
+        #    warnings.each { |warning| formatter.warning(warning) }
+        #  end
         def file(filename)
         end
 

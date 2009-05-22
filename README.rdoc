@@ -17,7 +17,10 @@ To analyse all the models in your Rails application, just do
 
   excellent app/models
 
-in your <tt>RAILS_ROOT</tt>. You can also invoke analysation through the Simplabs::Excellent::Runner class.
+in your <tt>RAILS_ROOT</tt>. You can also invoke analysation through the Simplabs::Excellent::Runner class. Excellent can also produce HTML output. To
+get a formatted HTML report, just specify html:<filename>:
+
+  excellent html:out.html app/models
 
 == Static analysis
 

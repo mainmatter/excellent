@@ -7,6 +7,17 @@ require 'pathname'
 
 excellent = Simplabs::Excellent::Runner.new
 
+if ARGV.first =~ /html:[^\s]+/
+  begin
+    output = File.open(ARGV.first.sub(/html:/, ''), 'w+')
+    formatter = Simplabs::Excellent::Formatters::Html.new(output)
+    ARGV.shift
+  rescue
+  end
+else
+  formatter = Simplabs::Excellent::Formatters::Text.new
+end
+
 if ARGV.empty?
   puts "\n  You must specify one or more directories to analyse, e.g.:\n"
   puts "\n    excellent app/\n\n"
@@ -14,9 +25,10 @@ if ARGV.empty?
 end
 
 begin
-  excellent.check_paths(ARGV, Simplabs::Excellent::Formatters::Text.new)
-rescue ArgumentError
-  puts "\n** Excellent cannot find '#{arg}'\n\n"
+  excellent.check_paths(ARGV, formatter)
+rescue ArgumentError => ex
+  puts "EXCEPTION: #{ex.message}"
+  puts "\n** Excellent cannot find the paths specified!\n\n"
   exit 1
 end
 

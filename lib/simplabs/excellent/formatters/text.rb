@@ -19,6 +19,7 @@ module Simplabs
 
         def file(filename)
           @stream.puts "\n  #{filename}\n"
+          yield self
         end
 
         def warning(warning)

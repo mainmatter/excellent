@@ -10,3 +10,4 @@ module Simplabs
 end
 
 require 'simplabs/excellent/formatters/text'
+require 'simplabs/excellent/formatters/html'
