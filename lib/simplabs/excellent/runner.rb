@@ -39,7 +39,7 @@ module Simplabs
       #
       # ==== Parameters
       #
-      # * <tt>checks</tt> - The checks to apply - passed instances of the various check classes. If no checks are specified, all checks will be applied.
+      # * <tt>checks</tt> - The checks to apply - pass instances of the various check classes. If no checks are specified, all checks will be applied.
       def initialize(*checks)
         @config = DEFAULT_CONFIG
         @checks = checks unless checks.empty?
@@ -77,6 +77,21 @@ module Simplabs
         check(filename, File.read(filename))
       end
 
+      # Processes the passed +paths+
+      #
+      # ==== Parameters
+      #
+      # * <tt>paths</tt> - The paths to process (specify file names or directories; will recursively process all ruby files if a directory are given).
+      # * <tt>formatter</tt> - The formatter to use. If a formatter is specified, its +start+, +file+, +warning+ and +end+ methods will be called
+      def check_paths(paths, formatter = nil)
+        formatter.start if formatter
+        collect_files(paths).each do |path|
+          check_file(path)
+          format_file_and_warnings(formatter, path) if formatter
+        end
+        formatter.end if formatter
+      end
+
       # Gets the warnings that were produced by the checks.
       def warnings
         @checks ||= []
@@ -96,6 +111,26 @@ module Simplabs
             check_objects << (value.empty? ? klass.new : klass.new(value))
           end
           check_objects
+        end
+
+        def collect_files(paths)
+          files = []
+          paths.each do |path|
+            if File.file?(path)
+              files << path
+            elsif File.directory?(path)
+              files += Dir.glob(File.join(path, '**/*.rb'))
+            else
+              raise ArgumentError.new("#{path} is neither a File nor a directory!")
+            end
+          end
+          files
+        end
+
+        def format_file_and_warnings(formatter, filename)
+          warnings = @checks.map { |check| check.warnings_for(filename) }.flatten
+          formatter.file(filename) if warnings.length > 0
+          warnings.sort { |x, y| x.line_number <=> y.line_number }.each { |warning| formatter.warning(warning) }
         end
 
     end

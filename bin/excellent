@@ -13,23 +13,11 @@ if ARGV.empty?
   exit 1
 end
 
-ARGV.each do |arg|
-  if File.file?(arg)
-    excellent.check_file(arg)
-  elsif File.directory?(arg)
-    Dir.glob("#{arg}/**/*.rb").each { |file| excellent.check_file(file) }
-  else
-    puts "\n** Excellent cannot find '#{arg}'\n\n"
-    exit 1
-  end
+begin
+  excellent.check_paths(ARGV, Simplabs::Excellent::Formatters::Text.new)
+rescue ArgumentError
+  puts "\n** Excellent cannot find '#{arg}'\n\n"
+  exit 1
 end
-
-unless excellent.warnings.empty?
-  puts "\n  Warnings:\n\n"
-  excellent.warnings.each do |warning|
-    puts "  * File #{warning.filename}, line #{warning.line_number}: #{warning.message}"
-  end
-end
-puts "\n  Found #{excellent.warnings.size} warnings.\n\n"
 
 exit 0

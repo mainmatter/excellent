@@ -42,6 +42,10 @@ module Simplabs
           @warnings << Simplabs::Excellent::Warning.new(klass, message, context.file, context.line + offset, info)
         end
   
+        def warnings_for(filename) #:nodoc:
+          warnings.select { |warning| warning.filename == filename }
+        end
+  
       end
 
     end

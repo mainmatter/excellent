@@ -14,6 +14,11 @@ module Simplabs
             downcase
         end
 
+        def lpad(to, with = ' ')
+          return self if self.length >= to
+          "#{with * (to - self.length)}#{self}"
+        end
+
       end
 
     end

@@ -8,5 +8,3 @@ module Simplabs
   end
 
 end
-
-require 'simplabs/excellent/runner'
