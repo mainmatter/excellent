@@ -5,6 +5,7 @@ require 'hoe'
 require 'rake'
 require 'spec/rake/spectask'
 require 'simplabs/excellent'
+require 'simplabs/excellent/rake'
 require 'jeweler'
 require 'pathname'
 
@@ -14,10 +15,10 @@ Jeweler::Tasks.new do |s|
   s.version  = '1.0.0'
   s.email    = 'marco.otte-witte@simplabs.com'
   s.homepage = 'http://github.com/marcoow/excellent'
-  s.authors  = ['originally by Marty Andrews (marty@cogentconsulting.com.au)', 'modifications by Marco Otte-Witte (http://simplabs.com)']
+  s.authors  = ['Marco Otte-Witte (http://simplabs.com), based on roodi, reek and flog.']
 end
 
-Spec::Rake::SpecTask.new('spec') do |t|
+Spec::Rake::SpecTask.new(:spec) do |t|
   t.spec_opts << '--color'
   t.spec_opts << '--format=html:doc/spec.html'
   t.spec_opts << '--format=specdoc'
@@ -28,17 +29,16 @@ Spec::Rake::SpecTask.new('spec') do |t|
 end
 
 desc 'Generate documentation for the Excellent gem.'
-Rake::RDocTask.new(:rdoc) do |rdoc|
-  rdoc.rdoc_dir = 'doc'
-  rdoc.title    = 'Excellent'
-  rdoc.options << '--line-numbers' << '--inline-source'
-  rdoc.rdoc_files.include('README.rdoc')
-  rdoc.rdoc_files.include('lib/**/*.rb')
+Rake::RDocTask.new(:rdoc) do |t|
+  t.rdoc_dir = 'doc'
+  t.title    = 'Excellent'
+  t.options << '--line-numbers' << '--inline-source'
+  t.rdoc_files.include('README.rdoc')
+  t.rdoc_files.include('lib/**/*.rb')
 end
 
-desc 'Run Excellent against all source files'
-task :excellent do
-  puts `bin/excellent "lib/**/*.rb"`
+desc 'Analyse the Excellent source with itself.'
+Simplabs::Excellent::Rake::ExcellentTask.new(:excellent) do |t|
+  t.format = 'html:doc/excellent.html'
+  t.paths  = ['spec']
 end
-
-task :default => :spec

@@ -1,0 +1,1 @@
+require 'simplabs/excellent/rake/excellent_task'

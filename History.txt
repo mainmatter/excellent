@@ -1,3 +1,7 @@
+= 1.4.1
+
+* added Rake Task (see Rakefile for example)
+
 = 1.4.0
 
 * Excellent not parses *.erb files
