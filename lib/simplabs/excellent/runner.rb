@@ -12,25 +12,26 @@ module Simplabs
     class Runner
 
       DEFAULT_CONFIG = {
-        :AssignmentInConditionalCheck    => { },
-        :CaseMissingElseCheck            => { },
-        :ClassLineCountCheck             => { :threshold      => 300 },
-        :ClassNameCheck                  => { :pattern         => /^[A-Z][a-zA-Z0-9]*$/ },
-        :SingletonVariableCheck          => { },
-        :CyclomaticComplexityBlockCheck  => { :complexity      => 4 },
-        :CyclomaticComplexityMethodCheck => { :complexity      => 8 },
-        :EmptyRescueBodyCheck            => { },
-        :ForLoopCheck                    => { },
-        :MethodLineCountCheck            => { :line_count      => 20 },
-        :MethodNameCheck                 => { :pattern         => /^[_a-z<>=\[|+-\/\*`]+[_a-z0-9_<>=~@\[\]]*[=!\?]?$/ },
-        :ModuleLineCountCheck            => { :line_count      => 300 },
-        :ModuleNameCheck                 => { :pattern         => /^[A-Z][a-zA-Z0-9]*$/ },
-        :ParameterNumberCheck            => { :parameter_count => 3 },
-        :FlogMethodCheck                 => { },
-        :FlogBlockCheck                  => { },
-        :FlogClassCheck                  => { },
-        :'Rails::AttrProtectedCheck'     => { },
-        :'Rails::AttrAccessibleCheck'    => { }
+        :AssignmentInConditionalCheck       => { },
+        :CaseMissingElseCheck               => { },
+        :ClassLineCountCheck                => { :threshold      => 300 },
+        :ClassNameCheck                     => { :pattern         => /^[A-Z][a-zA-Z0-9]*$/ },
+        :SingletonVariableCheck             => { },
+        :CyclomaticComplexityBlockCheck     => { :complexity      => 4 },
+        :CyclomaticComplexityMethodCheck    => { :complexity      => 8 },
+        :EmptyRescueBodyCheck               => { },
+        :ForLoopCheck                       => { },
+        :MethodLineCountCheck               => { :line_count      => 20 },
+        :MethodNameCheck                    => { :pattern         => /^[_a-z<>=\[|+-\/\*`]+[_a-z0-9_<>=~@\[\]]*[=!\?]?$/ },
+        :ModuleLineCountCheck               => { :line_count      => 300 },
+        :ModuleNameCheck                    => { :pattern         => /^[A-Z][a-zA-Z0-9]*$/ },
+        :ParameterNumberCheck               => { :parameter_count => 3 },
+        :FlogMethodCheck                    => { },
+        :FlogBlockCheck                     => { },
+        :FlogClassCheck                     => { },
+        :'Rails::AttrProtectedCheck'        => { },
+        :'Rails::AttrAccessibleCheck'       => { },
+        :'Rails::InstanceVarInPartialCheck' => { }
       }
 
       attr_accessor :config #:nodoc:

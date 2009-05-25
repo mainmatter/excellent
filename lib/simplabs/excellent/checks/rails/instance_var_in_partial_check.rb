@@ -9,7 +9,7 @@ module Simplabs
       module Rails
 
         # This check reports partials that use instance variables. Using instance variables in partials couples the partial to the controller action or
-        # template that includes the partial and has to define the instance variable.
+        # template that includes the partial and that has to define the instance variable.
         #
         # ==== Applies to
         #
