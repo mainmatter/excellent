@@ -16,8 +16,15 @@ module Simplabs
         # e.g. <tt>:if</tt> or <tt>:defn</tt>
         attr_reader :interesting_nodes
 
+        # An array of regular expressions for file names that are interesting for the check. These will usually be path extensions rather than longer
+        # patterns (e.g. *.rb as well as *.erb files or *.rb files only).
+        #
+        # Defaults to /\.rb$/. If you do not specify anything else in custom checks, only *.rb files will be processed
+        attr_reader :interesting_files
+
         def initialize #:nodoc:
-          @warnings = []
+          @warnings          = []
+          @interesting_files = [/\.rb$/]
         end
 
         # This method is called whenever Excellent processes a node that the check specified as one of the nodes it is interested in (see interesting_nodes).

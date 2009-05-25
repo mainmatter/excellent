@@ -16,6 +16,7 @@ module Simplabs
         def initialize #:nodoc:
           super
           @interesting_nodes = [:iter]
+          @interesting_files = [/\.rb$/, /\.erb$/]
         end
 
         def evaluate(context) #:nodoc:

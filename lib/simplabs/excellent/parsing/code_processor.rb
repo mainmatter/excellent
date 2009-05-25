@@ -11,6 +11,7 @@ require 'simplabs/excellent/parsing/for_loop_context'
 require 'simplabs/excellent/parsing/while_context'
 require 'simplabs/excellent/parsing/until_context'
 require 'simplabs/excellent/parsing/cvar_context'
+require 'simplabs/excellent/parsing/ivar_context'
 require 'simplabs/excellent/parsing/resbody_context'
 require 'simplabs/excellent/parsing/call_context'
 
@@ -51,6 +52,10 @@ module Simplabs
 
         def process_defs(exp)
           process_default(exp, SingletonMethodContext.new(exp, @contexts.last))
+        end
+
+        def process_ivar(exp)
+          process_default(exp, IvarContext.new(exp, @contexts.last))
         end
 
         def process_cvar(exp)
@@ -118,8 +123,8 @@ module Simplabs
 
           def apply_checks(exp)
             if exp.is_a?(Sexp)
-              checks = @checks[exp.node_type]
-              checks.each { |check| check.evaluate_node(@contexts.last) } unless checks.nil?
+              checks = @checks[exp.node_type] || []
+              checks.each { |check| check.evaluate_node(@contexts.last) if check.interesting_files.any? { |pattern| File.basename(exp.file) =~ pattern } }
             end
           end
 
