@@ -1,6 +1,7 @@
 require 'rubygems'
 require 'ruby_parser'
 require 'facets'
+require 'erb'
 
 module Simplabs
 
@@ -22,6 +23,7 @@ module Simplabs
 
           def silent_parse(content, filename)
             @parser ||= RubyParser.new
+            content = ::ERB.new(content).src if filename =~ /\.erb$/
             sexp = @parser.parse(content, filename)
             sexp
           end

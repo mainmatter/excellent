@@ -119,7 +119,7 @@ module Simplabs
             if File.file?(path)
               files << path
             elsif File.directory?(path)
-              files += Dir.glob(File.join(path, '**/*.rb'))
+              files += Dir.glob(File.join(path, '**/*.{rb,erb}'))
             else
               raise ArgumentError.new("#{path} is neither a File nor a directory!")
             end
