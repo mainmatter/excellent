@@ -91,6 +91,24 @@ module Simplabs
           				text-align: right;
           				display: inline-block;
           			}
+
+                #footer {
+                  margin: 20px 0 20px 0;
+                  padding: 5px;
+                  text-align: center;
+                }
+
+                #footer a {
+                  color: #000;
+                  background-color: #ddd;
+                  text-decoration: none;
+                  padding: 0 2px 0 2px;
+                }
+
+                #footer a:active, #footer a:hover {
+                  color: #fff;
+                  background-color: #222;
+                }
             	</style>
           	</head>
           	<body>
@@ -118,6 +136,9 @@ module Simplabs
         END
 
         FOOTER_TEMPLATE = <<-END
+              </div>
+              <div id="footer">
+                <a href="http://github.com/simplabs/excellent" title="Excellent at github">Excellent</a> by <a href="http://simplabs.com" title="simplabs">simplabs</a>
               </div>
       	    </body>
           </html>
