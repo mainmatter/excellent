@@ -1,3 +1,8 @@
+= 1.5.1
+
+* removed duplication checks (they are just too coarse for dynamic languages like Ruby and especially Rails apps where you would call e.g. params all over the place)
+* added Rails::ValidationsCheck to the default checks
+
 = 1.5.0
 
 * new check Rails::ValidationsCheck that reports ActiveRecord models that do not validate anything
