@@ -16,8 +16,8 @@ module Simplabs
         def initialize(exp, parent)
           super
           @name, @full_name = get_names
-          @methods = []
-          @line_count = count_lines
+          @methods          = []
+          @line_count       = count_lines
         end
 
       end

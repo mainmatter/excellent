@@ -11,7 +11,7 @@ module Simplabs
         def initialize(exp, parent)
           super
           @contains_assignment = has_assignment?
-          @tests_parameter = contains_parameter?
+          @tests_parameter     = contains_parameter?
         end
 
         def tests_assignment?

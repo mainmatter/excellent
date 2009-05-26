@@ -14,8 +14,8 @@ module Simplabs
         def full_name
           return @name if @parent.blank?
           full_name = @name
-          parent = @parent
-          parent = parent.parent until parent.is_a?(ClassContext) || parent.is_a?(ModuleContext)
+          parent    = @parent
+          parent    = parent.parent until parent.is_a?(ClassContext) || parent.is_a?(ModuleContext)
           full_name = "#{parent.full_name}.#{full_name}"
         end
 

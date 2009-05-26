@@ -29,6 +29,8 @@ module Simplabs
         :FlogMethodCheck                    => { },
         :FlogBlockCheck                     => { },
         :FlogClassCheck                     => { },
+        :BlockDuplicationCheck              => { },
+        :MethodDuplicationCheck             => { },
         :'Rails::AttrProtectedCheck'        => { },
         :'Rails::AttrAccessibleCheck'       => { },
         :'Rails::InstanceVarInPartialCheck' => { }

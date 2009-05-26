@@ -25,7 +25,7 @@ module Simplabs
           end
 
           def evaluate(context) #:nodoc:
-            add_warning(context, '{{class}} specifies attr_protected.', { :class => context.full_name }) if context.activerecord_model? && context.specifies_attr_protected?
+            add_warning(context, '{{class}} specifies attr_protected.', { :class => context.full_name }) if context.active_record_model? && context.specifies_attr_protected?
           end
 
         end

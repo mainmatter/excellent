@@ -24,7 +24,7 @@ module Simplabs
           end
 
           def evaluate(context) #:nodoc:
-            add_warning(context, '{{class}} does not specify attr_accessible.', { :class => context.full_name }) if context.activerecord_model? && !context.specifies_attr_accessible?
+            add_warning(context, '{{class}} does not specify attr_accessible.', { :class => context.full_name }) if context.active_record_model? && !context.specifies_attr_accessible?
           end
 
         end

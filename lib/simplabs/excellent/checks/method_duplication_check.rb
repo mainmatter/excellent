@@ -15,15 +15,14 @@ module Simplabs
       # ==== Applies to
       #
       # * methods
-      # * blocks
-      class DuplicationCheck < Base
+      class MethodDuplicationCheck < Base
 
         DEFAULT_THRESHOLD = 1
 
         def initialize(options = {}) #:nodoc:
           super()
           @threshold         = options[:threshold] || DEFAULT_THRESHOLD
-          @interesting_nodes = [:defn, :defs, :iter]
+          @interesting_nodes = [:defn, :defs]
         end
 
         def evaluate(context) #:nodoc:

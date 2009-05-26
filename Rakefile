@@ -39,5 +39,5 @@ end
 desc 'Analyse the Excellent source with itself.'
 Simplabs::Excellent::Rake::ExcellentTask.new(:excellent) do |t|
   t.html  = 'doc/excellent.html'
-  t.paths = ['spec']
+  t.paths = ['lib']
 end

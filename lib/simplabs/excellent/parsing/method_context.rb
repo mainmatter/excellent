@@ -37,8 +37,8 @@ module Simplabs
           "#{parent.full_name}##{@name}"
         end
 
-        def record_call_to(exp)
-          @calls[exp] += 1
+        def record_call_to(context)
+          @calls[context] += 1
         end
 
       end

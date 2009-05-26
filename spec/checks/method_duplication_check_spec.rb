@@ -1,9 +1,9 @@
 require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 
-describe Simplabs::Excellent::Checks::DuplicationCheck do
+describe Simplabs::Excellent::Checks::MethodDuplicationCheck do
 
   before do
-    @excellent = Simplabs::Excellent::Runner.new(Simplabs::Excellent::Checks::DuplicationCheck.new({ :threshold => 1 }))
+    @excellent = Simplabs::Excellent::Runner.new(Simplabs::Excellent::Checks::MethodDuplicationCheck.new({ :threshold => 1 }))
   end
 
   describe '#evaluate' do
@@ -110,18 +110,6 @@ describe Simplabs::Excellent::Checks::DuplicationCheck do
       END
 
       verify_warning_found(code, 'thing', 'Class.double_thing', 2)
-    end
-
-    it 'should also work with blocks' do
-      code = <<-END
-        def method
-          double_thing do
-            thing(1) + thing(2)
-          end
-        end
-      END
-
-      verify_warning_found(code, 'thing', 'block', 2)
     end
 
   end
