@@ -82,7 +82,7 @@ module Simplabs
       #
       # ==== Parameters
       #
-      # * <tt>paths</tt> - The paths to process (specify file names or directories; will recursively process all ruby files if a directory are given).
+      # * <tt>paths</tt> - The paths to process (specify file names or directories; will recursively process all ruby files if a directory is given).
       # * <tt>formatter</tt> - The formatter to use. If a formatter is specified, its +start+, +file+, +warning+ and +end+ methods will be called
       def check_paths(paths, formatter = nil)
         formatter.start if formatter
