@@ -1,4 +1,5 @@
 require 'rake'
+require 'simplabs/excellent'
 
 module Simplabs
 

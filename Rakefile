@@ -4,7 +4,6 @@ require 'rubygems'
 require 'hoe'
 require 'rake'
 require 'spec/rake/spectask'
-require 'simplabs/excellent'
 require 'simplabs/excellent/rake'
 require 'jeweler'
 require 'pathname'
@@ -40,5 +39,5 @@ end
 desc 'Analyse the Excellent source with itself.'
 Simplabs::Excellent::Rake::ExcellentTask.new(:excellent) do |t|
   t.html  = 'doc/excellent.html'
-  t.paths = ['lib']
+  t.paths = ['spec']
 end
