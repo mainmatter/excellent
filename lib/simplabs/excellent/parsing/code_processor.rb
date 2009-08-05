@@ -11,6 +11,7 @@ require 'simplabs/excellent/parsing/for_loop_context'
 require 'simplabs/excellent/parsing/while_context'
 require 'simplabs/excellent/parsing/until_context'
 require 'simplabs/excellent/parsing/cvar_context'
+require 'simplabs/excellent/parsing/gvar_context'
 require 'simplabs/excellent/parsing/ivar_context'
 require 'simplabs/excellent/parsing/resbody_context'
 require 'simplabs/excellent/parsing/call_context'
@@ -60,6 +61,14 @@ module Simplabs
 
         def process_cvar(exp)
           process_default(exp, CvarContext.new(exp, @contexts.last))
+        end
+
+        def process_gvar(exp)
+          process_default(exp, GvarContext.new(exp, @contexts.last))
+        end
+
+        def process_gasgn(exp)
+          process_default(exp, GvarContext.new(exp, @contexts.last))
         end
 
         def process_if(exp)

@@ -17,6 +17,7 @@ module Simplabs
         :ClassLineCountCheck                => { :threshold      => 300 },
         :ClassNameCheck                     => { :pattern         => /^[A-Z][a-zA-Z0-9]*$/ },
         :SingletonVariableCheck             => { },
+        :GlobalVariableCheck                => { },
         :CyclomaticComplexityBlockCheck     => { :complexity      => 4 },
         :CyclomaticComplexityMethodCheck    => { :complexity      => 8 },
         :EmptyRescueBodyCheck               => { },
