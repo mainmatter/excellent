@@ -13,7 +13,7 @@ module Simplabs
         #
         # ==== Applies to
         #
-        # * instance variables
+        # * partials
         class InstanceVarInPartialCheck < Base
 
           def initialize #:nodoc:

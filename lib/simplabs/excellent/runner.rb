@@ -32,7 +32,9 @@ module Simplabs
         :'Rails::AttrProtectedCheck'        => { },
         :'Rails::AttrAccessibleCheck'       => { },
         :'Rails::InstanceVarInPartialCheck' => { },
-        :'Rails::ValidationsCheck'          => { }
+        :'Rails::ValidationsCheck'          => { },
+        :'Rails::ParamsHashInViewCheck'     => { },
+        :'Rails::SessionHashInViewCheck'    => { }
       }
 
       attr_accessor :config #:nodoc:
