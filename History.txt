@@ -1,3 +1,10 @@
+= 1.5.2
+
+* added GlobalVariableCheck
+* added Rails::CustomInitializeMethodCheck
+* added Rails::ParamsHashInViewCheck
+* added Rails::SessionHashInViewCheck
+
 = 1.5.1
 
 * removed duplication checks (they are just too coarse for dynamic languages like Ruby and especially Rails apps where you would call e.g. params all over the place)
