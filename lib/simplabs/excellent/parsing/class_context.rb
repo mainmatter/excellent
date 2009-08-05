@@ -39,6 +39,7 @@ module Simplabs
           @line_count       = count_lines
           @attr_accessible  = false
           @attr_protected   = false
+          @initializer      = false
           @validations      = []
         end
 
@@ -54,6 +55,10 @@ module Simplabs
           @attr_protected
         end
 
+        def defines_initializer?
+          @initializer
+        end
+
         def validating?
           !@validations.empty? || @methods.any?{ |method| %(validate validate_on_create validate_on_update).include?(method.name) }
         end
@@ -61,6 +66,11 @@ module Simplabs
         def process_call(exp)
           @attr_accessible = true if exp[2] == :attr_accessible
           @attr_protected = true if exp[2] == :attr_protected
+          super
+        end
+
+        def process_defn(exp)
+          @initializer = true if exp[2] == :initialize
           super
         end
 
