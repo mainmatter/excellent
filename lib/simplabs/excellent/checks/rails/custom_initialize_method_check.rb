@@ -8,8 +8,9 @@ module Simplabs
 
       module Rails
 
-        # This check reports +ActiveRecord+ models that define custom +initialize+ methods. Since +ActiveRecord+ does not always call usw +new+ to
-        # create instances, these custom +initialize+ methods might not always be called.
+        # This check reports +ActiveRecord+ models that define a custom +initialize+ method. Since +ActiveRecord+ does not always call +new+ to
+        # create instances, these custom +initialize+ methods might not always be called, which makes the behavior of the application very hard to
+        # understand.
         #
         # ==== Applies to
         #

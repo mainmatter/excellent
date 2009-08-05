@@ -8,9 +8,9 @@ module Simplabs
 
       module Rails
 
-        # This check reports views (and partials) that use the +params+ hash directly. Using the +params+ hash directly in views can result in security
-        # problems if the value is printed to the output and in general is a bad habit because the controller is circumvented that is responsible
-        # for dealing with any parameters.
+        # This check reports views (and partials) that access the +params+ hash. Accessing the +params+ hash directly in views can result in security
+        # problems if the value is printed to the HTML output and in general is a bad habit because the controller, which is actually the part of the
+        # application that is responsible for dealing with parameters, is circumvented.
         #
         # ==== Applies to
         #

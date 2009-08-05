@@ -6,7 +6,7 @@ module Simplabs
 
     module Checks
 
-      # This check reports global variables. Global variables introduces strong dependencies between otherwise unrelated parts of code and their use is
+      # This check reports global variables. Global variables introduce strong dependencies between otherwise unrelated parts of code and their use is
       # usually considered extremely bad style.
       #
       # ==== Applies to

@@ -8,9 +8,9 @@ module Simplabs
 
       module Rails
 
-        # This check reports views (and partials) that use the +session+ hash directly. Using the +session+ hash directly in views can result in security
-        # problems if the value is printed to the output and in general is a bad habit because the controller is circumvented that is responsible
-        # for dealing with any session values.
+        # This check reports views (and partials) that access the +session+ hash. Accessing the +session+ hash directly in views can result in security
+        # problems if the value is printed to the HTML output and in general is a bad habit because the controller, which is actually the part of the
+        # application that is responsible for dealing with session data, is circumvented.
         #
         # ==== Applies to
         #
