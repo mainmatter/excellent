@@ -1,22 +1,15 @@
-$:.unshift(File.join(File.dirname(__FILE__), 'lib'))
-
-require 'rubygems'
-require 'hoe'
 require 'rake'
+require 'rake/rdoctask'
 require 'spec/rake/spectask'
 require 'simplabs/excellent/rake'
-require 'jeweler'
-require 'pathname'
 
-Jeweler::Tasks.new do |s|
-  s.name     = 'excellent'
-  s.summary  = 'Source code analysis gem'
-  s.version  = '1.0.0'
-  s.email    = 'marco.otte-witte@simplabs.com'
-  s.homepage = 'http://github.com/marcoow/excellent'
-  s.authors  = ['Marco Otte-Witte (http://simplabs.com), based on roodi, reek and flog.']
+desc 'Run the specs on the CI server.'
+Spec::Rake::SpecTask.new(:ci) do |t|
+  t.spec_opts << '--format=specdoc'
+  t.spec_files = FileList['spec/**/*_spec.rb']
 end
 
+desc 'Run the specs.'
 Spec::Rake::SpecTask.new(:spec) do |t|
   t.spec_opts << '--color'
   t.spec_opts << '--format=html:doc/spec.html'
