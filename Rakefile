@@ -3,6 +3,9 @@ require 'rake/rdoctask'
 require 'spec/rake/spectask'
 require 'simplabs/excellent/rake'
 
+desc 'Default: run specs.'
+task :default => :spec
+
 desc 'Run the specs on the CI server.'
 Spec::Rake::SpecTask.new(:ci) do |t|
   t.spec_opts << '--format=specdoc'
