@@ -5,6 +5,8 @@ Excellent detects commonly regarded bad code snippets like empty +rescue+ blocks
 See the API documentation at http://docs.github.com/simplabs/excellent and the WIKI at http://wiki.github.com/simplabs/excellent.
 Join the Google Group and discuss about the future and possibilities of Excellent: http://groups.google.com/group/excellent-gem.
 
+Excellent also has a CI server set up at http://ci.simplabs.com/excellent.
+
 == Installation
 
 Simply install with Ruby Gems:
