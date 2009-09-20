@@ -19,7 +19,6 @@ module Simplabs
         :SingletonVariableCheck               => { },
         :GlobalVariableCheck                  => { },
         :EmptyRescueBodyCheck                 => { },
-        :ForLoopCheck                         => { },
         :MethodLineCountCheck                 => { :line_count      => 20 },
         :MethodNameCheck                      => { :pattern         => /^[_a-z<>=\[|+-\/\*`]+[_a-z0-9_<>=~@\[\]]*[=!\?]?$/ },
         :ModuleLineCountCheck                 => { :line_count      => 300 },
