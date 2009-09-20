@@ -26,8 +26,7 @@ end
 
 begin
   excellent.check_paths(ARGV, formatter)
-rescue ArgumentError => ex
-  puts "EXCEPTION: #{ex.message}"
+rescue ArgumentError
   puts "\n** Excellent cannot find the paths specified!\n\n"
   exit 1
 end
