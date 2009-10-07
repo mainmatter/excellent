@@ -12,9 +12,7 @@ module Simplabs
       class Parser #:nodoc:
 
         def parse(content, filename)
-          silence_stream(STDERR) do 
-            return silent_parse(content, filename)
-          end
+          return silent_parse(content, filename)
         rescue Exception
           #continue on errors
         end
