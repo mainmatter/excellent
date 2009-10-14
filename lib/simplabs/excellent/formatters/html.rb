@@ -1,4 +1,6 @@
 require 'simplabs/excellent/formatters/base'
+require 'rubygems'
+require 'coderay'
 
 module Simplabs
 
@@ -23,7 +25,14 @@ module Simplabs
         end
 
         def warning(warning)
-          @stream.write(WARNING_TEMPLATE.sub('{{line_number}}', warning.line_number.to_s).sub('{{message}}', warning.message))
+          lines = CodeRay.scan_file(warning.filename).html.split("\n")
+          from_line = [warning.line_number - 5, 0].max
+          to_line = [warning.line_number + 5, lines.count].min
+          i = from_line
+          highlighted = lines[from_line..to_line].map do |line|
+            %Q(<div#{' class="highlight"' if (i += 1) == warning.line_number}><span class="lineNumber">#{i}</span>#{line}</div>)
+          end.join("\n")
+          @stream.write(WARNING_TEMPLATE.sub('{{line_number}}', warning.line_number.to_s).sub('{{message}}', warning.message).sub('{{code}}', highlighted))
         end
 
         def end
@@ -71,14 +80,11 @@ module Simplabs
           			}
 
           			dd {
-          				margin: 5px 0px 5px 20px;
-          			}
-
-          			dd.warning {
+          			  margin: 5px 0px 5px 20px;
           				background: #faf834;
           			}
 
-          			dd.warning span.lineNumber {
+          			dd span.lineNumber {
           				background: #ccc;
           				font-weight: bold;
           				padding: 3px;
@@ -86,7 +92,7 @@ module Simplabs
           				margin: 0 10px 0 0;
           			}
 
-          			dd.warning span.number {
+          			dd span.number {
           				width: 30px;
           				text-align: right;
           				display: inline-block;
@@ -109,6 +115,102 @@ module Simplabs
                   color: #fff;
                   background-color: #222;
                 }
+
+                .af { color:#00C }
+                .an { color:#007 }
+                .at { color:#f08 }
+                .av { color:#700 }
+                .aw { color:#C00 }
+                .bi { color:#509; font-weight:bold }
+                .c  { color:#888; }
+
+                .ch { color:#04D }
+                .ch .k { color:#04D }
+                .ch .dl { color:#039 }
+
+                .cl { color:#B06; font-weight:bold }
+                .co { color:#036; font-weight:bold }
+                .cr { color:#0A0 }
+                .cv { color:#369 }
+                .df { color:#099; font-weight:bold }
+                .di { color:#088; font-weight:bold }
+                .dl { color:black }
+                .do { color:#970 }
+                .dt { color:#34b }
+                .ds { color:#D42; font-weight:bold }
+                .e  { color:#666; font-weight:bold }
+                .en { color:#800; font-weight:bold }
+                .er { color:#F00; background-color:#FAA }
+                .ex { color:#F00; font-weight:bold }
+                .fl { color:#60E; font-weight:bold }
+                .fu { color:#06B; font-weight:bold }
+                .gv { color:#d70; font-weight:bold }
+                .hx { color:#058; font-weight:bold }
+                .i  { color:#00D; font-weight:bold }
+                .ic { color:#B44; font-weight:bold }
+
+                .il { background: #eee; color: black }
+                .il .il { background: #ddd }
+                .il .il .il { background: #ccc }
+                .il .idl { font-weight: bold; color: #777 }
+
+                .im { color:#f00; }
+                .in { color:#B2B; font-weight:bold }
+                .iv { color:#33B }
+                .la { color:#970; font-weight:bold }
+                .lv { color:#963 }
+                .oc { color:#40E; font-weight:bold }
+                .of { color:#000; font-weight:bold }
+                .op { }
+                .pc { color:#038; font-weight:bold }
+                .pd { color:#369; font-weight:bold }
+                .pp { color:#579; }
+                .ps { color:#00C; font-weight: bold; }
+                .pt { color:#349; font-weight:bold }
+                .r, .kw  { color:#080; font-weight:bold }
+
+                .ke { color: #808; }
+                .ke .dl { color: #606; }
+                .ke .ch { color: #80f; }
+                .vl { color: #088; }
+
+                .rx { background-color:#fff0ff }
+                .rx .k { color:#808 }
+                .rx .dl { color:#404 }
+                .rx .mod { color:#C2C }
+                .rx .fu  { color:#404; font-weight: bold }
+
+                .s { background-color:#fff0f0; color: #D20; }
+                .s .s { background-color:#ffe0e0 }
+                .s .s  .s { background-color:#ffd0d0 }
+                .s .k { }
+                .s .ch { color: #b0b; }
+                .s .dl { color: #710; }
+
+                .sh { background-color:#f0fff0; color:#2B2 }
+                .sh .k { }
+                .sh .dl { color:#161 }
+
+                .sy { color:#A60 }
+                .sy .k { color:#A60 }
+                .sy .dl { color:#630 }
+
+                .ta { color:#070 }
+                .tf { color:#070; font-weight:bold }
+                .ts { color:#D70; font-weight:bold }
+                .ty { color:#339; font-weight:bold }
+                .v  { color:#036 }
+                .xt { color:#444 }
+
+                .ins { background: #afa; }
+                .del { background: #faa; }
+                .chg { color: #aaf; background: #007; }
+                .head { color: #f8f; background: #505 }
+
+                .ins .ins { color: #080; font-weight:bold }
+                .del .del { color: #800; font-weight:bold }
+                .chg .chg { color: #66f; }
+                .head .head { color: #f4f; }
             	</style>
           	</head>
           	<body>
@@ -132,7 +234,10 @@ module Simplabs
         END
 
         WARNING_TEMPLATE = <<-END
-          <dd class="warning"><span class="lineNumber">Line <span class="number">{{line_number}}</span></span>{{message}}</dd>
+          <dd>
+            <span class="lineNumber">Line <span class="number">{{line_number}}</span></span>{{message}}
+            <pre>{{code}}</pre>
+          </dd>
         END
 
         FOOTER_TEMPLATE = <<-END
