@@ -46,7 +46,7 @@ To analyse all the models in your Rails application, just do
 in your <tt>RAILS_ROOT</tt>. You can also invoke analysation through the Simplabs::Excellent::Runner class. Excellent can also produce HTML output. To
 get a formatted HTML report, just specify <tt>html:<filename></tt>:
 
-  excellent html:out.html app/models
+  excellent -o out.html app/models
 
 You can also use Excellent in a Rake task:
 
