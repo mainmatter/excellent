@@ -25,14 +25,7 @@ module Simplabs
         end
 
         def warning(warning)
-          lines = CodeRay.scan_file(warning.filename).html.split("\n")
-          from_line = [warning.line_number - 5, 0].max
-          to_line = [warning.line_number + 5, lines.count].min
-          i = from_line
-          highlighted = lines[from_line..to_line].map do |line|
-            %Q(<div#{' class="highlight"' if (i += 1) == warning.line_number}><span class="lineNumber">#{i}</span>#{line}</div>)
-          end.join("\n")
-          @stream.write(WARNING_TEMPLATE.sub('{{line_number}}', warning.line_number.to_s).sub('{{message}}', warning.message).sub('{{code}}', highlighted))
+          @stream.write(WARNING_TEMPLATE.sub('{{line_number}}', warning.line_number.to_s).sub('{{message}}', warning.message))
         end
 
         def end
@@ -236,7 +229,6 @@ module Simplabs
         WARNING_TEMPLATE = <<-END
           <dd>
             <span class="lineNumber">Line <span class="number">{{line_number}}</span></span>{{message}}
-            <pre>{{code}}</pre>
           </dd>
         END
 
