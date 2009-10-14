@@ -1,3 +1,7 @@
+= 1.5.4
+
+* fixed handling of parser errors
+
 = 1.5.3
 
 * added missing dependency to facets gem
