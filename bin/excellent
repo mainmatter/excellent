@@ -7,11 +7,11 @@ require 'optparse'
 options = {}
 
 optparse = OptionParser.new do |opt|
-  opt.banner = "Usage: excellent [OPTIONS] <PATH1> [<PATH2> ...]"
-  opt.on("--output", "-o [DIR]") do |dir|
-    options[:output] = dir
+  opt.banner = 'Usage: excellent [OPTIONS] <PATH1> [<PATH2> ...]'
+  opt.on('--output', '-o [FILE]', 'Write HTML output to [FILE].') do |target|
+    options[:output] = target
   end
-  opt.on_tail("--help", "-h") do
+  opt.on_tail('--help', '-h', 'Help') do
     puts optparse
     exit
   end
@@ -19,8 +19,8 @@ end
 
 optparse.parse!
 
-dir   = options[:output]
-paths = ARGV.dup
+target   = options[:output]
+paths    = ARGV.dup
 
 if paths.empty?
   puts "\n  You must specify one or more directories to analyse, e.g.:\n"
@@ -28,13 +28,14 @@ if paths.empty?
   exit 1
 end
 
-if dir
-  # make the output directory if it does not exist
-  FileUtils.mkdir_p(dir) unless File.directory?(dir)
-  # index.html is the filename
-  file   = File.join(dir, 'index.html')
-  fileio = File.open(file, 'w+')
-  formatter = Simplabs::Excellent::Formatters::Html.new(fileio)
+if target
+  begin
+    fileio = File.open(target, 'w+')
+    formatter = Simplabs::Excellent::Formatters::Html.new(fileio)
+  rescue Errno::ENOENT
+    puts "\n  #{target} cannot be opened for writing. Specify a file name like so:\n"
+    puts "\n    excellent -o excellent.html lib/\n\n"
+  end
 else
   formatter = Simplabs::Excellent::Formatters::Text.new
 end
