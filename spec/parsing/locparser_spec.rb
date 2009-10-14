@@ -2,7 +2,7 @@ require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 
 require 'simplabs/excellent/parsing/loc_parser'
 
-describe Simplabs::Excellent::LOCParser do
+describe Simplabs::Excellent::Parsing::LOCParser do
 
   describe '#count' do
 
@@ -38,7 +38,7 @@ describe Simplabs::Excellent::LOCParser do
 
       it "should correctly count the lines for #{File.basename(check[:file])}" do
         file = check[:file]
-        loc_parser = Simplabs::Excellent::LOCParser.new([file])
+        loc_parser = Simplabs::Excellent::Parsing::LOCParser.new([file])
         count = loc_parser.count
 
         count[file][:code].should    == check[:expected][:code]
@@ -50,7 +50,7 @@ describe Simplabs::Excellent::LOCParser do
     end
 
     it 'should cache the counts' do
-      loc_parser = Simplabs::Excellent::LOCParser.new([File.expand_path(File.dirname(__FILE__) + '/../data/loc_parser_1.rb')])
+      loc_parser = Simplabs::Excellent::Parsing::LOCParser.new([File.expand_path(File.dirname(__FILE__) + '/../data/loc_parser_1.rb')])
       loc_parser.count
 
       loc_parser.should_not_receive(:recount)
@@ -59,7 +59,7 @@ describe Simplabs::Excellent::LOCParser do
     end
 
     it 'should always count new when the force parameter is specified' do
-      loc_parser = Simplabs::Excellent::LOCParser.new([File.expand_path(File.dirname(__FILE__) + '/../data/loc_parser_1.rb')])
+      loc_parser = Simplabs::Excellent::Parsing::LOCParser.new([File.expand_path(File.dirname(__FILE__) + '/../data/loc_parser_1.rb')])
       loc_parser.count
 
       loc_parser.should_receive(:recount)
