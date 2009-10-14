@@ -2,28 +2,47 @@
 
 require 'simplabs/excellent'
 require 'pathname'
+require 'optparse'
 
-excellent = Simplabs::Excellent::Runner.new
+options = {}
 
-if ARGV.first =~ /html:[^\s]+/
-  begin
-    output = File.open(ARGV.first.sub(/html:/, ''), 'w+')
-    formatter = Simplabs::Excellent::Formatters::Html.new(output)
-    ARGV.shift
-  rescue
+optparse = OptionParser.new do |opt|
+  opt.banner = "Usage: excellent [OPTIONS] <PATH1> [<PATH2> ...]"
+  opt.on("--output", "-o [DIR]") do |dir|
+    options[:output] = dir
   end
+  opt.on_tail("--help", "-h") do
+    puts optparse
+    exit
+  end
+end
+
+optparse.parse!
+
+dir   = options[:output]
+paths = ARGV.dup
+
+if paths.empty?
+  puts "\n  You must specify one or more directories to analyse, e.g.:\n"
+  puts "\n    excellent lib/\n\n"
+  exit 1
+end
+
+if dir
+  # make the output directory if it does not exist
+  FileUtils.mkdir_p(dir) unless File.directory?(dir)
+  # index.html is the filename
+  file   = File.join(dir, 'index.html')
+  fileio = File.open(file, 'w+')
+  formatter = Simplabs::Excellent::Formatters::Html.new(fileio)
 else
   formatter = Simplabs::Excellent::Formatters::Text.new
 end
 
-if ARGV.empty?
-  puts "\n  You must specify one or more directories to analyse, e.g.:\n"
-  puts "\n    excellent app/\n\n"
-  exit 1
-end
+excellent = Simplabs::Excellent::Runner.new
 
 begin
-  excellent.check_paths(ARGV, formatter)
+  excellent.check_paths(paths, formatter)
 rescue ArgumentError
   puts "\n** Excellent cannot find the paths specified!\n\n"
   exit 1
