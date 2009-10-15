@@ -15,8 +15,14 @@ module Simplabs
           super
           @receiver  = if exp[1].is_a?(Sexp) && exp[1].node_type == :colon2
             resolve_colon(exp[1])
+          elsif exp[1].is_a?(Sexp)
+            if exp[1].node_type != :call
+              exp[1][1].nil? ? exp[1][2].to_s : exp[1][1].to_s
+            else
+              nil
+            end
           else
-            exp[1].is_a?(Sexp) ? (exp[1][1].nil? ? exp[1][2].to_s : exp[1][1].to_s) : nil
+            nil
           end
           @method    = exp[2].to_s
           @full_name = [@receiver, @method].compact.join('.')
