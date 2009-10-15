@@ -35,8 +35,6 @@ module Simplabs
 
         def process(exp)
           super
-        rescue
-          #continue on errors
         end
 
         def process_class(exp)
