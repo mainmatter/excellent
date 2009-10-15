@@ -12,7 +12,7 @@
 [ 47] MethodContext: | Simplabs::Excellent::Checks::Base#add_warning | [:defn, :add_warning, [:args, :context, :message, :info, :offset, [:block, [:lasgn, :info, [:hash]], [:lasgn, :offset, [0]]]], [:scope, [:block, [:lasgn, :klass, [:call, [:self], :class, [:arglist]]], [:call, [:ivar, :@warnings], :<<, [:arglist, [:call, [:colon2, [:colon2, [:const, :Simplabs], :Excellent], :Warning], :new, [:arglist, [:lvar, :klass], [:lvar, :message], [:call, [:lvar, :context], :file, [:arglist]], [:call, [:call, [:lvar, :context], :line, [:arglist]], :+, [:arglist, [:lvar, :offset]]], [:lvar, :info]]]]]]]]
 [ 48] CallContext: | .class | [:call, [:self], :class, [:arglist]]
 [ 49] CallContext: | @warnings.<< | [:call, [:ivar, :@warnings], :<<, [:arglist, [:call, [:colon2, [:colon2, [:const, :Simplabs], :Excellent], :Warning], :new, [:arglist, [:lvar, :klass], [:lvar, :message], [:call, [:lvar, :context], :file, [:arglist]], [:call, [:call, [:lvar, :context], :line, [:arglist]], :+, [:arglist, [:lvar, :offset]]], [:lvar, :info]]]]]
-[ 49] IvarContext: | Simplabs::Excellent::Checks::Base.warnings | [:ivar, :@warnings]
+[ 49] IvarContext: | @warnings | [:ivar, :@warnings]
 [ 49] CallContext: | s(:colon2, s(:const, :Simplabs), :Excellent).new | [:call, [:colon2, [:colon2, [:const, :Simplabs], :Excellent], :Warning], :new, [:arglist, [:lvar, :klass], [:lvar, :message], [:call, [:lvar, :context], :file, [:arglist]], [:call, [:call, [:lvar, :context], :line, [:arglist]], :+, [:arglist, [:lvar, :offset]]], [:lvar, :info]]]
 [ 49] CallContext: | context.file | [:call, [:lvar, :context], :file, [:arglist]]
 [ 49] CallContext: | s(:lvar, :context).+ | [:call, [:call, [:lvar, :context], :line, [:arglist]], :+, [:arglist, [:lvar, :offset]]]

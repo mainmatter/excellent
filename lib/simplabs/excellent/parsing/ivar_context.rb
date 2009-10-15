@@ -17,7 +17,7 @@ module Simplabs
           parent = @parent
           parent = parent.parent until parent.is_a?(ClassContext) || parent.is_a?(ModuleContext) || parent.nil?
           if parent
-            full_name = "#{parent.full_name}.#{full_name}"
+            full_name = "@#{full_name}"
           else
             @name
           end
