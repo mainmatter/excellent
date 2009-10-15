@@ -6,3 +6,4 @@
 [  8] CallContext: | require | [:call, nil, :require, [:arglist, [:str, "sexp"]]]
 [  8] ModuleContext: | Simplabs | [:module, :Simplabs, [:scope, [:module, :Excellent, [:scope, [:cdecl, :VERSION, [:str, "1.5.1"]]]]]]
 [ 15] ModuleContext: | Simplabs::Excellent | [:module, :Excellent, [:scope, [:cdecl, :VERSION, [:str, "1.5.1"]]]]
+[ 17] ConstantContext: | Simplabs::Excellent::VERSION | [:cdecl, :VERSION, [:str, "1.5.1"]]

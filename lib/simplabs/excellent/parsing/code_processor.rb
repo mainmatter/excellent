@@ -15,6 +15,7 @@ require 'simplabs/excellent/parsing/gvar_context'
 require 'simplabs/excellent/parsing/ivar_context'
 require 'simplabs/excellent/parsing/resbody_context'
 require 'simplabs/excellent/parsing/call_context'
+require 'simplabs/excellent/parsing/constant_context'
 
 module Simplabs
 
@@ -109,6 +110,10 @@ module Simplabs
 
         def process_resbody(exp)
           process_default(exp, ResbodyContext.new(exp, @contexts.last))
+        end
+
+        def process_cdecl(exp)
+          process_default(exp, ConstantContext.new(exp, @contexts.last))
         end
 
         def process_default(exp, context = nil)
