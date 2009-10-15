@@ -8,7 +8,7 @@ describe Simplabs::Excellent::Parsing::LOCParser do
 
     [
       {
-        :file     => File.expand_path(File.dirname(__FILE__) + '/../data/loc_parser_1.rb'),
+        :file     => File.expand_path(File.dirname(__FILE__) + '/../data/example_1.rb'),
         :expected => {
           :code    => 14,
           :comment => 1,
@@ -17,7 +17,7 @@ describe Simplabs::Excellent::Parsing::LOCParser do
         }
       },
       {
-        :file     => File.expand_path(File.dirname(__FILE__) + '/../data/loc_parser_2.rb'),
+        :file     => File.expand_path(File.dirname(__FILE__) + '/../data/example_2.rb'),
         :expected => {
           :code    => 11,
           :comment => 5,
@@ -26,7 +26,7 @@ describe Simplabs::Excellent::Parsing::LOCParser do
         }
       },
       {
-        :file     => File.expand_path(File.dirname(__FILE__) + '/../data/loc_parser_3.rb'),
+        :file     => File.expand_path(File.dirname(__FILE__) + '/../data/example_3.rb'),
         :expected => {
           :code    => 26,
           :comment => 21,
@@ -50,7 +50,7 @@ describe Simplabs::Excellent::Parsing::LOCParser do
     end
 
     it 'should cache the counts' do
-      loc_parser = Simplabs::Excellent::Parsing::LOCParser.new([File.expand_path(File.dirname(__FILE__) + '/../data/loc_parser_1.rb')])
+      loc_parser = Simplabs::Excellent::Parsing::LOCParser.new([File.expand_path(File.dirname(__FILE__) + '/../data/example_1.rb')])
       loc_parser.count
 
       loc_parser.should_not_receive(:recount)
@@ -59,7 +59,7 @@ describe Simplabs::Excellent::Parsing::LOCParser do
     end
 
     it 'should always count new when the force parameter is specified' do
-      loc_parser = Simplabs::Excellent::Parsing::LOCParser.new([File.expand_path(File.dirname(__FILE__) + '/../data/loc_parser_1.rb')])
+      loc_parser = Simplabs::Excellent::Parsing::LOCParser.new([File.expand_path(File.dirname(__FILE__) + '/../data/example_1.rb')])
       loc_parser.count
 
       loc_parser.should_receive(:recount)
