@@ -34,7 +34,7 @@ describe Simplabs::Excellent::Parsing::CodeProcessor do
   end
 
   def map_contexts(contexts)
-    contexts.map { |context| "#{context.class}: #{context.full_name}" }.join("\n")
+    contexts.map { |context| "[#{context.line.to_s.rjust(3)}] #{context.class.to_s.gsub('Simplabs::Excellent::Parsing::', '')}: | #{context.full_name} | #{context.instance_variable_get(:@exp).to_a.inspect}" }.join("\n")
   end
 
 end

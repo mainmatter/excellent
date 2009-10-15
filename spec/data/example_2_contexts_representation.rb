@@ -1,8 +1,8 @@
-Simplabs::Excellent::Parsing::CallContext: require
-Simplabs::Excellent::Parsing::CallContext: require
-Simplabs::Excellent::Parsing::CallContext: require
-Simplabs::Excellent::Parsing::CallContext: require
-Simplabs::Excellent::Parsing::CallContext: require
-Simplabs::Excellent::Parsing::CallContext: require
-Simplabs::Excellent::Parsing::ModuleContext: Simplabs
-Simplabs::Excellent::Parsing::ModuleContext: Simplabs::Excellent
+[  2] CallContext: | require | [:call, nil, :require, [:arglist, [:str, "simplabs/excellent/checks"]]]
+[  3] CallContext: | require | [:call, nil, :require, [:arglist, [:str, "simplabs/excellent/parsing"]]]
+[  4] CallContext: | require | [:call, nil, :require, [:arglist, [:str, "simplabs/excellent/formatters"]]]
+[  5] CallContext: | require | [:call, nil, :require, [:arglist, [:str, "simplabs/excellent/runner"]]]
+[  6] CallContext: | require | [:call, nil, :require, [:arglist, [:str, "rubygems"]]]
+[  8] CallContext: | require | [:call, nil, :require, [:arglist, [:str, "sexp"]]]
+[  8] ModuleContext: | Simplabs | [:module, :Simplabs, [:scope, [:module, :Excellent, [:scope, [:cdecl, :VERSION, [:str, "1.5.1"]]]]]]
+[ 15] ModuleContext: | Simplabs::Excellent | [:module, :Excellent, [:scope, [:cdecl, :VERSION, [:str, "1.5.1"]]]]

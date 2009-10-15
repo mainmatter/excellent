@@ -1,29 +1,29 @@
-Simplabs::Excellent::Parsing::CallContext: require
-Simplabs::Excellent::Parsing::CallContext: File.expand_path
-Simplabs::Excellent::Parsing::CallContext: s(:const, :File).+
-Simplabs::Excellent::Parsing::CallContext: File.dirname
-Simplabs::Excellent::Parsing::CallContext: require
-Simplabs::Excellent::Parsing::BlockContext: block
-Simplabs::Excellent::Parsing::CallContext: describe
-Simplabs::Excellent::Parsing::BlockContext: block
-Simplabs::Excellent::Parsing::CallContext: describe
-Simplabs::Excellent::Parsing::BlockContext: block
-Simplabs::Excellent::Parsing::CallContext: it
-Simplabs::Excellent::Parsing::CallContext: s(:colon2, s(:const, :Simplabs), :Excellent).new
-Simplabs::Excellent::Parsing::CallContext: loc_parser.count
-Simplabs::Excellent::Parsing::CallContext: s(:call, s(:call, s(:lvar, :count), :[], s(:arglist, s(:str, "loc_parser_1.rb"))), :[], s(:arglist, s(:lit, :code))).==
-Simplabs::Excellent::Parsing::CallContext: s(:call, s(:lvar, :count), :[], s(:arglist, s(:str, "loc_parser_1.rb"))).should
-Simplabs::Excellent::Parsing::CallContext: s(:lvar, :count).[]
-Simplabs::Excellent::Parsing::CallContext: count.[]
-Simplabs::Excellent::Parsing::CallContext: s(:call, s(:call, s(:lvar, :count), :[], s(:arglist, s(:str, "loc_parser_1.rb"))), :[], s(:arglist, s(:lit, :comment))).==
-Simplabs::Excellent::Parsing::CallContext: s(:call, s(:lvar, :count), :[], s(:arglist, s(:str, "loc_parser_1.rb"))).should
-Simplabs::Excellent::Parsing::CallContext: s(:lvar, :count).[]
-Simplabs::Excellent::Parsing::CallContext: count.[]
-Simplabs::Excellent::Parsing::CallContext: s(:call, s(:call, s(:lvar, :count), :[], s(:arglist, s(:str, "loc_parser_1.rb"))), :[], s(:arglist, s(:lit, :blank))).==
-Simplabs::Excellent::Parsing::CallContext: s(:call, s(:lvar, :count), :[], s(:arglist, s(:str, "loc_parser_1.rb"))).should
-Simplabs::Excellent::Parsing::CallContext: s(:lvar, :count).[]
-Simplabs::Excellent::Parsing::CallContext: count.[]
-Simplabs::Excellent::Parsing::CallContext: s(:call, s(:call, s(:lvar, :count), :[], s(:arglist, s(:str, "loc_parser_1.rb"))), :[], s(:arglist, s(:lit, :total))).==
-Simplabs::Excellent::Parsing::CallContext: s(:call, s(:lvar, :count), :[], s(:arglist, s(:str, "loc_parser_1.rb"))).should
-Simplabs::Excellent::Parsing::CallContext: s(:lvar, :count).[]
-Simplabs::Excellent::Parsing::CallContext: count.[]
+[  3] CallContext: | require | [:call, nil, :require, [:arglist, [:call, [:const, :File], :expand_path, [:arglist, [:call, [:call, [:const, :File], :dirname, [:arglist, [:str, "loc_parser_1.rb"]]], :+, [:arglist, [:str, "/spec_helper"]]]]]]]
+[  1] CallContext: | File.expand_path | [:call, [:const, :File], :expand_path, [:arglist, [:call, [:call, [:const, :File], :dirname, [:arglist, [:str, "loc_parser_1.rb"]]], :+, [:arglist, [:str, "/spec_helper"]]]]]
+[  1] CallContext: | s(:const, :File).+ | [:call, [:call, [:const, :File], :dirname, [:arglist, [:str, "loc_parser_1.rb"]]], :+, [:arglist, [:str, "/spec_helper"]]]
+[  1] CallContext: | File.dirname | [:call, [:const, :File], :dirname, [:arglist, [:str, "loc_parser_1.rb"]]]
+[  5] CallContext: | require | [:call, nil, :require, [:arglist, [:str, "simplabs/excellent/locparser"]]]
+[  5] BlockContext: | block | [:iter, [:call, nil, :describe, [:arglist, [:colon2, [:colon2, [:const, :Simplabs], :Excellent], :LOCParser]]], nil, [:iter, [:call, nil, :describe, [:arglist, [:str, "#count"]]], nil, [:iter, [:call, nil, :it, [:arglist, [:str, "should correctly count the lines"]]], nil, [:block, [:lasgn, :loc_parser, [:call, [:colon2, [:colon2, [:const, :Simplabs], :Excellent], :LOCParser], :new, [:arglist, [:array, [:str, "loc_parser_1.rb"]]]]], [:lasgn, :count, [:call, [:lvar, :loc_parser], :count, [:arglist]]], [:call, [:call, [:call, [:call, [:lvar, :count], :[], [:arglist, [:str, "loc_parser_1.rb"]]], :[], [:arglist, [:code]]], :should, [:arglist]], :==, [:arglist, [14]]], [:call, [:call, [:call, [:call, [:lvar, :count], :[], [:arglist, [:str, "loc_parser_1.rb"]]], :[], [:arglist, [:comment]]], :should, [:arglist]], :==, [:arglist, [1]]], [:call, [:call, [:call, [:call, [:lvar, :count], :[], [:arglist, [:str, "loc_parser_1.rb"]]], :[], [:arglist, [:blank]]], :should, [:arglist]], :==, [:arglist, [6]]], [:call, [:call, [:call, [:call, [:lvar, :count], :[], [:arglist, [:str, "loc_parser_1.rb"]]], :[], [:arglist, [:total]]], :should, [:arglist]], :==, [:arglist, [21]]]]]]]
+[  5] CallContext: | describe | [:call, nil, :describe, [:arglist, [:colon2, [:colon2, [:const, :Simplabs], :Excellent], :LOCParser]]]
+[  7] BlockContext: | block | [:iter, [:call, nil, :describe, [:arglist, [:str, "#count"]]], nil, [:iter, [:call, nil, :it, [:arglist, [:str, "should correctly count the lines"]]], nil, [:block, [:lasgn, :loc_parser, [:call, [:colon2, [:colon2, [:const, :Simplabs], :Excellent], :LOCParser], :new, [:arglist, [:array, [:str, "loc_parser_1.rb"]]]]], [:lasgn, :count, [:call, [:lvar, :loc_parser], :count, [:arglist]]], [:call, [:call, [:call, [:call, [:lvar, :count], :[], [:arglist, [:str, "loc_parser_1.rb"]]], :[], [:arglist, [:code]]], :should, [:arglist]], :==, [:arglist, [14]]], [:call, [:call, [:call, [:call, [:lvar, :count], :[], [:arglist, [:str, "loc_parser_1.rb"]]], :[], [:arglist, [:comment]]], :should, [:arglist]], :==, [:arglist, [1]]], [:call, [:call, [:call, [:call, [:lvar, :count], :[], [:arglist, [:str, "loc_parser_1.rb"]]], :[], [:arglist, [:blank]]], :should, [:arglist]], :==, [:arglist, [6]]], [:call, [:call, [:call, [:call, [:lvar, :count], :[], [:arglist, [:str, "loc_parser_1.rb"]]], :[], [:arglist, [:total]]], :should, [:arglist]], :==, [:arglist, [21]]]]]]
+[  7] CallContext: | describe | [:call, nil, :describe, [:arglist, [:str, "#count"]]]
+[ 10] BlockContext: | block | [:iter, [:call, nil, :it, [:arglist, [:str, "should correctly count the lines"]]], nil, [:block, [:lasgn, :loc_parser, [:call, [:colon2, [:colon2, [:const, :Simplabs], :Excellent], :LOCParser], :new, [:arglist, [:array, [:str, "loc_parser_1.rb"]]]]], [:lasgn, :count, [:call, [:lvar, :loc_parser], :count, [:arglist]]], [:call, [:call, [:call, [:call, [:lvar, :count], :[], [:arglist, [:str, "loc_parser_1.rb"]]], :[], [:arglist, [:code]]], :should, [:arglist]], :==, [:arglist, [14]]], [:call, [:call, [:call, [:call, [:lvar, :count], :[], [:arglist, [:str, "loc_parser_1.rb"]]], :[], [:arglist, [:comment]]], :should, [:arglist]], :==, [:arglist, [1]]], [:call, [:call, [:call, [:call, [:lvar, :count], :[], [:arglist, [:str, "loc_parser_1.rb"]]], :[], [:arglist, [:blank]]], :should, [:arglist]], :==, [:arglist, [6]]], [:call, [:call, [:call, [:call, [:lvar, :count], :[], [:arglist, [:str, "loc_parser_1.rb"]]], :[], [:arglist, [:total]]], :should, [:arglist]], :==, [:arglist, [21]]]]]
+[ 10] CallContext: | it | [:call, nil, :it, [:arglist, [:str, "should correctly count the lines"]]]
+[ 11] CallContext: | s(:colon2, s(:const, :Simplabs), :Excellent).new | [:call, [:colon2, [:colon2, [:const, :Simplabs], :Excellent], :LOCParser], :new, [:arglist, [:array, [:str, "loc_parser_1.rb"]]]]
+[ 12] CallContext: | loc_parser.count | [:call, [:lvar, :loc_parser], :count, [:arglist]]
+[ 13] CallContext: | s(:call, s(:call, s(:lvar, :count), :[], s(:arglist, s(:str, "loc_parser_1.rb"))), :[], s(:arglist, s(:lit, :code))).== | [:call, [:call, [:call, [:call, [:lvar, :count], :[], [:arglist, [:str, "loc_parser_1.rb"]]], :[], [:arglist, [:code]]], :should, [:arglist]], :==, [:arglist, [14]]]
+[ 13] CallContext: | s(:call, s(:lvar, :count), :[], s(:arglist, s(:str, "loc_parser_1.rb"))).should | [:call, [:call, [:call, [:lvar, :count], :[], [:arglist, [:str, "loc_parser_1.rb"]]], :[], [:arglist, [:code]]], :should, [:arglist]]
+[ 13] CallContext: | s(:lvar, :count).[] | [:call, [:call, [:lvar, :count], :[], [:arglist, [:str, "loc_parser_1.rb"]]], :[], [:arglist, [:code]]]
+[ 13] CallContext: | count.[] | [:call, [:lvar, :count], :[], [:arglist, [:str, "loc_parser_1.rb"]]]
+[ 14] CallContext: | s(:call, s(:call, s(:lvar, :count), :[], s(:arglist, s(:str, "loc_parser_1.rb"))), :[], s(:arglist, s(:lit, :comment))).== | [:call, [:call, [:call, [:call, [:lvar, :count], :[], [:arglist, [:str, "loc_parser_1.rb"]]], :[], [:arglist, [:comment]]], :should, [:arglist]], :==, [:arglist, [1]]]
+[ 14] CallContext: | s(:call, s(:lvar, :count), :[], s(:arglist, s(:str, "loc_parser_1.rb"))).should | [:call, [:call, [:call, [:lvar, :count], :[], [:arglist, [:str, "loc_parser_1.rb"]]], :[], [:arglist, [:comment]]], :should, [:arglist]]
+[ 14] CallContext: | s(:lvar, :count).[] | [:call, [:call, [:lvar, :count], :[], [:arglist, [:str, "loc_parser_1.rb"]]], :[], [:arglist, [:comment]]]
+[ 14] CallContext: | count.[] | [:call, [:lvar, :count], :[], [:arglist, [:str, "loc_parser_1.rb"]]]
+[ 15] CallContext: | s(:call, s(:call, s(:lvar, :count), :[], s(:arglist, s(:str, "loc_parser_1.rb"))), :[], s(:arglist, s(:lit, :blank))).== | [:call, [:call, [:call, [:call, [:lvar, :count], :[], [:arglist, [:str, "loc_parser_1.rb"]]], :[], [:arglist, [:blank]]], :should, [:arglist]], :==, [:arglist, [6]]]
+[ 15] CallContext: | s(:call, s(:lvar, :count), :[], s(:arglist, s(:str, "loc_parser_1.rb"))).should | [:call, [:call, [:call, [:lvar, :count], :[], [:arglist, [:str, "loc_parser_1.rb"]]], :[], [:arglist, [:blank]]], :should, [:arglist]]
+[ 15] CallContext: | s(:lvar, :count).[] | [:call, [:call, [:lvar, :count], :[], [:arglist, [:str, "loc_parser_1.rb"]]], :[], [:arglist, [:blank]]]
+[ 15] CallContext: | count.[] | [:call, [:lvar, :count], :[], [:arglist, [:str, "loc_parser_1.rb"]]]
+[ 16] CallContext: | s(:call, s(:call, s(:lvar, :count), :[], s(:arglist, s(:str, "loc_parser_1.rb"))), :[], s(:arglist, s(:lit, :total))).== | [:call, [:call, [:call, [:call, [:lvar, :count], :[], [:arglist, [:str, "loc_parser_1.rb"]]], :[], [:arglist, [:total]]], :should, [:arglist]], :==, [:arglist, [21]]]
+[ 16] CallContext: | s(:call, s(:lvar, :count), :[], s(:arglist, s(:str, "loc_parser_1.rb"))).should | [:call, [:call, [:call, [:lvar, :count], :[], [:arglist, [:str, "loc_parser_1.rb"]]], :[], [:arglist, [:total]]], :should, [:arglist]]
+[ 16] CallContext: | s(:lvar, :count).[] | [:call, [:call, [:lvar, :count], :[], [:arglist, [:str, "loc_parser_1.rb"]]], :[], [:arglist, [:total]]]
+[ 16] CallContext: | count.[] | [:call, [:lvar, :count], :[], [:arglist, [:str, "loc_parser_1.rb"]]]
