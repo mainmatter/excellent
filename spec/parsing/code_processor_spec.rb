@@ -7,8 +7,13 @@ describe Simplabs::Excellent::Parsing::CodeProcessor do
     before do
       @parser = Simplabs::Excellent::Parsing::Parser.new
       @processor = Simplabs::Excellent::Parsing::CodeProcessor.new([])
-      # don't ever pop context objects so we can assert on them
-      @processor.instance_variable_get(:@contexts).stub!(:pop)
+
+      # intercept push's to the context stack so we can assert on the generated contexts
+      @contexts = []
+      @processor.instance_variable_get(:@contexts).stub!(:push) do |node|
+        @processor.instance_variable_get(:@contexts) << node
+        @contexts << node
+      end
     end
 
     %w(example_1 example_2 example_3).each do |example|
@@ -19,7 +24,7 @@ describe Simplabs::Excellent::Parsing::CodeProcessor do
           'loc_parser_1.rb'
         ))
 
-        map_contexts(@processor.instance_variable_get(:@contexts)).should == File.read(
+        map_contexts(@contexts).should == File.read(
           File.expand_path(File.dirname(__FILE__) + "/../data/#{example}_contexts_representation.rb")
         )
       end
