@@ -116,6 +116,15 @@ module Simplabs
             found_assignment
           end
 
+          def resolve_colon(exp)
+            scope = if exp[1].node_type == :colon2
+              resolve_colon(exp[1])
+            elsif exp[1].node_type == :const
+              exp[1][1]
+            end
+            "#{scope.to_s}::#{exp[2].to_s}"
+          end
+
       end
 
     end
