@@ -23,7 +23,7 @@ module Simplabs
           end
 
           def evaluate(context) #:nodoc:
-            add_warning(context, 'Instance variable {{variable}} used in partial.', { :variable => context.full_name })
+            add_warning(context, 'Instance variable {{variable}} used in partial.', { :variable => context.full_name }, -1)
           end
 
         end

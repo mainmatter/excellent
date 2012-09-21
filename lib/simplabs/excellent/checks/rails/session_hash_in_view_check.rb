@@ -24,7 +24,7 @@ module Simplabs
           end
 
           def evaluate(context) #:nodoc:
-            add_warning(context, 'Session hash used in view.') if (context.full_name == 'session')
+            add_warning(context, 'Session hash used in view.', {}, -1) if (context.full_name == 'session')
           end
 
         end

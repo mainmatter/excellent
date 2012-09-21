@@ -45,7 +45,7 @@ describe Simplabs::Excellent::Checks::Rails::ValidationsCheck do
       warnings.should be_empty
     end
 
-    %(validate validate_on_create validate_on_update).each do |method|
+    %w(validate validate_on_create validate_on_update).each do |method|
 
       it "should accept an active record model that validates attribute by overriding #{method}" do
         code = <<-END
