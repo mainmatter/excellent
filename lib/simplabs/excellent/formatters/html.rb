@@ -1,6 +1,5 @@
 require 'simplabs/excellent/formatters/base'
 require 'rubygems'
-require 'coderay'
 
 module Simplabs
 
