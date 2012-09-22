@@ -12,7 +12,7 @@ module Simplabs
         end
 
         def full_name
-          return @name if @parent.blank?
+          return @name if !@parent
           full_name = @name
           parent    = @parent
           parent    = parent.parent until parent.is_a?(ClassContext) || parent.is_a?(ModuleContext)

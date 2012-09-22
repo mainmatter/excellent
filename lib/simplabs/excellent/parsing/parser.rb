@@ -1,6 +1,5 @@
 require 'rubygems'
 require 'ruby_parser'
-require 'facets'
 require 'erb'
 
 module Simplabs

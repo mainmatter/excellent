@@ -91,7 +91,7 @@ module Simplabs
         # 'Basket#add_product'.
         def full_name
           return @full_name if @full_name
-          return @name if @parent.blank?
+          return @name if !@parent
           "#{@parent.full_name}::#{@name}"
         end
 

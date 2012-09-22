@@ -25,7 +25,7 @@ module Simplabs
         def full_name
           return @full_name if @full_name
           parent = @parent.is_a?(BlockContext) ? @parent.parent : @parent
-          return @name if parent.blank?
+          return @name if !parent
           "#{parent.full_name}.#{@name}"
         end
 
