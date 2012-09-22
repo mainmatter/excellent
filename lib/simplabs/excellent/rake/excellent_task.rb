@@ -46,7 +46,7 @@ module Simplabs
             end
             task name do
               paths = @paths.join(' ')
-              format = @html ? " html:#{@html}" : ''
+              format = @html ? " -o #{@html}" : ''
               system("excellent#{format} #{paths}")
               $stdout.puts("\nWrote Excellent result to #{@html}\n\n") if @html
             end
