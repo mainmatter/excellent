@@ -139,10 +139,10 @@ module Simplabs
           def setup_checks(checks)
             @checks = {}
             checks.each do |check|
-              check.interesting_contexts.each do |node|
-                @checks[node] ||= []
-                @checks[node] << check
-                @checks[node].uniq!
+              check.interesting_contexts.each do |context|
+                @checks[context] ||= []
+                @checks[context] << check
+                @checks[context].uniq!
               end
             end
           end
