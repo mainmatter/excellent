@@ -22,8 +22,8 @@ module Simplabs
 
         def initialize(options = {}) #:nodoc:
           super()
-          @interesting_nodes = [:if, :while, :until]
-          @interesting_files = [/\.rb$/, /\.erb$/]
+          @interesting_contexts = [Parsing::IfContext, Parsing::WhileContext, Parsing::UntilContext]
+          @interesting_files    = [/\.rb$/, /\.erb$/]
         end
 
         def evaluate(context) #:nodoc:

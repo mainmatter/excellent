@@ -15,7 +15,7 @@ module Simplabs
 
         def initialize #:nodoc:
           super
-          @interesting_nodes = [:resbody]
+          @interesting_contexts = [Parsing::ResbodyContext]
         end
 
         def evaluate(context) #:nodoc:

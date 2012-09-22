@@ -20,7 +20,7 @@ module Simplabs
 
         def initialize(options = {}) #:nodoc:
           pattern = options['pattern'] || DEFAULT_PATTERN
-          super([:module], pattern)
+          super([Parsing::ModuleContext], pattern)
         end
 
         protected

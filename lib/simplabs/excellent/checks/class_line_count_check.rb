@@ -18,7 +18,7 @@ module Simplabs
 
         def initialize(options = {}) #:nodoc:
           threshold = options[:threshold] || DEFAULT_THRESHOLD
-          super([:class], threshold)
+          super([Parsing::ClassContext], threshold)
         end
 
         protected

@@ -25,8 +25,8 @@ module Simplabs
 
         def initialize #:nodoc:
           super
-          @interesting_nodes = [:for]
-          @interesting_files = [/\.rb$/, /\.erb$/]
+          @interesting_contexts = [Parsing::ForLoopContext]
+          @interesting_files    = [/\.rb$/, /\.erb$/]
         end
 
         def evaluate(context) #:nodoc:

@@ -19,8 +19,8 @@ module Simplabs
 
           def initialize #:nodoc:
             super
-            @interesting_nodes = [:call]
-            @interesting_files = [/^.*\.(erb|rhtml)$/]
+            @interesting_contexts = [Parsing::CallContext]
+            @interesting_files = [/^.*\.(erb|rhtml|haml)$/]
           end
 
           def evaluate(context) #:nodoc:

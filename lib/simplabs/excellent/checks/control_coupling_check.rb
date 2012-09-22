@@ -17,7 +17,7 @@ module Simplabs
 
         def initialize #:nodoc:
           super
-          @interesting_nodes = [:if, :case]
+          @interesting_contexts = [Parsing::IfContext, Parsing::CaseContext]
         end
 
         def evaluate(context) #:nodoc:

@@ -12,6 +12,7 @@ require 'simplabs/excellent/parsing/while_context'
 require 'simplabs/excellent/parsing/until_context'
 require 'simplabs/excellent/parsing/cvar_context'
 require 'simplabs/excellent/parsing/gvar_context'
+require 'simplabs/excellent/parsing/gasgn_context'
 require 'simplabs/excellent/parsing/ivar_context'
 require 'simplabs/excellent/parsing/resbody_context'
 require 'simplabs/excellent/parsing/call_context'
@@ -67,7 +68,7 @@ module Simplabs
         end
 
         def process_gasgn(exp)
-          process_default(exp, GvarContext.new(exp, @contexts.last))
+          process_default(exp, GasgnContext.new(exp, @contexts.last))
         end
 
         def process_if(exp)
@@ -123,24 +124,22 @@ module Simplabs
             c.send(method, exp) if c.respond_to?(method)
           end
           exp.children.each { |sub| process(sub) }
-          apply_checks(exp)
+          apply_checks(exp.file, context) if context
           @contexts.pop if context
           exp
         end
 
         private
 
-          def apply_checks(exp)
-            if exp.is_a?(Sexp)
-              checks = @checks[exp.node_type] || []
-              checks.each { |check| check.evaluate_node(@contexts.last) if check.interesting_files.any? { |pattern| File.basename(exp.file) =~ pattern } }
-            end
+          def apply_checks(file, context)
+            checks = @checks[context.class] || []
+            checks.each { |check| check.evaluate_context(@contexts.last) if check.interesting_files.any? { |pattern| File.basename(file) =~ pattern } }
           end
 
           def setup_checks(checks)
             @checks = {}
             checks.each do |check|
-              check.interesting_nodes.each do |node|
+              check.interesting_contexts.each do |node|
                 @checks[node] ||= []
                 @checks[node] << check
                 @checks[node].uniq!

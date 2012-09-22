@@ -22,7 +22,7 @@ module Simplabs
 
         def initialize(options = {}) #:nodoc:
           threshold = options[:threshold] || DEFAULT_THRESHOLD
-          super([:defn, :defs], threshold)
+          super([Parsing::MethodContext, Parsing::SingletonMethodContext], threshold)
         end
 
         protected

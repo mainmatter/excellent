@@ -6,15 +6,16 @@ module Simplabs
 
     module Checks
 
-      # This is the base class for all code checks. All checks must specify +interesting_nodes+. When one of these nodes is processed by Excellent, it
-      # will invoke the +evaluate_node+ method of all checks that specify the node as one if their +interesting_nodes+.
+      # This is the base class for all code checks. All checks must specify +interesting_contexts+. When one of these contexts is processed by Excellent, it
+      # will invoke the +evaluate_context+ method of all checks that specify the context as one if their +interesting_contexts+.
       class Base
 
         attr_reader :warnings
 
-        # An array of node types that are interesting for the check. These are symbols as returned by RubyParser (see http://parsetree.rubyforge.org/ruby_parser/),
-        # e.g. <tt>:if</tt> or <tt>:defn</tt>
-        attr_reader :interesting_nodes
+        # An array of contexts that are interesting for the check. These contexts are based on symbols as returned by RubyParser (see
+        # http://parsetree.rubyforge.org/ruby_parser/) and add some additional data,
+        # e.g. <tt>Ifcontext</tt> or <tt>MethodContext</tt>
+        attr_reader :interesting_contexts
 
         # An array of regular expressions for file names that are interesting for the check. These will usually be path extensions rather than longer
         # patterns (e.g. *.rb as well as *.erb files or *.rb files only).
@@ -27,12 +28,13 @@ module Simplabs
           @interesting_files = [/\.rb$/]
         end
 
-        # This method is called whenever Excellent processes a node that the check specified as one of the nodes it is interested in (see interesting_nodes).
+        # This method is called whenever Excellent processes a context that the check specified as one of the contexts it is interested in (see 
+        # interesting_contexts).
         #
         # ==== Parameters
         #
         # * <tt>context</tt> - This is the last context the code processor has constructed. It contains all information required to execute the check (see Simplabs::Excellent::Parsing::SexpContext).
-        def evaluate_node(context)
+        def evaluate_context(context)
           evaluate(context)
         end
 

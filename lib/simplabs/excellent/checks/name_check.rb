@@ -8,10 +8,10 @@ module Simplabs
 
       class NameCheck < Base #:nodoc:
 
-        def initialize(interesting_nodes, pattern)
+        def initialize(interesting_contexts, pattern)
           super()
-          @interesting_nodes = interesting_nodes
-          @pattern           = pattern
+          @interesting_contexts = interesting_contexts
+          @pattern              = pattern
         end
 
         def evaluate(context)

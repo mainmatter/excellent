@@ -16,8 +16,8 @@ module Simplabs
 
         def initialize #:nodoc:
           super
-          @interesting_nodes = [:gvar, :gasgn]
-          @interesting_files = [/\.rb$/, /\.erb$/]
+          @interesting_contexts = [Parsing::GvarContext, Parsing::GasgnContext]
+          @interesting_files    = [/\.rb$/, /\.erb$/]
         end
 
         def evaluate(context) #:nodoc:

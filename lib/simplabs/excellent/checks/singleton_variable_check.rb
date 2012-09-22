@@ -16,7 +16,7 @@ module Simplabs
 
         def initialize #:nodoc:
           super
-          @interesting_nodes = [:cvar]
+          @interesting_contexts = [Parsing::CvarContext]
           @interesting_files = [/\.rb$/, /\.erb$/]
         end
 

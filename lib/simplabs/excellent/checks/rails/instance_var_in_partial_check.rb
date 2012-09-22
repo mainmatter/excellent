@@ -18,7 +18,7 @@ module Simplabs
 
           def initialize #:nodoc:
             super
-            @interesting_nodes = [:ivar]
+            @interesting_contexts = [Parsing::IvarContext]
             @interesting_files = [/^_.*\.erb$/]
           end
 

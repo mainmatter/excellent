@@ -24,8 +24,8 @@ module Simplabs
 
         def initialize(options = {}) #:nodoc:
           super()
-          @threshold         = options[:threshold] || DEFAULT_THRESHOLD
-          @interesting_nodes = [:defn, :defs]
+          @threshold            = options[:threshold] || DEFAULT_THRESHOLD
+          @interesting_contexts = [Parsing::MethodContext, Parsing::SingletonMethodContext]
         end
 
         def evaluate(context) #:nodoc:

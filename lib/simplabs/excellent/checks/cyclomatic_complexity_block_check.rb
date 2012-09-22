@@ -30,7 +30,7 @@ module Simplabs
       
         def initialize(options = {}) #:nodoc:
           threshold = options[:threshold] || DEFAULT_THRESHOLD
-          super([:iter], threshold)
+          super([Parsing::BlockContext], threshold)
         end
       
         def evaluate(context) #:nodoc:

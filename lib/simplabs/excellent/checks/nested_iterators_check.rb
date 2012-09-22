@@ -15,8 +15,8 @@ module Simplabs
 
         def initialize #:nodoc:
           super
-          @interesting_nodes = [:iter]
-          @interesting_files = [/\.rb$/, /\.erb$/]
+          @interesting_contexts = [Parsing::BlockContext]
+          @interesting_files    = [/\.rb$/, /\.erb$/]
         end
 
         def evaluate(context) #:nodoc:
