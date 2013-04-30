@@ -19,7 +19,7 @@ module Simplabs
         private
 
           def silent_parse(content, filename)
-            @parser ||= RubyParser.new
+            @parser ||= RubyParser.for_current_ruby
             content = ::ERB.new(content, nil, '-').src if filename =~ /\.erb$/
             sexp = @parser.parse(content, filename)
             sexp
