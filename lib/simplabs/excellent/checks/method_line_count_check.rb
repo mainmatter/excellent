@@ -24,7 +24,7 @@ module Simplabs
         protected
 
           def warning_args(context) #:nodoc:
-            [context, '{{method}} has {{count}} lines.', { :method => context.full_name, :count => context.line_count }]
+            [context, '{{method}} has {{count}} lines.', { :method => context.full_name, :count => context.line_count + 1 }]
           end
 
       end
