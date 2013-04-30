@@ -88,19 +88,20 @@ module Simplabs
         end
 
         def process_args(exp)
-          exp[1..-1].each do |parameter|
-            case parameter
-              when Symbol
-                @contexts.last.parameters << parameter
-              when Array
-                @contexts.last.parameters << parameter[1] if parameter[0] == :lasgn
+          if exp.last.is_a?(Sexp)
+            if exp.last.first == :masgn
+              exp.last[1..-1].each { |parameter| @contexts.last.parameters << parameter }
+            end
+          else
+            exp[1..-1].each do |parameter|
+              @contexts.last.parameters << parameter if parameter.is_a?(Symbol)
             end
           end
           process_default(exp)
         end
 
         def process_masgn(exp)
-          exp[1][1..-1].each { |parameter| @contexts.last.parameters << parameter[1] if parameter[1].is_a?(Symbol) } if @contexts.last.is_a?(BlockContext)
+          exp[1..-1].each { |parameter| @contexts.last.parameters << parameter[1] if parameter[1].is_a?(Symbol) } if @contexts.last.is_a?(BlockContext)
           process_default(exp)
         end
 
