@@ -11,8 +11,10 @@ describe Simplabs::Excellent::Checks::CaseMissingElseCheck do
     it 'should accept case statements that do have an else clause' do
       code = <<-END
         case foo
-          when "bar": "ok"
-          else "good"
+          when "bar"
+            "ok"
+          else
+            "good"
           end
       END
       @excellent.check_code(code)
@@ -24,8 +26,10 @@ describe Simplabs::Excellent::Checks::CaseMissingElseCheck do
     it 'should reject case statements that do not have an else clause' do
       code = <<-END
         case foo
-          when "bar": "ok"
-          when "bar": "bad"
+          when "bar"
+            "ok"
+          when "bar"
+            "bad"
           end
       END
       @excellent.check_code(code)
@@ -33,7 +37,7 @@ describe Simplabs::Excellent::Checks::CaseMissingElseCheck do
 
       warnings.should_not be_empty
       warnings[0].info.should        == {}
-      warnings[0].line_number.should == 2
+      warnings[0].line_number.should == 1
       warnings[0].message.should     == 'Case statement is missing else clause.'
     end
 
