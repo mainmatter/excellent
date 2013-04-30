@@ -1,4 +1,15 @@
 =======
+= 1.7.0
+
+* fixed issue #24
+* updated ruby_parser and sexp_processor dependencies
+* fixed some wrong line number reports
+
+= 1.6.0
+
+* added Gemfile
+* internal refactoring/cleanups
+
 = 1.5.5
 
 * better option parsing in the executable, (thanks trans, http://github.com/trans)
