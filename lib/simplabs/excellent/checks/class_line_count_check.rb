@@ -21,10 +21,15 @@ module Simplabs
           super([Parsing::ClassContext], threshold)
         end
 
+        def evaluate(context)
+          line_count = context.line_count == 1 ? 1 : context.line_count + 1
+          add_warning(*warning_args(context, line_count)) unless line_count <= @threshold
+        end
+
         protected
 
-          def warning_args(context) #:nodoc:
-            [context, '{{class}} has {{count}} lines.', { :class => context.full_name, :count => context.line_count }]
+          def warning_args(context, line_count) #:nodoc:
+            [context, '{{class}} has {{count}} lines.', { :class => context.full_name, :count => line_count }]
           end
 
       end
