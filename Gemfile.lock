@@ -1,9 +1,9 @@
 PATH
   remote: .
   specs:
-    excellent (1.6.0)
-      ruby_parser (>= 2.0)
-      sexp_processor (>= 3.0)
+    excellent (1.7.0)
+      ruby_parser (>= 3.0)
+      sexp_processor (>= 4.0)
 
 GEM
   remote: http://rubygems.org/
