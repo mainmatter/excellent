@@ -22,7 +22,7 @@ module Simplabs
 
         def evaluate(context) #:nodoc:
           if tested_parameter = context.tests_parameter?
-            add_warning(context, '{{method}} is coupled to {{argument}}.', { :method => context.parent.full_name, :argument => tested_parameter.to_s }, -2)
+            add_warning(context, '{{method}} is coupled to {{argument}}.', { :method => context.parent.full_name, :argument => tested_parameter.to_s })
           end
         end
 

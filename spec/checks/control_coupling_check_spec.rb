@@ -58,7 +58,7 @@ describe Simplabs::Excellent::Checks::ControlCouplingCheck do
           end
         END
 
-        verify_warning_found(code)
+        verify_warning_found(code, 2)
       end
 
     end
@@ -70,7 +70,7 @@ describe Simplabs::Excellent::Checks::ControlCouplingCheck do
         end
       END
 
-      verify_warning_found(code)
+      verify_warning_found(code, 3) # this should actually be line 2
     end
 
     it "should reject methods with case statements using a parameter" do
@@ -85,18 +85,18 @@ describe Simplabs::Excellent::Checks::ControlCouplingCheck do
         end
       END
 
-      verify_warning_found(code)
+      verify_warning_found(code, 2)
     end
 
   end
 
-  def verify_warning_found(code)
+  def verify_warning_found(code, line)
     @excellent.check_code(code)
     warnings = @excellent.warnings
 
     warnings.should_not be_empty
     warnings[0].info.should        == { :method => 'write', :argument => 'quoted' }
-    warnings[0].line_number.should == 1
+    warnings[0].line_number.should == line
     warnings[0].message.should     == 'write is coupled to quoted.'
   end
 
