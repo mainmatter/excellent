@@ -15,6 +15,10 @@ optparse = OptionParser.new do |opt|
     puts optparse
     exit
   end
+  opt.on_tail('--version', '-v', 'Version') do
+    puts Simplabs::Excellent::VERSION
+    exit
+  end
 end
 
 optparse.parse!
