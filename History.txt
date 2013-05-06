@@ -3,6 +3,7 @@
 
 * fixed excellent for Ruby 2.0
 * some internal cleanup
+* support -v switch on command line
 
 = 1.7.0
 
