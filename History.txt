@@ -1,4 +1,9 @@
 =======
+= 1.7.1
+
+* fixed excellent for Ruby 2.0
+* some internal cleanup
+
 = 1.7.0
 
 * fixed issue #24
