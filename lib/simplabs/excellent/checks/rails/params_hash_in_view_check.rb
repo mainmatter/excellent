@@ -24,7 +24,7 @@ module Simplabs
           end
 
           def evaluate(context) #:nodoc:
-            add_warning(context, 'Params hash used in view.', {}, RUBY_VERSION =~ /1\.9/ ? -1 : 0) if (context.full_name == 'params')
+            add_warning(context, 'Params hash used in view.', {}, RUBY_VERSION =~ /1\.8/ ? 0 : -1) if (context.full_name == 'params')
           end
 
         end
