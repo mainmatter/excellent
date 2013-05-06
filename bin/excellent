@@ -19,8 +19,8 @@ end
 
 optparse.parse!
 
-target   = options[:output]
-paths    = ARGV.dup
+target = options[:output]
+paths  = ARGV.dup
 
 if paths.empty?
   puts "\n  You must specify one or more directories to analyse, e.g.:\n"
