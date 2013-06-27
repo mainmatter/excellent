@@ -17,6 +17,12 @@ module Simplabs
           @contains_statements
         end
 
+        def assigns_exception_to_local_variable?
+          @exp[1][2].node_type == :lasgn && @exp[1][2][2].to_a == [:gvar, :$!]
+        rescue
+          false
+        end
+
         private
 
           def contains_statements?(exp = @exp)

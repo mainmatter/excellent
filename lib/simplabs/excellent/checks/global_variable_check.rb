@@ -21,7 +21,9 @@ module Simplabs
         end
 
         def evaluate(context) #:nodoc:
-          add_warning(context, 'Global variable {{variable}} used.', { :variable => context.full_name })
+          if context.is_a?(Parsing::GasgnContext) || !context.reassigned_local_exception_var?
+            add_warning(context, 'Global variable {{variable}} used.', { :variable => context.full_name })
+          end
         end
 
       end

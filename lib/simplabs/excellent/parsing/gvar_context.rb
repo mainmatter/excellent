@@ -12,6 +12,14 @@ module Simplabs
           @full_name = @name
         end
 
+        def reassigned_local_exception_var?
+          if self.parent.is_a?(Simplabs::Excellent::Parsing::ResbodyContext)
+            @name == '!' && self.parent.assigns_exception_to_local_variable?.inspect
+          else
+            false
+          end
+        end
+
       end
 
     end
