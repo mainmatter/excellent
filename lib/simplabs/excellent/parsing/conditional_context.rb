@@ -12,7 +12,7 @@ module Simplabs
 
           def contains_parameter?
             return false unless @parent.is_a?(MethodContext)
-            return @exp[1][1] if @exp[1][0] == :lvar and @parent.has_parameter?(@exp[1][1])
+            return @exp[1][1] if !!@exp[1] && @exp[1][0] == :lvar and @parent.has_parameter?(@exp[1][1])
             false
           end
 

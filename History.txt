@@ -4,6 +4,7 @@
 * fixed Simplabs::Excellent::Checks::Rails::CustomInitializeMethodCheck
 * fixed Simplabs::Excellent::Checks::MethodNameCheck so it allows method names that exist in Ruby itself
 * fixed Simplabs::Excellent::Checks::GlobalVariableCheck so it doesn't report false positives for rescue bodies
+* made the parser more forgiving/stable in some situations
 
 = 1.7.1
 

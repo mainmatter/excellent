@@ -15,8 +15,12 @@ module Simplabs
           return @name if !@parent
           full_name = @name
           parent    = @parent
-          parent    = parent.parent until parent.is_a?(ClassContext) || parent.is_a?(ModuleContext)
-          full_name = "#{parent.full_name}.#{full_name}"
+          parent = parent.parent until parent.is_a?(ClassContext) || parent.is_a?(ModuleContext) rescue nil
+          if !!parent
+            "#{parent.full_name}.#{full_name}"
+          else
+            full_name
+          end
         end
 
       end
