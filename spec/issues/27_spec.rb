@@ -13,7 +13,6 @@ describe 'issue #27' do
         class Model < ActiveRecord::Base
         end
       END
-
       @excellent.check_code(code)
       warnings = @excellent.warnings
 
@@ -31,7 +30,6 @@ describe 'issue #27' do
           end
         end
       END
-
       @excellent.check_code(code)
       warnings = @excellent.warnings
 
