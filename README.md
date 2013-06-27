@@ -1,7 +1,7 @@
 Excellent
 =========
 
-https://travis-ci.org/simplabs/excellent.png?branch=master
+[![Build Status](https://travis-ci.org/simplabs/excellent.png)](https://travis-ci.org/simplabs/excellent)
 
 Excellent **finds the nasty lines in your code**. It implements a comprehensive set of checks for possibly
 buggy parts of your app that would **otherwise make it into your repo and eventually to the production server**.
