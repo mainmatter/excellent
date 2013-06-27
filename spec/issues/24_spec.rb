@@ -8,7 +8,7 @@ describe 'issue #24' do
 
   it 'is fixed' do
     code = <<-END
-    {
+      {
         a: 1,
         b: 2,
         c: 3
