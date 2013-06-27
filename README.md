@@ -3,20 +3,23 @@ Excellent
 
 https://travis-ci.org/simplabs/excellent.png?branch=master
 
-Excellent *finds the nasty lines in your code*. It implements a comprehensive set of checks for possibly buggy parts of your app that would *otherwise make it into your repo and eventually to the production server*.
+Excellent **finds the nasty lines in your code**. It implements a comprehensive set of checks for possibly
+buggy parts of your app that would **otherwise make it into your repo and eventually to the production server**.
 
-See the API documentation at [http://docs.github.com/simplabs/excellent](http://docs.github.com/simplabs/excellent) and the Wiki at [http://wiki.github.com/simplabs/excellent](http://wiki.github.com/simplabs/excellent).
+See the API documentation at [http://docs.github.com/simplabs/excellent](http://docs.github.com/simplabs/excellent)
+and the Wiki at [http://wiki.github.com/simplabs/excellent](http://wiki.github.com/simplabs/excellent).
 
-== Installation
+Installation
+------------
 
 Simply install with Ruby Gems:
 
 ```bash
-gem sources -a http://gems.github.com
-sudo gem install simplabs-excellent
-````
+gem install excellent
+```
 
-== Example
+Example
+-------
 
 Assume you have the following class definition,
 
@@ -51,12 +54,12 @@ To analyse all the models in your Rails application, just do
 excellent app/models
 ```
 
-in your `RAILS_ROOT`. You can also invoke analysation through the `Simplabs::Excellent::Runner` class. Excellent can also produce HTML output. To
-get a formatted HTML report, just specify `html:<filename>`:
+in your `RAILS_ROOT`. You can also invoke analysation through the `Simplabs::Excellent::Runner` class.
+Excellent can also produce HTML output. To get a formatted HTML report, just specify `html:<filename>`:
 
 ```bash
 excellent -o out.html app/models
-``
+```
 
 You can also use Excellent in a Rake task:
 
@@ -69,15 +72,19 @@ Simplabs::Excellent::Rake::ExcellentTask.new(:excellent) do |t|
 end
 ```
 
-== Static analysis
+Static analysis
+---------------
 
-A few words regarding static code analysis: Static code analysis tools like Excellent can never really understand the code. They just search for patterns that *might* inidicate problematic code. The word *might* really has to be stressed here since static analysis will usually return a reasonable number of false positives. For example, there might be pretty good reasons for empty +rescue+ blocks that suppress all errors (Excellent itself does it). So, don't try and code with the aim of passing Excellent with zero warnings. That will most likely make your code a mess. Instead use Excellent as a helper to find *possibly* problematic code early.
+A few words regarding static code analysis: Static code analysis tools like Excellent can never really
+understand the code. They just search for patterns that *might* inidicate problematic code. The word **might**
+really has to be stressed here since static analysis will usually return a reasonable number of false
+positives. For example, there might be pretty good reasons for empty +rescue+ blocks that suppress all
+errors (Excellent itself does it). So, don't try and code with the aim of passing Excellent with zero warnings.
+That will most likely make your code a mess. Instead use Excellent as a helper to find **potentially**
+problematic code early.
 
-== Contribute
-
-If you want to contribute, just fork the repo. Also I would appretiate suggestions for more checks (especially Rails specific checks) - simply open a new issue: [http://github.com/simplabs/excellent/issues](http://github.com/simplabs/excellent/issues).
-
-== Author
+Author
+------
 
 Copyright (c) 2008-2013 Marco Otte-Witte ([http://simplabs.com](http://simplabs.com)), released under the MIT license.
 
