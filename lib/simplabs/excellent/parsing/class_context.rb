@@ -70,7 +70,7 @@ module Simplabs
         end
 
         def process_defn(exp)
-          @initializer = true if exp[2] == :initialize
+          @initializer = exp[1] == :initialize
           super
         end
 

@@ -23,7 +23,7 @@ module Simplabs
           end
 
           def evaluate(context) #:nodoc:
-            add_warning(context, '{{class}} defines initialize method.', { :class => context.full_name }) if context.active_record_model? && !context.defines_initializer?
+            add_warning(context, '{{class}} defines initialize method.', { :class => context.full_name }) if context.active_record_model? && context.defines_initializer?
           end
 
         end

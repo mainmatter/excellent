@@ -1,6 +1,10 @@
 =======
 = 1.7.1
 
+* fixed Simplabs::Excellent::Checks::Rails::CustomInitializeMethodCheck
+
+= 1.7.1
+
 * fixed excellent for Ruby 2.0
 * some internal cleanup
 * support -v switch on command line
