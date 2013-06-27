@@ -1,6 +1,6 @@
 require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 
-describe 'issue #42' do
+describe 'issue #24' do
 
   before(:each) do
     @excellent = Simplabs::Excellent::Runner.new(Simplabs::Excellent::Checks::SingletonVariableCheck.new)
