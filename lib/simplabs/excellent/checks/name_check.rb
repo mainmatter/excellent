@@ -8,14 +8,18 @@ module Simplabs
 
       class NameCheck < Base #:nodoc:
 
-        def initialize(interesting_contexts, pattern)
+        def initialize(interesting_contexts, pattern, whitelist = [])
           super()
           @interesting_contexts = interesting_contexts
           @pattern              = pattern
+          @whitelist            = whitelist
         end
 
         def evaluate(context)
-          add_warning(*warning_args(context)) unless context.name.to_s =~ @pattern
+          name = context.name.to_s
+          if !@whitelist.include?(name) && !(name =~ @pattern)
+            add_warning(*warning_args(context))
+          end
         end
 
       end

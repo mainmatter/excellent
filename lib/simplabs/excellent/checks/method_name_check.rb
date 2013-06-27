@@ -17,10 +17,11 @@ module Simplabs
       class MethodNameCheck < NameCheck
 
         DEFAULT_PATTERN = /^[_a-z<>=\[|+-\/\*\~\%\&`\|\^]+[_a-z0-9_<>=~@\[\]]*[=!\?]?$/
+        WHITELIST       = %w([] ! !=  !~ % & * ** + +@ - -@ / < << <= <=> == === =~ > >= >> ^ ` | ~)
 
         def initialize(options = {}) #:nodoc:
           pattern = options['pattern'] || DEFAULT_PATTERN
-          super([Parsing::MethodContext, Parsing::SingletonMethodContext], pattern)
+          super([Parsing::MethodContext, Parsing::SingletonMethodContext], pattern, WHITELIST)
         end
 
         protected
