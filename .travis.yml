@@ -5,4 +5,4 @@ rvm:
   - 1.9.3
   - 2.0.0
   - ree
-script: "bundle exec spec spec"
+script: "bundle exec rspec"
