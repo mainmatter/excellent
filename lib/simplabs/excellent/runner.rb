@@ -12,25 +12,31 @@ module Simplabs
     class Runner
 
       DEFAULT_CONFIG = {
-        :AssignmentInConditionalCheck         => { },
-        :CaseMissingElseCheck                 => { },
-        :ClassLineCountCheck                  => { :threshold      => 300 },
+        :AbcMetricMethodCheck                 => {},
+        :AssignmentInConditionalCheck         => {},
+        :CaseMissingElseCheck                 => {},
+        :ClassLineCountCheck                  => { :threshold       => 300 },
         :ClassNameCheck                       => { :pattern         => /^[A-Z][a-zA-Z0-9]*$/ },
-        :SingletonVariableCheck               => { },
-        :GlobalVariableCheck                  => { },
-        :EmptyRescueBodyCheck                 => { },
+        :ControlCouplingCheck                 => {},
+        :CyclomaticComplexityBlockCheck       => { :threshold       => 4 },
+        :CyclomaticComplexityMethodCheck      => {},
+        :EmptyRescueBodyCheck                 => {},
+        :ForLoopCheck                         => {},
+        :GlobalVariableCheck                  => {},
         :MethodLineCountCheck                 => { :line_count      => 20 },
         :MethodNameCheck                      => { :pattern         => /^[_a-z<>=\[|+-\/\*`]+[_a-z0-9_<>=~@\[\]]*[=!\?]?$/ },
         :ModuleLineCountCheck                 => { :line_count      => 300 },
         :ModuleNameCheck                      => { :pattern         => /^[A-Z][a-zA-Z0-9]*$/ },
+        :NestedIteratorsCheck                 => {},
         :ParameterNumberCheck                 => { :parameter_count => 3 },
-        :'Rails::AttrProtectedCheck'          => { },
-        :'Rails::AttrAccessibleCheck'         => { },
-        :'Rails::InstanceVarInPartialCheck'   => { },
-        :'Rails::ValidationsCheck'            => { },
-        :'Rails::ParamsHashInViewCheck'       => { },
-        :'Rails::SessionHashInViewCheck'      => { },
-        :'Rails::CustomInitializeMethodCheck' => { }
+        :SingletonVariableCheck               => {},
+        :'Rails::AttrProtectedCheck'          => {},
+        :'Rails::AttrAccessibleCheck'         => {},
+        :'Rails::InstanceVarInPartialCheck'   => {},
+        :'Rails::ValidationsCheck'            => {},
+        :'Rails::ParamsHashInViewCheck'       => {},
+        :'Rails::SessionHashInViewCheck'      => {},
+        :'Rails::CustomInitializeMethodCheck' => {}
       }
 
       attr_accessor :config #:nodoc:
@@ -67,7 +73,7 @@ module Simplabs
       def check_code(code)
         check('dummy-file.rb', code)
       end
-  
+
       # Processes the file +filename+. The code will be read from the file.
       #
       # ==== Parameters
@@ -106,7 +112,7 @@ module Simplabs
 
         def load_checks
           check_objects = []
-          DEFAULT_CONFIG.each_pair do |key, value| 
+          DEFAULT_CONFIG.each_pair do |key, value|
             klass = eval("Simplabs::Excellent::Checks::#{key.to_s}")
             check_objects << (value.empty? ? klass.new : klass.new(value))
           end

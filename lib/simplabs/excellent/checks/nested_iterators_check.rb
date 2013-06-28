@@ -6,7 +6,7 @@ module Simplabs
 
     module Checks
 
-      # This check reports nested iterators. Nested iterators lead to introduce performance issues.
+      # This check reports nested iterators. Nested iterators may introduce performance issues.
       #
       # ==== Applies to
       #
