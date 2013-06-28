@@ -9,7 +9,7 @@ module Simplabs #:nodoc:
 
   module Excellent #:nodoc:
 
-    VERSION = '1.7.2'
+    VERSION = '2.0.0'
 
   end
 
