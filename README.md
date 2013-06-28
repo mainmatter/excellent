@@ -72,6 +72,38 @@ Simplabs::Excellent::Rake::ExcellentTask.new(:excellent) do |t|
 end
 ```
 
+Configuration
+-------------
+
+You can configure which checks to run and which thresholds etc. to use. Simply place a `.excellent.yml` in the
+root directory of you project (the directory that you will be starting excellent from). You can enable/disable
+by using the check name as hash key and specifying a truthy/falsy value:
+
+```yaml
+AbcMetricMethodCheck: true
+AssignmentInConditionalCheck: false
+```
+
+By default all checks are enabled so you would usually only switch off certain checks you're not interested in.
+Some checks also take cofngigurations like thresholds, patterns etc. You can configure those by simply defining
+nested hashes in the YAML:
+
+```yaml
+ClassLineCountCheck:
+  threshold: 500
+MethodNameCheck:
+  pattern: /^[a-z].*/
+```
+
+This would for example only report classes with more than 500 lines and require that all method names start
+with a lower case letter.
+
+You can get a list of the enabled checks and their configurations by running:
+
+```bash
+excellent --checks
+```
+
 Static analysis
 ---------------
 
