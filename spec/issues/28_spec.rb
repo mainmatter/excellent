@@ -7,7 +7,7 @@ describe 'issue #28' do
   end
 
   it 'is fixed' do
-    Simplabs::Excellent::Checks::MethodNameCheck::WHITELIST.each do |special_method|
+    Simplabs::Excellent::Checks::MethodNameCheck::DEFAULT_WHITELIST.each do |special_method|
       code = <<-END
         class Klass
           def #{special_method}
