@@ -115,7 +115,9 @@ module Simplabs
         def load_checks
           check_objects = []
           DEFAULT_CONFIG.each_pair do |key, value|
-            klass = eval("Simplabs::Excellent::Checks::#{key.to_s}")
+            klass = key.to_s.split('::').inject(::Simplabs::Excellent::Checks) do |mod, class_name|
+              mod.const_get(class_name)
+            end
             check_objects << (value.empty? ? klass.new : klass.new(value))
           end
           check_objects
