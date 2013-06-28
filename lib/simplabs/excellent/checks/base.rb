@@ -10,7 +10,9 @@ module Simplabs
       # will invoke the +evaluate_context+ method of all checks that specify the context as one if their +interesting_contexts+.
       class Base
 
-        attr_reader :warnings
+        attr_reader :warnings #:nodoc:
+
+        attr_reader :options #:nodoc:
 
         # An array of contexts that are interesting for the check. These contexts are based on symbols as returned by RubyParser (see
         # http://parsetree.rubyforge.org/ruby_parser/) and add some additional data,
@@ -23,7 +25,8 @@ module Simplabs
         # Defaults to /\.rb$/. If you do not specify anything else in custom checks, only *.rb files will be processed
         attr_reader :interesting_files
 
-        def initialize(interesting_contexts, options = {}) #:nodoc:
+        def initialize(options = {}) #:nodoc:
+          @options              = options
           @interesting_contexts = []
           @warnings             = []
           @interesting_files    = [/\.rb$/]

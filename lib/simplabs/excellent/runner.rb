@@ -41,6 +41,8 @@ module Simplabs
         :'Rails::CustomInitializeMethodCheck' => {}
       }
 
+      attr_reader :checks
+
       # Initializes a Runner
       #
       # ==== Parameters

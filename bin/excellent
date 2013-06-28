@@ -8,8 +8,11 @@ options = {}
 
 optparse = OptionParser.new do |opt|
   opt.banner = 'Usage: excellent [OPTIONS] <PATH1> [<PATH2> ...]'
-  opt.on('--output', '-o [FILE]', 'Write HTML output to [FILE].') do |target|
+  opt.on('--output', '-o [FILE]', 'Write HTML output to [FILE]') do |target|
     options[:output] = target
+  end
+  opt.on('--checks', 'Show a list of the enabled checks and their configuraton values') do |target|
+    options[:print_checks] = true
   end
   opt.on_tail('--help', '-h', 'Help') do
     puts optparse
@@ -24,14 +27,6 @@ end
 optparse.parse!
 
 target = options[:output]
-paths  = ARGV.dup
-
-if paths.empty?
-  puts "\n  You must specify one or more directories to analyse, e.g.:\n"
-  puts "\n    excellent lib/\n\n"
-  exit 1
-end
-
 if target
   begin
     fileio = File.open(target, 'w+')
@@ -67,8 +62,27 @@ if File.exists?(config_file)
     exit 1
   end
 end
-puts "custom config: #{custom_config.inspect}"
+
 excellent = Simplabs::Excellent::Runner.new(custom_config)
+
+if options[:print_checks]
+  puts "\nConfigured Checks\n\n"
+  excellent.checks.each do |check|
+    puts "  #{check.class.name.gsub('Simplabs::Excellent::Checks::', '')}"
+    check.options.each do |key, value|
+      puts "    #{key}: #{value}"
+    end
+    puts "\n"
+  end
+  exit 0
+end
+
+paths  = ARGV.dup
+if paths.empty?
+  puts "\n  You must specify one or more directories to analyse, e.g.:\n"
+  puts "\n    excellent lib/\n\n"
+  exit 1
+end
 
 begin
   excellent.check_paths(paths, formatter)
