@@ -8,11 +8,11 @@ module Simplabs
 
       class NameCheck < Base #:nodoc:
 
-        def initialize(interesting_contexts, pattern, whitelist = [])
+        def initialize(interesting_contexts, options)
           super()
           @interesting_contexts = interesting_contexts
-          @pattern              = pattern
-          @whitelist            = whitelist
+          @pattern              = Regexp.new(options[:pattern].to_s)
+          @whitelist            = Array(options[:whitelist])
         end
 
         def evaluate(context)

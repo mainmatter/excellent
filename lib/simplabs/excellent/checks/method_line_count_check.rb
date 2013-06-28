@@ -14,11 +14,9 @@ module Simplabs
       # * methods
       class MethodLineCountCheck < LineCountCheck
 
-        DEFAULT_THRESHOLD = 20
-
         def initialize(options = {}) #:nodoc:
-          threshold = options[:threshold] || DEFAULT_THRESHOLD
-          super([Parsing::MethodContext], threshold)
+          options[:threshold] ||= DEFAULT_THRESHOLD
+          super([Parsing::MethodContext], options)
         end
 
         protected

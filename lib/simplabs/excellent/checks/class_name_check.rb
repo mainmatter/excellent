@@ -17,12 +17,12 @@ module Simplabs
       class ClassNameCheck < NameCheck
 
         DEFAULT_PATTERN = /^[A-Z]{1}[a-zA-Z0-9]*$/
-      
+
         def initialize(options = {}) #:nodoc:
-          pattern = options[:pattern] || DEFAULT_PATTERN
-          super([Parsing::ClassContext], pattern)
+          options[:pattern] ||= DEFAULT_PATTERN
+          super([Parsing::ClassContext], options)
         end
-      
+
         protected
 
           def warning_args(context) #:nodoc:

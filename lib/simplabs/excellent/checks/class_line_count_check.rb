@@ -14,11 +14,9 @@ module Simplabs
       # * classes
       class ClassLineCountCheck < LineCountCheck
 
-        DEFAULT_THRESHOLD = 300
-
         def initialize(options = {}) #:nodoc:
-          threshold = options[:threshold] || DEFAULT_THRESHOLD
-          super([Parsing::ClassContext], threshold)
+          options[:threshold] ||= DEFAULT_THRESHOLD
+          super([Parsing::ClassContext], options)
         end
 
         def evaluate(context)

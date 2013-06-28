@@ -19,8 +19,8 @@ module Simplabs
         DEFAULT_PATTERN = /^[A-Z][a-zA-Z0-9]*$/
 
         def initialize(options = {}) #:nodoc:
-          pattern = options['pattern'] || DEFAULT_PATTERN
-          super([Parsing::ModuleContext], pattern)
+          options[:pattern] ||= DEFAULT_PATTERN
+          super([Parsing::ModuleContext], options)
         end
 
         protected
