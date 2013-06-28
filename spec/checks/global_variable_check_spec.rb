@@ -63,4 +63,18 @@ describe Simplabs::Excellent::Checks::GlobalVariableCheck do
 
   end
 
+  Simplabs::Excellent::Checks::GlobalVariableCheck::DEFAULT_WHITELIST.each do |whitelisted|
+
+    it "does not report dereferences of #{whitelisted}" do
+      code = <<-END
+        puts $#{whitelisted}
+      END
+      @excellent.check_code(code)
+      warnings = @excellent.warnings
+
+      warnings.should be_empty
+    end
+
+  end
+
 end
