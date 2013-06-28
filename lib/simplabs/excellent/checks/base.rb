@@ -48,8 +48,7 @@ module Simplabs
         # * <tt>info</tt> - The information hash that contains more info on the finding.
         # * <tt>offset</tt> - The line offset that is added to the context's line property.
         def add_warning(context, message, info = {}, offset = 0)
-          klass = self.class
-          @warnings << Simplabs::Excellent::Warning.new(klass, message, context.file, context.line + offset, info)
+          @warnings << Simplabs::Excellent::Warning.new(message, context.file, context.line + offset, info)
         end
 
         def warnings_for(filename) #:nodoc:

@@ -2,7 +2,6 @@ require 'pp'
 require 'yaml'
 require 'simplabs/excellent/parsing/parser'
 require 'simplabs/excellent/parsing/code_processor'
-require 'simplabs/excellent/extensions/hash'
 
 module Simplabs
 
@@ -114,7 +113,7 @@ module Simplabs
         end
 
         def load_checks(checks_config)
-          effective_checks = checks_config.is_a?(Array) ? checks_config : [DEFAULT_CHECKS_CONFIG.deep_merge(checks_config)]
+          effective_checks = checks_config.is_a?(Array) ? checks_config : [DEFAULT_CHECKS_CONFIG.deep_merge(checks_config.deep_symbolize_keys)]
           check_objects = []
           effective_checks.each do |check|
             check.each do |name, check_config|
@@ -122,7 +121,7 @@ module Simplabs
                 klass = name.to_s.split('::').inject(::Simplabs::Excellent::Checks) do |mod, class_name|
                   mod.const_get(class_name)
                 end
-                check_objects << klass.new(check_config.is_a?(Hash) ? check_config : {})
+                check_objects << klass.new(check_config.is_a?(Hash) ? check_config.deep_symbolize_keys : {})
               end
             end
           end

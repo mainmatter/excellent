@@ -44,7 +44,31 @@ else
   formatter = Simplabs::Excellent::Formatters::Text.new
 end
 
-excellent = Simplabs::Excellent::Runner.new
+custom_config = {}
+config_file   = File.join(Dir.pwd, '.excellent.yml')
+if File.exists?(config_file)
+  require 'yaml'
+  begin
+    custom_config = YAML.load(File.open(config_file)) || {}
+    config_valid  = custom_config.is_a?(Hash) && custom_config.all? do |key, value|
+      key.is_a?(String) || key.is_a?(Symbol)
+    end
+  rescue Exception
+    config_valid = false
+  end
+  unless config_valid
+    puts "\n** The configuration in #{config_file} is not valid!\n\n"
+    puts "   Please make sure you specify a hash with check names as keys and hashes or truthy/falsy values as hash values, e.g.:\n\n"
+    puts "     AbcMetricMethodCheck:"
+    puts "       false"
+    puts "     ClassLineCountCheck:"
+    puts "       threshold: 10"
+    puts "\n\n"
+    exit 1
+  end
+end
+puts "custom config: #{custom_config.inspect}"
+excellent = Simplabs::Excellent::Runner.new(custom_config)
 
 begin
   excellent.check_paths(paths, formatter)

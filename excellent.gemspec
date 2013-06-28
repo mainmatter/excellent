@@ -24,13 +24,16 @@ Gem::Specification.new do |s|
     if Gem::Version.new(Gem::RubyGemsVersion) >= Gem::Version.new('1.2.0') then
       s.add_runtime_dependency(%q<ruby_parser>, ['>= 3.0'])
       s.add_runtime_dependency(%q<sexp_processor>, ['>= 4.0'])
+      s.add_runtime_dependency(%q<hashr>, ['>= 0.0.10'])
     else
       s.add_dependency(%q<ruby_parser>, ['>= 3.0'])
       s.add_dependency(%q<sexp_processor>, ['>= 4.0'])
+      s.add_dependency(%q<hashr>, ['>= 0.0.10'])
     end
   else
     s.add_dependency(%q<ruby_parser>, ['>= 3.0'])
     s.add_dependency(%q<sexp_processor>, ['>= 4.0'])
+    s.add_dependency(%q<hashr>, ['>= 0.0.10'])
   end
 
 end

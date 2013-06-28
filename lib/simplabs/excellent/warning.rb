@@ -1,5 +1,3 @@
-require 'simplabs/excellent/extensions/string'
-
 module Simplabs
 
   module Excellent
@@ -32,8 +30,7 @@ module Simplabs
       # The template used to produce the warning (see above)
       attr_reader :message_template
 
-      def initialize(check, message, filename, line_number, info) #:nodoc:
-        @check       = check.to_s.underscore.to_sym
+      def initialize(message, filename, line_number, info) #:nodoc:
         @info        = info
         @filename    = filename
         @line_number = line_number.to_i

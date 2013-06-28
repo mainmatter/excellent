@@ -2,8 +2,8 @@ require 'simplabs/excellent/checks'
 require 'simplabs/excellent/parsing'
 require 'simplabs/excellent/formatters'
 require 'simplabs/excellent/runner'
-require 'rubygems'
 require 'sexp'
+require 'hashr'
 
 module Simplabs #:nodoc:
 

@@ -23,13 +23,19 @@ module Simplabs
         end
 
         def warning(warning)
-          @stream.puts "    * Line #{warning.line_number.to_s.lpad(3)}: \e[33m#{warning.message}\e[0m"
+          @stream.puts "    * Line #{lpad(warning.line_number.to_s, 3)}: \e[33m#{warning.message}\e[0m"
           @total_warnings += 1
         end
 
         def end
           @stream.puts "\n  Found #{@total_warnings} warnings.\n\n"
         end
+
+        private
+
+          def lpad(string, length, fill = ' ')
+            [fill * (length - string.length), string].join
+          end
 
       end
 
