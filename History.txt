@@ -1,4 +1,11 @@
 =======
+= 2.0.0
+
+* predefined globals will not be reported anymore ($!, $@, $&, $`, $', $+, $1, $2.., $~, $=, $/, $\, $,, $;, $., $<, $>, $_, $0, $*, $$, $?, $:, $", $DEBUG, $FILENAME, $LOAD_PATH, $stdin, $stdout, $stderr, $VERBOSE, option variables, $-0, $-a, $-d, $-F, $-i, $-I, $-l, $-p, $-v)
+* enabled previously disable checks again: AbcMetricMethodCheck, ControlCouplingCheck, CyclomaticComplexityBlockCheck, CyclomaticComplexityMethodCheck, ForLoopCheck, FlogBlockCheck, FlogClassCheck, FlogMethodCheck
+* testing now uses Rspec 2
+* internal cleanups/ simplifications
+
 = 1.7.2
 
 * fixed Simplabs::Excellent::Checks::Rails::CustomInitializeMethodCheck
