@@ -92,7 +92,7 @@ nested hashes in the YAML:
 ClassLineCountCheck:
   threshold: 500
 MethodNameCheck:
-  pattern: /^[a-z].*/
+  pattern: '^[a-z].*'
 ```
 
 This would for example only report classes with more than 500 lines and require that all method names start
