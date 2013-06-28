@@ -32,8 +32,8 @@ if target
     fileio = File.open(target, 'w+')
     formatter = Simplabs::Excellent::Formatters::Html.new(fileio)
   rescue Errno::ENOENT
-    puts "\n  #{target} cannot be opened for writing. Specify a file name like so:\n"
-    puts "\n    excellent -o excellent.html lib/\n\n"
+    puts "\n  **#{target} cannot be opened for writing. Specify a file name like so:\n"
+    puts "\n      excellent -o excellent.html lib/\n\n"
   end
 else
   formatter = Simplabs::Excellent::Formatters::Text.new
@@ -52,12 +52,12 @@ if File.exists?(config_file)
     config_valid = false
   end
   unless config_valid
-    puts "\n** The configuration in #{config_file} is not valid!\n\n"
-    puts "   Please make sure you specify a hash with check names as keys and hashes or truthy/falsy values as hash values, e.g.:\n\n"
-    puts "     AbcMetricMethodCheck:"
-    puts "       false"
-    puts "     ClassLineCountCheck:"
-    puts "       threshold: 10"
+    puts "\n  ** The configuration in #{config_file} is not valid!\n\n"
+    puts "     Please make sure you specify a hash with check names as keys and hashes or truthy/falsy values as hash values, e.g.:\n\n"
+    puts "       AbcMetricMethodCheck:"
+    puts "         false"
+    puts "       ClassLineCountCheck:"
+    puts "         threshold: 10"
     puts "\n\n"
     exit 1
   end
@@ -66,11 +66,11 @@ end
 excellent = Simplabs::Excellent::Runner.new(custom_config)
 
 if options[:print_checks]
-  puts "\nConfigured Checks\n\n"
+  puts "\n  Configured Checks\n\n"
   excellent.checks.each do |check|
-    puts "  #{check.class.name.gsub('Simplabs::Excellent::Checks::', '')}"
+    puts "    #{check.class.name.gsub('Simplabs::Excellent::Checks::', '')}"
     check.options.each do |key, value|
-      puts "    #{key}: #{value}"
+      puts "      #{key}: #{value}"
     end
     puts "\n"
   end
@@ -79,7 +79,7 @@ end
 
 paths  = ARGV.dup
 if paths.empty?
-  puts "\n  You must specify one or more directories to analyse, e.g.:\n"
+  puts "\n  **You must specify one or more directories to analyse, e.g.:\n"
   puts "\n    excellent lib/\n\n"
   exit 1
 end
