@@ -1,4 +1,4 @@
-require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
+require 'spec_helper'
 
 describe Simplabs::Excellent::Checks::AbcMetricMethodCheck do
 
@@ -85,7 +85,7 @@ describe Simplabs::Excellent::Checks::AbcMetricMethodCheck do
           verify_code_score(code, 0, 0, 1)
         end
 
-      end 
+      end
 
     end
 

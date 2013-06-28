@@ -1,4 +1,4 @@
-require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
+require 'spec_helper'
 
 describe Simplabs::Excellent::Checks::ModuleNameCheck do
 
@@ -10,7 +10,7 @@ describe Simplabs::Excellent::Checks::ModuleNameCheck do
 
     it 'should accept camel case module names starting in capitals' do
       code = <<-END
-        module GoodModuleName 
+        module GoodModuleName
         end
       END
       @excellent.check_code(code)
@@ -20,7 +20,7 @@ describe Simplabs::Excellent::Checks::ModuleNameCheck do
 
     it 'should accept namespaced modules' do
       code = <<-END
-        module Outer::Inner::GoodModuleName 
+        module Outer::Inner::GoodModuleName
         end
       END
       @excellent.check_code(code)
@@ -30,7 +30,7 @@ describe Simplabs::Excellent::Checks::ModuleNameCheck do
 
     it 'should reject module names with underscores' do
       code = <<-END
-        module Bad_ModuleName 
+        module Bad_ModuleName
         end
       END
       @excellent.check_code(code)

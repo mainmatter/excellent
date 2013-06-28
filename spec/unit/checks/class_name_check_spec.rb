@@ -1,4 +1,4 @@
-require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
+require 'spec_helper'
 
 describe Simplabs::Excellent::Checks::ClassNameCheck do
 
@@ -19,7 +19,7 @@ describe Simplabs::Excellent::Checks::ClassNameCheck do
 
     it 'should be able to parse scoped class names' do
       code = <<-END
-        class Outer::Inner::GoodClassName 
+        class Outer::Inner::GoodClassName
           def method
           end
         end
