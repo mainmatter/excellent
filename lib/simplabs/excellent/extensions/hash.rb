@@ -14,6 +14,14 @@ module Simplabs
           end
         end
 
+        def symbolize_keys
+          result = self.dup
+          keys.each do |key|
+            result[(key.to_sym rescue key) || key] = delete(key)
+          end
+          result
+        end
+
       end
 
     end

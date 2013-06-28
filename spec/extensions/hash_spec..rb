@@ -56,4 +56,12 @@ describe Hash do
 
   end
 
+  describe '#symbolize_keys' do
+
+    it 'symbolizes keys correctly' do
+      { 1 => 2, :a => 'b', 'c' => 'd', "efghijklm" => "n", ':"§$%"' => 'o' }.symbolize_keys.should == { 1 => 2, :a => 'b', :c => 'd', :efghijklm => "n", :':"§$%"' => 'o' }
+    end
+
+  end
+
 end
