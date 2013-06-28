@@ -72,7 +72,6 @@ if options[:print_checks]
     check.options.each do |key, value|
       puts "      #{key}: #{value}"
     end
-    puts "\n"
   end
   exit 0
 end
