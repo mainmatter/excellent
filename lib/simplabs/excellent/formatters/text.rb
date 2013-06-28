@@ -34,7 +34,7 @@ module Simplabs
         private
 
           def lpad(string, length, fill = ' ')
-            [fill * (length - string.length), string].join
+            [fill * ([length - string.length, 0].max), string].join
           end
 
       end
