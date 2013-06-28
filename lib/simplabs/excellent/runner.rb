@@ -30,7 +30,6 @@ module Simplabs
         :MethodNameCheck                      => {},
         :ModuleLineCountCheck                 => {},
         :ModuleNameCheck                      => {},
-        :NestedIteratorsCheck                 => {},
         :ParameterNumberCheck                 => {},
         :SingletonVariableCheck               => {},
         :'Rails::AttrProtectedCheck'          => {},
