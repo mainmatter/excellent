@@ -16,7 +16,7 @@ module Simplabs
       # * modules
       class ModuleNameCheck < NameCheck
 
-        DEFAULT_PATTERN = /^[A-Z][a-zA-Z0-9]*$/
+        DEFAULT_PATTERN = '^[A-Z][a-zA-Z0-9]*$'
 
         def initialize(options = {}) #:nodoc:
           options[:pattern] ||= DEFAULT_PATTERN

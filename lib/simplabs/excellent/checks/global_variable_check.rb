@@ -14,9 +14,7 @@ module Simplabs
       # * global variables
       class GlobalVariableCheck < Base
 
-        DEFAULT_WHITELIST = %w(! @ & ` ' + \d+ ~ = / \\ , ; \. < > _ 0 \* $ \? : " DEBUG FILENAME LOAD_PATH stdin stdout stderr VERBOSE -0 -a -d -F -i -I -l -p -v).map do |global_name|
-          Regexp.new("^#{global_name}$")
-        end
+        DEFAULT_WHITELIST = %w(! @ & ` ' + \d+ ~ = / \ , ; \. < > _ 0 * $ ? : " DEBUG FILENAME LOAD_PATH stdin stdout stderr VERBOSE -0 -a -d -F -i -I -l -p -v)
 
         def initialize(options = {}) #:nodoc:
           super
@@ -26,7 +24,7 @@ module Simplabs
         end
 
         def evaluate(context) #:nodoc:
-          if context.is_a?(Parsing::GasgnContext) || !@whitelist.any? { |whitelisted| context.full_name =~ whitelisted }
+          if context.is_a?(Parsing::GasgnContext) || !@whitelist.include?(context.full_name)
             add_warning(context, 'Global variable {{variable}} used.', { :variable => context.full_name })
           end
         end

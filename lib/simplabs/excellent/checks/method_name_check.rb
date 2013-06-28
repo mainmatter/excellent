@@ -16,7 +16,7 @@ module Simplabs
       # * methods
       class MethodNameCheck < NameCheck
 
-        DEFAULT_PATTERN   = /^[_a-z<>=\[|+-\/\*\~\%\&`\|\^]+[_a-z0-9_<>=~@\[\]]*[=!\?]?$/
+        DEFAULT_PATTERN   = '^[_a-z<>=\[|+-\/\*\~\%\&`\|\^]+[_a-z0-9_<>=~@\[\]]*[=!\?]?$'
         DEFAULT_WHITELIST = %w([] ! !=  !~ % & * ** + +@ - -@ / < << <= <=> == === =~ > >= >> ^ ` | ~)
 
         def initialize(options = {}) #:nodoc:
