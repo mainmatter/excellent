@@ -8,8 +8,8 @@ module Simplabs
 
       class LineCountCheck < Base #:nodoc:
 
-        def initialize(interesting_contexts, options)
-          super()
+        def initialize(interesting_contexts, options = {}) #:nodoc:
+          super(options)
           @interesting_contexts = interesting_contexts
           @threshold            = options[:threshold].to_i
         end

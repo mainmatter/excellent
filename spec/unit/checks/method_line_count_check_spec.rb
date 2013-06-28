@@ -3,7 +3,7 @@ require 'spec_helper'
 describe Simplabs::Excellent::Checks::MethodLineCountCheck do
 
   before do
-    @excellent = Simplabs::Excellent::Runner.new(Simplabs::Excellent::Checks::MethodLineCountCheck.new({ :threshold => 2 }))
+    @excellent = Simplabs::Excellent::Runner.new([:MethodLineCountCheck => { :threshold => 2 }])
   end
 
   describe '#evaluate' do

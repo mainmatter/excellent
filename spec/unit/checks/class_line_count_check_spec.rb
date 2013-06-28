@@ -3,7 +3,7 @@ require 'spec_helper'
 describe Simplabs::Excellent::Checks::ClassLineCountCheck do
 
   before do
-    @excellent = Simplabs::Excellent::Runner.new(Simplabs::Excellent::Checks::ClassLineCountCheck.new({ :threshold => 3 }))
+    @excellent = Simplabs::Excellent::Runner.new([:ClassLineCountCheck => { :threshold => 3 }])
   end
 
   describe '#evaluate' do

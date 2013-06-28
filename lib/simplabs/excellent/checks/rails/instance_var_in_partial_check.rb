@@ -16,7 +16,7 @@ module Simplabs
         # * partials
         class InstanceVarInPartialCheck < Base
 
-          def initialize #:nodoc:
+          def initialize(options = {}) #:nodoc:
             super
             @interesting_contexts = [Parsing::IvarContext]
             @interesting_files = [/^_.*\.erb$/]

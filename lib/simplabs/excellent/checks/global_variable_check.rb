@@ -19,7 +19,7 @@ module Simplabs
         end
 
         def initialize(options = {}) #:nodoc:
-          super()
+          super
           @whitelist            = options[:whitelist] ||= DEFAULT_WHITELIST
           @interesting_contexts = [Parsing::GvarContext, Parsing::GasgnContext]
           @interesting_files    = [/\.rb$/, /\.erb$/]

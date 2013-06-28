@@ -13,7 +13,7 @@ module Simplabs
       # * +rescue+ blocks
       class EmptyRescueBodyCheck < Base
 
-        def initialize #:nodoc:
+        def initialize(options = {}) #:nodoc:
           super
           @interesting_contexts = [Parsing::ResbodyContext]
         end

@@ -3,7 +3,7 @@ require 'spec_helper'
 describe Simplabs::Excellent::Checks::AbcMetricMethodCheck do
 
   before do
-    @excellent = Simplabs::Excellent::Runner.new(Simplabs::Excellent::Checks::AbcMetricMethodCheck.new({ :threshold => 0 }))
+    @excellent = Simplabs::Excellent::Runner.new([:AbcMetricMethodCheck => { :threshold => 0 }])
   end
 
   describe '#evaluate' do

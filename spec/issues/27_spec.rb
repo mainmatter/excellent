@@ -3,7 +3,7 @@ require 'spec_helper'
 describe 'issue #27' do
 
   before(:each) do
-    @excellent = Simplabs::Excellent::Runner.new(Simplabs::Excellent::Checks::Rails::CustomInitializeMethodCheck.new)
+    @excellent = Simplabs::Excellent::Runner.new([:'Rails::CustomInitializeMethodCheck' => {}])
   end
 
   context 'when no initialize method is defined' do

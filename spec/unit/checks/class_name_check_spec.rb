@@ -3,7 +3,7 @@ require 'spec_helper'
 describe Simplabs::Excellent::Checks::ClassNameCheck do
 
   before(:each) do
-    @excellent = Simplabs::Excellent::Runner.new(Simplabs::Excellent::Checks::ClassNameCheck.new)
+    @excellent = Simplabs::Excellent::Runner.new([:ClassNameCheck => {}])
   end
 
   describe '#evaluate' do

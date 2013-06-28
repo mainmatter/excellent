@@ -27,12 +27,12 @@ module Simplabs
       class CyclomaticComplexityBlockCheck < CyclomaticComplexityCheck
 
         DEFAULT_THRESHOLD = 4
-      
+
         def initialize(options = {}) #:nodoc:
-          threshold = options[:threshold] || DEFAULT_THRESHOLD
-          super([Parsing::BlockContext], threshold)
+          options[:threshold] ||= DEFAULT_THRESHOLD
+          super([Parsing::BlockContext], options)
         end
-      
+
         def evaluate(context) #:nodoc:
           unless context.cc_score <= @threshold
             add_warning(context, '{{block}} has cyclomatic complexity of {{score}}.', { :block => context.full_name, :score => context.cc_score })

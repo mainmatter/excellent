@@ -23,12 +23,13 @@ module Simplabs
         # Defaults to /\.rb$/. If you do not specify anything else in custom checks, only *.rb files will be processed
         attr_reader :interesting_files
 
-        def initialize #:nodoc:
-          @warnings          = []
-          @interesting_files = [/\.rb$/]
+        def initialize(interesting_contexts, options = {}) #:nodoc:
+          @interesting_contexts = []
+          @warnings             = []
+          @interesting_files    = [/\.rb$/]
         end
 
-        # This method is called whenever Excellent processes a context that the check specified as one of the contexts it is interested in (see 
+        # This method is called whenever Excellent processes a context that the check specified as one of the contexts it is interested in (see
         # interesting_contexts).
         #
         # ==== Parameters
@@ -50,11 +51,11 @@ module Simplabs
           klass = self.class
           @warnings << Simplabs::Excellent::Warning.new(klass, message, context.file, context.line + offset, info)
         end
-  
+
         def warnings_for(filename) #:nodoc:
           warnings.select { |warning| warning.filename == filename }
         end
-  
+
       end
 
     end

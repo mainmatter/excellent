@@ -3,7 +3,7 @@ require 'spec_helper'
 describe Simplabs::Excellent::Checks::ModuleNameCheck do
 
   before do
-    @excellent = Simplabs::Excellent::Runner.new(Simplabs::Excellent::Checks::ModuleNameCheck.new)
+    @excellent = Simplabs::Excellent::Runner.new([:ModuleNameCheck => {}])
   end
 
   describe '#evaluate' do

@@ -3,7 +3,7 @@ require 'spec_helper'
 describe Simplabs::Excellent::Checks::Rails::CustomInitializeMethodCheck do
 
   before do
-    @excellent = Simplabs::Excellent::Runner.new(Simplabs::Excellent::Checks::Rails::CustomInitializeMethodCheck.new)
+    @excellent = Simplabs::Excellent::Runner.new([:'Rails::CustomInitializeMethodCheck' => {}])
   end
 
   describe '#evaluate' do

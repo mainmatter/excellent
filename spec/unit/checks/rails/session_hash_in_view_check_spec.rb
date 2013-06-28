@@ -3,7 +3,7 @@ require 'spec_helper'
 describe Simplabs::Excellent::Checks::Rails::SessionHashInViewCheck do
 
   before do
-    @excellent = Simplabs::Excellent::Runner.new(Simplabs::Excellent::Checks::Rails::SessionHashInViewCheck.new)
+    @excellent = Simplabs::Excellent::Runner.new([:'Rails::SessionHashInViewCheck' => {}])
   end
 
   describe '#evaluate' do

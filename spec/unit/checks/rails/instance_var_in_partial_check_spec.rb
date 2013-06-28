@@ -3,7 +3,7 @@ require 'spec_helper'
 describe Simplabs::Excellent::Checks::Rails::InstanceVarInPartialCheck do
 
   before do
-    @excellent = Simplabs::Excellent::Runner.new(Simplabs::Excellent::Checks::Rails::InstanceVarInPartialCheck.new)
+    @excellent = Simplabs::Excellent::Runner.new([:'Rails::InstanceVarInPartialCheck' => {}])
   end
 
   describe '#evaluate' do

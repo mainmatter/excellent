@@ -3,7 +3,7 @@ require 'spec_helper'
 describe Simplabs::Excellent::Checks::NestedIteratorsCheck do
 
   before do
-    @excellent = Simplabs::Excellent::Runner.new(Simplabs::Excellent::Checks::NestedIteratorsCheck.new)
+    @excellent = Simplabs::Excellent::Runner.new([:NestedIteratorsCheck => {}])
   end
 
   describe '#evaluate' do

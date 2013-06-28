@@ -3,7 +3,7 @@ require 'spec_helper'
 describe 'issue #24' do
 
   before(:each) do
-    @excellent = Simplabs::Excellent::Runner.new(Simplabs::Excellent::Checks::ClassVariableCheck.new)
+    @excellent = Simplabs::Excellent::Runner.new([:ClassVariableCheck => {}])
   end
 
   it 'is fixed' do

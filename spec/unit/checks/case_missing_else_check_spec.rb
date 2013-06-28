@@ -3,7 +3,7 @@ require 'spec_helper'
 describe Simplabs::Excellent::Checks::CaseMissingElseCheck do
 
   before do
-    @excellent = Simplabs::Excellent::Runner.new(Simplabs::Excellent::Checks::CaseMissingElseCheck.new)
+    @excellent = Simplabs::Excellent::Runner.new([:CaseMissingElseCheck => {}])
   end
 
   describe '#evaluate' do

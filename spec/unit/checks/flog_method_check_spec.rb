@@ -3,7 +3,7 @@ require 'spec_helper'
 describe Simplabs::Excellent::Checks::FlogMethodCheck do
 
   before do
-    @excellent = Simplabs::Excellent::Runner.new(Simplabs::Excellent::Checks::FlogMethodCheck.new({ :threshold => 0 }))
+    @excellent = Simplabs::Excellent::Runner.new([:FlogMethodCheck => { :threshold => 0 }])
   end
 
   describe '#evaluate' do

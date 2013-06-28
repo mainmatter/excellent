@@ -21,7 +21,7 @@ module Simplabs
       class AssignmentInConditionalCheck < Base
 
         def initialize(options = {}) #:nodoc:
-          super()
+          super
           @interesting_contexts = [Parsing::IfContext, Parsing::WhileContext, Parsing::UntilContext]
           @interesting_files    = [/\.rb$/, /\.erb$/]
         end

@@ -3,7 +3,7 @@ require 'spec_helper'
 describe Simplabs::Excellent::Checks::EmptyRescueBodyCheck do
 
   before do
-    @excellent = Simplabs::Excellent::Runner.new(Simplabs::Excellent::Checks::EmptyRescueBodyCheck.new)
+    @excellent = Simplabs::Excellent::Runner.new([:EmptyRescueBodyCheck => {}])
   end
 
   describe '#evaluate' do

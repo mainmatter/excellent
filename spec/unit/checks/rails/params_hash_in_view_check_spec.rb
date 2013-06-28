@@ -3,7 +3,7 @@ require 'spec_helper'
 describe Simplabs::Excellent::Checks::Rails::ParamsHashInViewCheck do
 
   before do
-    @excellent = Simplabs::Excellent::Runner.new(Simplabs::Excellent::Checks::Rails::ParamsHashInViewCheck.new)
+    @excellent = Simplabs::Excellent::Runner.new([:'Rails::ParamsHashInViewCheck' => {}])
   end
 
   describe '#evaluate' do

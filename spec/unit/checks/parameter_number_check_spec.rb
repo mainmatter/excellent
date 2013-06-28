@@ -3,7 +3,7 @@ require 'spec_helper'
 describe Simplabs::Excellent::Checks::ParameterNumberCheck do
 
   before(:each) do
-    @excellent = Simplabs::Excellent::Runner.new(Simplabs::Excellent::Checks::ParameterNumberCheck.new({ :threshold => 1 }))
+    @excellent = Simplabs::Excellent::Runner.new([:ParameterNumberCheck => { :threshold => 1 }])
   end
 
   describe '#evaluate' do

@@ -2,6 +2,7 @@ require 'pp'
 require 'yaml'
 require 'simplabs/excellent/parsing/parser'
 require 'simplabs/excellent/parsing/code_processor'
+require 'simplabs/excellent/extensions/hash'
 
 module Simplabs
 
@@ -11,7 +12,7 @@ module Simplabs
     # name of a file to read the code to process from.
     class Runner
 
-      DEFAULT_CONFIG = {
+      DEFAULT_CHECKS_CONFIG = {
         :AbcMetricMethodCheck                 => {},
         :AssignmentInConditionalCheck         => {},
         :CaseMissingElseCheck                 => {},
@@ -41,16 +42,18 @@ module Simplabs
         :'Rails::CustomInitializeMethodCheck' => {}
       }
 
-      attr_accessor :config #:nodoc:
-
       # Initializes a Runner
       #
       # ==== Parameters
       #
-      # * <tt>checks</tt> - The checks to apply - pass instances of the various check classes. If no checks are specified, all checks will be applied.
-      def initialize(*checks)
-        @config = DEFAULT_CONFIG
-        @checks = checks unless checks.empty?
+      # * <tt>checks_config</tt> - The check configuration to use; You can either specify an array of specs to use like this
+      #                              [:ClassLineCountCheck => { :threshold => 10 }]
+      #                            or you can specify a hash that will then be merged with the default configuration:
+      #                              { :ClassNameCheck => { pattern: 'test' }, :ClassLineCountCheck => { :threshold => 10 } }
+      #                            You can enable/disable a check by setting the value of the hash to sth. truthy/falsy:
+      #                              { :ClassNameCheck => false, :AbcMetricMethodCheck => {} }
+      def initialize(checks_config = {})
+        @checks = load_checks(checks_config)
         @parser = Parsing::Parser.new
       end
 
@@ -61,7 +64,6 @@ module Simplabs
       # * <tt>filename</tt> - The name of the file the code was read from.
       # * <tt>code</tt> - The code to process (String).
       def check(filename, code)
-        @checks ||= load_checks
         @processor ||= Parsing::CodeProcessor.new(@checks)
         node = parse(filename, code)
         @processor.process(node)
@@ -102,7 +104,6 @@ module Simplabs
 
       # Gets the warnings that were produced by the checks.
       def warnings
-        @checks ||= []
         @checks.collect { |check| check.warnings }.flatten
       end
 
@@ -112,13 +113,18 @@ module Simplabs
           @parser.parse(code, filename)
         end
 
-        def load_checks
+        def load_checks(checks_config)
+          effective_checks = checks_config.is_a?(Array) ? checks_config : [DEFAULT_CHECKS_CONFIG.deep_merge(checks_config)]
           check_objects = []
-          DEFAULT_CONFIG.each_pair do |key, value|
-            klass = key.to_s.split('::').inject(::Simplabs::Excellent::Checks) do |mod, class_name|
-              mod.const_get(class_name)
+          effective_checks.each do |check|
+            check.each do |name, check_config|
+              if !!check_config
+                klass = name.to_s.split('::').inject(::Simplabs::Excellent::Checks) do |mod, class_name|
+                  mod.const_get(class_name)
+                end
+                check_objects << klass.new(check_config.is_a?(Hash) ? check_config : {})
+              end
             end
-            check_objects << (value.empty? ? klass.new : klass.new(value))
           end
           check_objects
         end

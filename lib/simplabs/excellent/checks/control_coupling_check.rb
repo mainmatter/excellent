@@ -15,7 +15,7 @@ module Simplabs
       # * methods
       class ControlCouplingCheck < Base
 
-        def initialize #:nodoc:
+        def initialize(options = {}) #:nodoc:
           super
           @interesting_contexts = [Parsing::IfContext, Parsing::CaseContext]
         end

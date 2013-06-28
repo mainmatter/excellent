@@ -3,7 +3,7 @@ require 'spec_helper'
 describe Simplabs::Excellent::Checks::CyclomaticComplexityBlockCheck do
 
   before(:each) do
-    @excellent = Simplabs::Excellent::Runner.new(Simplabs::Excellent::Checks::CyclomaticComplexityBlockCheck.new({ :threshold => 0 }))
+    @excellent = Simplabs::Excellent::Runner.new([:CyclomaticComplexityBlockCheck => { :threshold => 0 }])
   end
 
   describe '#evaluate' do

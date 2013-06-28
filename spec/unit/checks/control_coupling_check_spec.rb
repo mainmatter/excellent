@@ -3,7 +3,7 @@ require 'spec_helper'
 describe Simplabs::Excellent::Checks::ControlCouplingCheck do
 
   before(:each) do
-    @excellent = Simplabs::Excellent::Runner.new(Simplabs::Excellent::Checks::ControlCouplingCheck.new)
+    @excellent = Simplabs::Excellent::Runner.new([:ControlCouplingCheck => {}])
   end
 
   describe '#evaluate' do

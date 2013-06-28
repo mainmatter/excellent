@@ -3,7 +3,7 @@ require 'spec_helper'
 describe Simplabs::Excellent::Checks::Rails::AttrAccessibleCheck do
 
   before do
-    @excellent = Simplabs::Excellent::Runner.new(Simplabs::Excellent::Checks::Rails::AttrAccessibleCheck.new)
+    @excellent = Simplabs::Excellent::Runner.new([:'Rails::AttrAccessibleCheck' => {}])
   end
 
   describe '#evaluate' do

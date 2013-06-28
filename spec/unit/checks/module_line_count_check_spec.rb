@@ -3,7 +3,7 @@ require 'spec_helper'
 describe Simplabs::Excellent::Checks::ModuleLineCountCheck do
 
   before do
-    @excellent = Simplabs::Excellent::Runner.new(Simplabs::Excellent::Checks::ModuleLineCountCheck.new({ :threshold => 2 }))
+    @excellent = Simplabs::Excellent::Runner.new([:ModuleLineCountCheck => { :threshold => 2 }])
   end
 
   describe '#evaluate' do

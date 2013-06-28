@@ -3,7 +3,7 @@ require 'spec_helper'
 describe Simplabs::Excellent::Checks::Rails::AttrProtectedCheck do
 
   before do
-    @excellent = Simplabs::Excellent::Runner.new(Simplabs::Excellent::Checks::Rails::AttrProtectedCheck.new)
+    @excellent = Simplabs::Excellent::Runner.new([:'Rails::AttrProtectedCheck' => {}])
   end
 
   describe '#evaluate' do

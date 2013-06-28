@@ -3,7 +3,7 @@ require 'spec_helper'
 describe Simplabs::Excellent::Checks::GlobalVariableCheck do
 
   before(:each) do
-    @excellent = Simplabs::Excellent::Runner.new(Simplabs::Excellent::Checks::GlobalVariableCheck.new)
+    @excellent = Simplabs::Excellent::Runner.new([:GlobalVariableCheck => {}])
   end
 
   describe '#evaluate' do

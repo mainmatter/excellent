@@ -3,7 +3,7 @@ require 'spec_helper'
 describe Simplabs::Excellent::Checks::MethodNameCheck do
 
   before do
-    @excellent = Simplabs::Excellent::Runner.new(Simplabs::Excellent::Checks::MethodNameCheck.new)
+    @excellent = Simplabs::Excellent::Runner.new([:MethodNameCheck => {}])
   end
 
   describe '#evaluate' do

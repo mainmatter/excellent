@@ -3,7 +3,7 @@ require 'spec_helper'
 describe Simplabs::Excellent::Checks::ForLoopCheck do
 
   before do
-    @excellent = Simplabs::Excellent::Runner.new(Simplabs::Excellent::Checks::ForLoopCheck.new)
+    @excellent = Simplabs::Excellent::Runner.new([:ForLoopCheck => {}])
   end
 
   describe '#evaluate' do

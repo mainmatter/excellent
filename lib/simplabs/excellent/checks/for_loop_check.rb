@@ -23,7 +23,7 @@ module Simplabs
       # * +for+ loops
       class ForLoopCheck < Base
 
-        def initialize #:nodoc:
+        def initialize(options = {}) #:nodoc:(options => {}) #:nodoc:
           super
           @interesting_contexts = [Parsing::ForLoopContext]
           @interesting_files    = [/\.rb$/, /\.erb$/]

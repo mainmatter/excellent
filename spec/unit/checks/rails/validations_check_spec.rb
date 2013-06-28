@@ -3,7 +3,7 @@ require 'spec_helper'
 describe Simplabs::Excellent::Checks::Rails::ValidationsCheck do
 
   before do
-    @excellent = Simplabs::Excellent::Runner.new(Simplabs::Excellent::Checks::Rails::ValidationsCheck.new)
+    @excellent = Simplabs::Excellent::Runner.new([:'Rails::ValidationsCheck' => {}])
   end
 
   describe '#evaluate' do

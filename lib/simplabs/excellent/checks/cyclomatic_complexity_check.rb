@@ -8,10 +8,10 @@ module Simplabs
 
       class CyclomaticComplexityCheck < Base #:nodoc:
 
-        def initialize(interesting_contexts, threshold)
-          super()
+        def initialize(interesting_contexts, options = {}) #:nodoc:
+          super(options)
           @interesting_contexts = interesting_contexts
-          @threshold            = threshold
+          @threshold            = options[:threshold].to_i
         end
 
       end

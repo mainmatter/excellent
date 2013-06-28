@@ -3,7 +3,7 @@ require 'spec_helper'
 describe 'issue #28' do
 
   before(:each) do
-    @excellent = Simplabs::Excellent::Runner.new(Simplabs::Excellent::Checks::MethodNameCheck.new)
+    @excellent = Simplabs::Excellent::Runner.new([:MethodNameCheck => {}])
   end
 
   it 'is fixed' do

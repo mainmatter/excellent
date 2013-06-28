@@ -3,7 +3,7 @@ require 'spec_helper'
 describe Simplabs::Excellent::Checks::AssignmentInConditionalCheck do
 
   before do
-    @excellent = Simplabs::Excellent::Runner.new(Simplabs::Excellent::Checks::AssignmentInConditionalCheck.new)
+    @excellent = Simplabs::Excellent::Runner.new([:AssignmentInConditionalCheck => {}])
   end
 
   describe '#evaluate' do

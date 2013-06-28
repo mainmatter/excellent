@@ -17,7 +17,7 @@ module Simplabs
         # * partials and regular views
         class SessionHashInViewCheck < Base
 
-          def initialize #:nodoc:
+          def initialize(options = {}) #:nodoc:
             super
             @interesting_contexts = [Parsing::CallContext]
             @interesting_files = [/^.*\.(erb|rhtml|haml)$/]

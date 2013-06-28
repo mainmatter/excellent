@@ -18,7 +18,7 @@ module Simplabs
         # * +ActiveRecord+ models
         class AttrAccessibleCheck < Base
 
-          def initialize #:nodoc:
+          def initialize(options = {}) #:nodoc:
             super
             @interesting_contexts = [Parsing::ClassContext]
           end

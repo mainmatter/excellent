@@ -3,7 +3,7 @@ require 'spec_helper'
 describe Simplabs::Excellent::Checks::ClassVariableCheck do
 
   before(:each) do
-    @excellent = Simplabs::Excellent::Runner.new(Simplabs::Excellent::Checks::ClassVariableCheck.new)
+    @excellent = Simplabs::Excellent::Runner.new([:ClassVariableCheck => {}])
   end
 
   describe '#evaluate' do

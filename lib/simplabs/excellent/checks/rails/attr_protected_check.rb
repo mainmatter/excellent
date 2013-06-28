@@ -19,7 +19,7 @@ module Simplabs
         # * +ActiveRecord+ models
         class AttrProtectedCheck < Base
 
-          def initialize #:nodoc:
+          def initialize(options = {}) #:nodoc:
             super
             @interesting_contexts = [Parsing::ClassContext]
           end

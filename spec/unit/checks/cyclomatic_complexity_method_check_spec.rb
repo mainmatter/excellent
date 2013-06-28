@@ -3,7 +3,7 @@ require 'spec_helper'
 describe Simplabs::Excellent::Checks::CyclomaticComplexityMethodCheck do
 
   before do
-    @excellent = Simplabs::Excellent::Runner.new(Simplabs::Excellent::Checks::CyclomaticComplexityMethodCheck.new({ :threshold => 0 }))
+    @excellent = Simplabs::Excellent::Runner.new([:CyclomaticComplexityMethodCheck => { :threshold => 0 }])
   end
 
   describe '#evaluate' do

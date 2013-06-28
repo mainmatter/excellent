@@ -29,8 +29,8 @@ module Simplabs
         DEFAULT_THRESHOLD = 8
 
         def initialize(options = {}) #:nodoc:
-          threshold = options[:threshold] || DEFAULT_THRESHOLD
-          super([Parsing::MethodContext, Parsing::SingletonMethodContext], threshold)
+          options[:threshold] ||= DEFAULT_THRESHOLD
+          super([Parsing::MethodContext, Parsing::SingletonMethodContext], options)
         end
 
         def evaluate(context) #:nodoc:
