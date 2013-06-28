@@ -12,7 +12,7 @@ module Simplabs
       # ==== Applies to
       #
       # * class variables
-      class SingletonVariableCheck < Base
+      class ClassVariableCheck < Base
 
         def initialize #:nodoc:
           super
@@ -21,7 +21,7 @@ module Simplabs
         end
 
         def evaluate(context) #:nodoc:
-          add_warning(context, 'Singleton variable {{variable}} used.', { :variable => context.full_name })
+          add_warning(context, 'Class variable {{variable}} used.', { :variable => context.full_name })
         end
 
       end

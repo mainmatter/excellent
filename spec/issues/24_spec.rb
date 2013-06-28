@@ -3,7 +3,7 @@ require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 describe 'issue #24' do
 
   before(:each) do
-    @excellent = Simplabs::Excellent::Runner.new(Simplabs::Excellent::Checks::SingletonVariableCheck.new)
+    @excellent = Simplabs::Excellent::Runner.new(Simplabs::Excellent::Checks::ClassVariableCheck.new)
   end
 
   it 'is fixed' do

@@ -1,14 +1,14 @@
 require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 
-describe Simplabs::Excellent::Checks::SingletonVariableCheck do
+describe Simplabs::Excellent::Checks::ClassVariableCheck do
 
   before(:each) do
-    @excellent = Simplabs::Excellent::Runner.new(Simplabs::Excellent::Checks::SingletonVariableCheck.new)
+    @excellent = Simplabs::Excellent::Runner.new(Simplabs::Excellent::Checks::ClassVariableCheck.new)
   end
 
   describe '#evaluate' do
 
-    it 'should reject singleton variables' do
+    it 'should reject class variables' do
       code = <<-END
         @@foo
       END
@@ -18,7 +18,7 @@ describe Simplabs::Excellent::Checks::SingletonVariableCheck do
       warnings.should_not be_empty
       warnings[0].info.should        == { :variable => 'foo' }
       warnings[0].line_number.should == 1
-      warnings[0].message.should     == 'Singleton variable foo used.'
+      warnings[0].message.should     == 'Class variable foo used.'
     end
 
     it 'should also work for namespaced classes' do
@@ -37,10 +37,10 @@ describe Simplabs::Excellent::Checks::SingletonVariableCheck do
       warnings.should_not be_empty
       warnings[0].info.should        == { :variable => 'Outer::Inner::Class.foo' }
       warnings[0].line_number.should == 4
-      warnings[0].message.should     == 'Singleton variable Outer::Inner::Class.foo used.'
+      warnings[0].message.should     == 'Class variable Outer::Inner::Class.foo used.'
     end
 
-    it 'should also work for singleton variables that occur within methods' do
+    it 'should also work for class variables that occur within methods' do
       code = <<-END
         module Outer
           module Inner
@@ -58,7 +58,7 @@ describe Simplabs::Excellent::Checks::SingletonVariableCheck do
       warnings.should_not be_empty
       warnings[0].info.should        == { :variable => 'Outer::Inner::Class.foo' }
       warnings[0].line_number.should == 5
-      warnings[0].message.should     == 'Singleton variable Outer::Inner::Class.foo used.'
+      warnings[0].message.should     == 'Class variable Outer::Inner::Class.foo used.'
     end
 
   end

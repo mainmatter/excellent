@@ -31,7 +31,7 @@ module Simplabs
         :ModuleLineCountCheck                 => {},
         :ModuleNameCheck                      => {},
         :ParameterNumberCheck                 => {},
-        :SingletonVariableCheck               => {},
+        :ClassVariableCheck                   => {},
         :'Rails::AttrProtectedCheck'          => {},
         :'Rails::AttrAccessibleCheck'         => {},
         :'Rails::InstanceVarInPartialCheck'   => {},
