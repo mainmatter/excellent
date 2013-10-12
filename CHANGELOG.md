@@ -1,5 +1,5 @@
-=======
-= 2.0.0
+2.0.0
+=====
 
 * now supporting config file .excellent.yml in current working directory to configure which specs to run/ not to run with thresholds, patterns etc.
 * predefined globals will not be reported anymore ($!, $@, $&, $`, $', $+, $1, $2.., $~, $=, $/, $\, $,, $;, $., $<, $>, $_, $0, $*, $$, $?, $:, $", $DEBUG, $FILENAME, $LOAD_PATH, $stdin, $stdout, $stderr, $VERBOSE, $-0, $-a, $-d, $-F, $-i, $-I, $-l, $-p, $-v)
@@ -7,101 +7,121 @@
 * testing now uses Rspec 2
 * internal cleanups/ simplifications
 
-= 1.7.2
+1.7.2
+=====
 
 * fixed Simplabs::Excellent::Checks::Rails::CustomInitializeMethodCheck
 * fixed Simplabs::Excellent::Checks::MethodNameCheck so it allows method names that exist in Ruby itself
 * fixed Simplabs::Excellent::Checks::GlobalVariableCheck so it doesn't report false positives for rescue bodies
 * made the parser more forgiving/stable in some situations
 
-= 1.7.1
+1.7.1
+=====
 
 * fixed excellent for Ruby 2.0
 * some internal cleanup
 * support -v switch on command line
 
-= 1.7.0
+1.7.0
+=====
 
 * fixed issue #24
 * updated ruby_parser and sexp_processor dependencies
 * fixed some wrong line number reports
 
-= 1.6.0
+1.6.0
+=====
 
 * added Gemfile
 * internal refactoring/cleanups
 
-= 1.5.5
+1.5.5
+=====
 
 * better option parsing in the executable, (thanks trans, http://github.com/trans)
 * added line count parser (not yet used), (thanks trans, http://github.com/trans)
 
-= 1.5.4
+1.5.4
+=====
 
 * fixed handling of parser errors
 
-= 1.5.3
+1.5.3
+=====
 
 * added missing dependency to facets gem
 
-= 1.5.2
+1.5.2
+=====
 
 * added GlobalVariableCheck
 * added Rails::CustomInitializeMethodCheck
 * added Rails::ParamsHashInViewCheck
 * added Rails::SessionHashInViewCheck
 
-= 1.5.1
+1.5.1
+=====
 
 * removed duplication checks (they are just too coarse for dynamic languages like Ruby and especially Rails apps where you would call e.g. params all over the place)
 * added Rails::ValidationsCheck to the default checks
 
-= 1.5.0
+1.5.0
+=====
 
 * new check Rails::ValidationsCheck that reports ActiveRecord models that do not validate anything
 * added DuplicationCheck to default checks
 * split DuplicationCheck up into MethodDuplicationCheck and BlockDuplicationCheck
 
-= 1.4.1
+1.4.1
+=====
 
 * added Rake Task (see Rakefile for example)
 
-= 1.4.0
+1.4.0
+=====
 
 * Excellent not parses *.erb files
 * added new check InstanceVarInPartialCheck
 
-= 1.3.1
+1.3.1
+=====
 
 * FIX (forgot files in gemspec on 1.3.0)
 
-= 1.3.0
+1.3.0
+=====
 
 * added formatters (currently text and HTML formatting is supported, see README)
 
-= 1.2.2
+1.2.2
+=====
 
 * fixed specs
 
-= 1.2.1
+1.2.1
+=====
 
 * renamed Error to Warning
 * added documentation
 
-= 1.2.0
+1.2.0
+=====
 
 * cleanup
 * added 2 Rails specific checks, AttrAccessibleCheck and AttrProtectedCheck
 
-= 1.1.0
+1.1.0
+=====
 
 * completely restructured, made everything running in the flow of the SexpProcessor
 * added most tests from reek (except for UtilityFunction and FeatureEnvy)
 
-= 1.0.1
+1.0.1
+=====
 
 * fixed some errors
 
-= 1.0.0
+1.0.0
+=====
 
 * this is basically just a custom version of roodi, converted to ruby_parser to be 1.9 safe
