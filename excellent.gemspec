@@ -4,7 +4,7 @@ Gem::Specification.new do |s|
   s.name        = %q{excellent}
   s.description = 'Excellent finds the nasty lines in your code. It implements a comprehensive set of checks for possibly buggy parts of your app that would otherwise make it into your repo and eventually to the production server.'
   s.summary     = %q{Source Code analysis gem for Ruby and Rails}
-  s.version     = '2.0.0'
+  s.version     = '2.0.1'
 
   s.required_rubygems_version = Gem::Requirement.new('>= 0') if s.respond_to?(:required_rubygems_version=)
   s.authors                   = ['Marco Otte-Witte']

@@ -12,6 +12,11 @@ module Simplabs
         include Scopeable
 
         VALIDATIONS = %w(
+          validate
+          validates
+          validates!
+          validates_each
+          validates_with
           validates_acceptance_of
           validates_associated
           validates_confirmation_of

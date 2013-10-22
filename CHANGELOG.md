@@ -1,3 +1,8 @@
+2.0.1
+=====
+
+* Simplabs::Excellent::Checks::Rails::ValidationsCheck now supports the new ActiveRecord validations syntax (e.g. "validates :name, presence: true")
+
 2.0.0
 =====
 

@@ -48,8 +48,15 @@ module Simplabs
           end
 
           def record_validation
-            if ClassContext::VALIDATIONS.include?(@method) && @parent && @parent.is_a?(ClassContext) && @parent.active_record_model?
-              @parent.validations << @method
+            active_record_parent = if @parent.is_a?(ClassContext)
+              @parent if @parent.active_record_model?
+            elsif @parent.is_a?(BlockContext) && @parent.parent.is_a?(ClassContext)
+              @parent.parent if @parent.parent.active_record_model?
+            else
+              nil
+            end
+            if ClassContext::VALIDATIONS.include?(@method) && !!active_record_parent
+              active_record_parent.validations << @method
             end
           end
 
