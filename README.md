@@ -104,6 +104,17 @@ You can get a list of the enabled checks and their configurations by running:
 excellent --checks
 ```
 
+You can also place a `.excellent.yml` file in your home directory that contains default settings you always
+want to apply. Settings in project-specific configuration files will override these default settings.
+
+Excellent now also supports ignore paths. Simple place a `.excellentignore` file in the root directory of
+your project and these directories will be ignored, e.g.:
+
+```
+vendor
+some/specific/file.rb
+```
+
 Static analysis
 ---------------
 
