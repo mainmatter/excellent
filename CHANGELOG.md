@@ -1,3 +1,9 @@
+2.1.0
+=====
+
+* support for ~/.excellent.yml - default configuration for all excellent runs that the local config file will override
+* added .excellentignore file that can list paths to ignore
+
 2.0.1
 =====
 
