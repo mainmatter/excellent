@@ -94,9 +94,10 @@ module Simplabs
       #
       # * <tt>paths</tt> - The paths to process (specify file names or directories; will recursively process all ruby files if a directory is given).
       # * <tt>formatter</tt> - The formatter to use. If a formatter is specified, its +start+, +file+, +warning+ and +end+ methods will be called
-      def check_paths(paths, formatter = nil)
+      # * <tt>ignore_paths</tt> - The paths to ignore
+      def check_paths(paths, formatter = nil, ignore_paths = [])
         formatter.start if formatter
-        collect_files(paths).each do |path|
+        collect_files(paths, ignore_paths).each do |path|
           check_file(path)
           format_file_and_warnings(formatter, path) if formatter
         end
@@ -130,8 +131,9 @@ module Simplabs
           check_objects
         end
 
-        def collect_files(paths)
-          files = []
+        def collect_files(paths, ignore_paths)
+          files         = []
+          ignored_files = []
           paths.each do |path|
             if File.file?(path)
               files << path
@@ -141,7 +143,16 @@ module Simplabs
               raise ArgumentError.new("#{path} is neither a File nor a directory!")
             end
           end
-          files
+          ignore_paths.each do |path|
+            if File.file?(path)
+              ignored_files << path
+            elsif File.directory?(path)
+              ignored_files += Dir.glob(File.join(path, '**/*.{rb,erb}'))
+            else
+              raise ArgumentError.new("#{path} is neither a File nor a directory!")
+            end
+          end
+          files - ignored_files
         end
 
         def format_file_and_warnings(formatter, filename)

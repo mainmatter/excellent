@@ -74,6 +74,12 @@ if File.exists?(default_config_file) || File.exists?(custom_config_file)
   end
 end
 
+ignore_paths = []
+ignore_file  = File.join(Dir.pwd, '.excellentignore')
+if File.exists?(ignore_file)
+  ignore_paths = File.readlines(ignore_file).map(&:strip).select { |line| !line.empty? }
+end
+
 excellent = Simplabs::Excellent::Runner.new(custom_config)
 
 if options[:print_checks]
@@ -87,7 +93,7 @@ if options[:print_checks]
   exit 0
 end
 
-paths  = ARGV.dup
+paths = ARGV.dup
 if paths.empty?
   puts "\n  **You must specify one or more directories to analyse, e.g.:\n"
   puts "\n    excellent lib/\n\n"
@@ -95,8 +101,9 @@ if paths.empty?
 end
 
 begin
-  excellent.check_paths(paths, formatter)
-rescue ArgumentError
+  excellent.check_paths(paths, formatter, ignore_paths)
+rescue ArgumentError => e
+  puts e.inspect
   puts "\n** Excellent cannot find the paths specified!\n\n"
   exit 1
 end
