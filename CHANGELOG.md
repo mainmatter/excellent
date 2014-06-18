@@ -1,3 +1,8 @@
+2.1.1
+=====
+
+* fix for wrong line numbers, see #33
+
 2.1.0
 =====
 
