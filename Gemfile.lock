@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    excellent (2.1.0)
+    excellent (2.1.1)
       hashr (>= 0.0.10)
       ruby_parser (>= 3.0)
       sexp_processor (>= 4.0)
