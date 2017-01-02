@@ -129,6 +129,6 @@ problematic code early.
 Author
 ------
 
-Copyright (c) 2008-2016 simplabs GmbH ([http://simplabs.com](http://simplabs.com)), released under the MIT license.
+Copyright (c) 2009-2017 simplabs GmbH ([http://simplabs.com](http://simplabs.com)), released under the MIT license.
 
 Excellent was inspired by roodi ([https://github.com/martinjandrews/roodi](https://github.com/martinjandrews/roodi)), reek ([https://github.com/troessner/reek](https://github.com/troessner/reek)) and flog ([https://github.com/seattlerb/flog](https://github.com/seattlerb/flog)).
