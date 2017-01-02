@@ -1,8 +1,19 @@
 language: ruby
+
 rvm:
   - 1.8.7
   - 1.9.2
   - 1.9.3
   - 2.0.0
   - ree
+
+before_install:
+  - gem install bundler
+
 script: "bundle exec rspec"
+
+notifications:
+  email: false
+  slack:
+    rooms:
+      secure: OOKD4ZksqzEBW/A3WRuOToODIxnDITqx+Esu7tdmmYPuQlMYgx4SUHv8j9OM9/ScFJiseeVGSkl45vJrHLLIITX9XSjO1RgiGZgw2heVujmGpF6CZNqvT6GsQuKIvMzmwF7IxuHdfV45Csr9Ou/Fg74TszR/4S2h4SOI4zhLg7A=
