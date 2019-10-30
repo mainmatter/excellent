@@ -12,7 +12,7 @@ and the Wiki at [http://wiki.github.com/simplabs/excellent](http://wiki.github.c
 Installation
 ------------
 
-Simply install with Ruby Gems:
+Simply install it with Ruby Gems:
 
 ```bash
 gem install excellent
@@ -21,7 +21,7 @@ gem install excellent
 Example
 -------
 
-Assume you have the following class definition,
+Assuming you have the following class definition,
 
 ```ruby
 class ShoppingBasket < ActiveRecord::Base
@@ -33,7 +33,7 @@ class ShoppingBasket < ActiveRecord::Base
 end
 ````
 
-then Excellent will report the problems in this piece of code:
+Then Excellent will report the problems in this piece of code:
 
 ```bash
 $ excellent shopping_basket.rb
@@ -48,7 +48,7 @@ $ excellent shopping_basket.rb
   Found 3 warnings.
 ```
 
-To analyse all the models in your Rails application, just do
+To analyse all the models in your Rails application, just do:
 
 ```bash
 excellent app/models
